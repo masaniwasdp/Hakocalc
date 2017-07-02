@@ -1,47 +1,109 @@
+-- メインモジュール。
+-- Date: 2017/7/2
+-- Authors: masaniwa
+
 module Main where
 
-import Control.Monad (when)
 import Data.List (intercalate)
 import System.Environment (getArgs)
+import Text.Printf (printf)
 
-import HakoniwaKilling (enoughMissiles, killingProbability)
+import HakoniwaKilling
+    ( enoughMissiles
+    , killingProbability
+    , probabilityTransition)
 
+import Probability (fromPercentage, toPercentage)
+
+-- コマンドライン引数の情報。
+-- 確率モード 怪獣の体力 撃つミサイルの数
+-- ミサイルの数モード 怪獣の体力 倒したい確率
+-- 確率推移モード 怪獣の体力 最小のミサイルの数 最大のミサイルの数
 data Args = Probability Integer Integer
           | Missiles Integer Rational
+          | Transition Integer Integer Integer
 
+-- 文字列から読み取った値。
+-- 文字列 -> 値
+maybeRead :: Read r => String -> Maybe r
+maybeRead s = case reads s of
+    [(x, "")] -> Just x
+    _         -> Nothing
+
+-- 読み取ったコマンドライン引数の情報。
+-- コマンドライン引数 -> 情報
 readArgs :: [String] -> Maybe Args
-
 readArgs [mode, first, second]
-    | mode == probabilityMode && hp > 0 && quantity > 0
-        = Just $ Probability hp quantity
+    | mode == probabilityMode
+        = Probability <$> hp <*> quantity
 
-    | mode == missilesMode && hp > 0 && probability > 0 && probability < 1
-        = Just $ Missiles hp probability
-
-    | otherwise
-        = Nothing
+    | mode == missilesMode
+        = Missiles <$> hp <*> probability
 
     where
-        hp = read first
-        quantity = read second
-        probability = (toRational . read) second / 100
+        hp          = maybeRead first
+        quantity    = maybeRead second
+        probability = fromPercentage <$> maybeRead second
+
+readArgs [mode, first, second, third]
+    | mode == transitionMode
+        = Transition <$> hp <*> from <*> to
+
+    where
+        hp   = maybeRead first
+        from = maybeRead second
+        to   = maybeRead third
 
 readArgs _ = Nothing
 
+-- 割合の百分率表記。
+-- 割合 -> 百分率
+showPercentage :: Rational -> String
+showPercentage = (++ " %") . printf "%.10f" . toPercentage
+
+-- 計算結果。
+-- コマンドライン引数 -> 結果を示す文字列
+result :: Args -> Maybe String
+result (Probability hp quantity)
+    = showPercentage <$> killingProbability hp quantity
+
+result (Missiles hp probability)
+    = show <$> enoughMissiles hp probability
+
+result (Transition hp from to)
+    = intercalate "\n" . map showPercentage <$> probabilityTransition hp from to
+
+-- 確率モードを示す文字列。
+probabilityMode :: String
 probabilityMode = "p"
 
+-- ミサイルの数モードを表す文字列。
+missilesMode :: String
 missilesMode = "q"
 
+-- 確率推移モードを示す文字列。
+transitionMode :: String
+transitionMode = "t"
+
+-- コマンドの使い方。
+usage :: String
 usage = intercalate "\n" [
-    "usage: [args...]",
-    "args:",
-    "    p [hp] [quantity]: Calculate probability of killing monster.",
-    "    q [hp] [probability (%)] : Calculate enough quantity of missiles for killing monster."]
+    "Usage:",
+    "    p [hp] [quantity]: It calculates probability of killing a monster.",
+    "    q [hp] [probability]: It calculates enough quantity of missiles for killing a monster.",
+    "    t [hp] [from] [to]: It Calculates probability transition of killing a monster."]
 
+-- 計算失敗を示す文字列。
+failure :: String
+failure = "Failed calculation."
+
+main :: IO ()
 main = do
-    args <- readArgs <$> getArgs
+    args' <- readArgs <$> getArgs
 
-    case args of
-        Just (Probability hp quantity) -> print . fromRational $ killingProbability hp quantity * 100
-        Just (Missiles hp probability) -> print $ enoughMissiles hp probability
+    case args' of
+        Just args -> case result args of
+            Just xs -> putStrLn xs
+            Nothing -> putStrLn failure
+
         Nothing -> putStrLn usage
