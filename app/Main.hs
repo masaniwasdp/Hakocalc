@@ -64,14 +64,15 @@ showPercentage = (++ " %") . printf "%.10f" . toPercentage
 -- 計算結果。
 -- コマンドライン引数 -> 結果を示す文字列
 result :: Args -> Maybe String
-result (Probability hp quantity)
-    = showPercentage <$> killingProbability hp quantity
+result (Probability hp quantity) = showPercentage <$> probability where
+    probability = killingProbability hp quantity
 
-result (Missiles hp probability)
-    = show <$> enoughMissiles hp probability
+result (Missiles hp probability) = show <$> missiles where
+    missiles = enoughMissiles hp probability
 
-result (Transition hp from to)
-    = intercalate "\n" . map showPercentage <$> probabilityTransition hp from to
+result (Transition hp from to) = showPercentages <$> transition where
+    showPercentages = intercalate "\n" . map showPercentage
+    transition      = probabilityTransition hp from to
 
 -- 確率モードを示す文字列。
 probabilityMode :: String
@@ -89,9 +90,9 @@ transitionMode = "t"
 usage :: String
 usage = intercalate "\n" [
     "Usage:",
-    "    p [hp] [quantity]: It calculates probability of killing a monster.",
-    "    q [hp] [probability]: It calculates enough quantity of missiles for killing a monster.",
-    "    t [hp] [from] [to]: It Calculates probability transition of killing a monster."]
+    "    p [hp] [quantity]: It calculates probability that the monster will die.",
+    "    q [hp] [probability]: It calculates enough quantity of missiles to kill a monster.",
+    "    t [hp] [from] [to]: It Calculates probability transition that the monster will die."]
 
 -- 計算失敗を示す文字列。
 failure :: String
@@ -103,7 +104,7 @@ main = do
 
     case args' of
         Just args -> case result args of
-            Just xs -> putStrLn xs
+            Just s  -> putStrLn s
             Nothing -> putStrLn failure
 
         Nothing -> putStrLn usage
