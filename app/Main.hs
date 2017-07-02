@@ -91,7 +91,7 @@ usage :: String
 usage = intercalate "\n" [
     "Usage:",
     "    p [hp] [quantity]: It calculates probability that the monster will die.",
-    "    q [hp] [probability]: It calculates enough quantity of missiles to kill a monster.",
+    "    q [hp] [probability]: It calculates enough quantity of missiles to kill the monster.",
     "    t [hp] [from] [to]: It Calculates probability transition that the monster will die."]
 
 -- 計算失敗を示す文字列。
