@@ -11,7 +11,7 @@ import Text.Printf (printf)
 import HakoniwaKilling
     ( enoughMissiles
     , killingProbability
-    , probabilityTransition)
+    , probabilityTransition )
 
 import Probability (fromPercentage, toPercentage)
 
