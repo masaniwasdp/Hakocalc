@@ -1,7 +1,7 @@
 HakoniwaKilling
 ===
 
-![HakoniwaKilling](https://github.com/masaniwasdp/Screenshots/blob/master/HakoniwaKilling.png)
+![HakoniwaKilling](https://masaniwasdp.github.io/HakoniwaKilling/Screenshot.png)
 
 「箱庭諸島」において怪獣を倒せる確率の計算ツールです。
 
