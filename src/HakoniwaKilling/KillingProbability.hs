@@ -32,19 +32,12 @@ enoughMissiles :: Natural     -- ^ HP de monstro.
                -> Natural     -- ^ Postulita kvanto da misiloj.
 
 enoughMissiles hp probability
-    | fromProbability probability == 0
-        = 0
-
-    | otherwise
-        = try hp
-
+    | fromProbability probability == 0 = 0
+    | otherwise                        = try hp
     where
         try quantity
-            | killingProbability hp quantity >= probability
-                = quantity
-
-            | otherwise
-                = try $ quantity + 1
+            | killingProbability hp quantity >= probability = quantity
+            | otherwise                                     = try $ quantity + 1
 
 
 {-| Kalkulas transiron de probablo de sukcesi mortigi monstron. -}

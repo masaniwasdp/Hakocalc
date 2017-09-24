@@ -1,7 +1,5 @@
 {-# LANGUAGE DataKinds #-}
 
-module Main where
-
 import Control.Monad.IO.Class (liftIO)
 import Data.List (intercalate)
 import Data.Maybe (fromMaybe)

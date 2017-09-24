@@ -18,14 +18,14 @@ newtype Probability = Probability' Rational deriving (Eq, Ord, Show)
 
 
 {-| Konvertas probablon al racia nombro. -}
-fromProbability :: Probability -- ^ Probablo ki estos konvertata.
+fromProbability :: Probability -- ^ Probablo kiu estos konvertata.
                 -> Rational    -- ^ Racia nombro konvertita de probablo.
 
 fromProbability (Probability' p) = p
 
 
 {-| Konvertas racia nombro al probablo. -}
-toProbability :: Rational          -- ^ Racian nombro ki estos konvertata.
+toProbability :: Rational          -- ^ Racian nombro kiu estos konvertata.
               -> Maybe Probability -- ^ Probablo kovertita de racia nombro.
 
 toProbability p
