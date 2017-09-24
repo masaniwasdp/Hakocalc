@@ -29,13 +29,6 @@ $ hakoniwakilling [command] [args...]
 + `command`: Subkomando kiu vi volas uzi.
 + `args`: Argumentoj kiuj estos transdonita al la subkomando.
 
-La jenaj subkomandoj estas haveblaj.
-
-+ `probability`: Kalkulas la probablon de sukcesi mortigi monstron kiam vi ĵetis PP misilojn kiom la specifaj kvantoj.
-+ `quantity`: Kalkulas la postulitan kvanton da misiloj por mortigi monstron en la specifa probablo.
-+ `transition`: Kalkulas transiron de probablo de sukcesi mortigi monstron kiam vi ĵetis PP misilojn,
-                kiom la kvantoj de specifaj gamoj.
-
 ## Permesiloj
 + [MIT](https://github.com/masaniwasdp/HakoniwaKilling/blob/master/LICENSE)
 
