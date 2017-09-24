@@ -3,7 +3,7 @@ HakoniwaKilling
 
 ![HakoniwaKilling](https://masaniwasdp.github.io/HakoniwaKilling/Screenshot.png)
 
-Kalkulas probablon de sukcesi mortigi monstron, en la "Hakoniwa Insulo".
+Kalkulas probablon de sukcesi mortigi monstron.
 
 ## Priskribo
 La ilo estas probablo kalkulilo kiun vi povas uzi kiam mortigi monstron, en la "Hakoniwa Insulo".
@@ -11,12 +11,13 @@ La ilo estas probablo kalkulilo kiun vi povas uzi kiam mortigi monstron, en la "
 
 + Kalkuli la probablon de sukcesi mortigi monstron kiam vi ĵetis PP misilojn kiom la specifaj kvantoj.
 + Kalkuli la postulitan kvanton da misiloj por mortigi monstron en la specifa probablo.
-+ Kalkuli transiron de probablo de sukcesi mortigi monstron kiam vi ĵetis PP misilojn,
-  kiom la kvantoj de specifaj gamoj.
++ Kalkuli transiron de probablo de sukcesi mortigi monstron kiam vi ĵetis PP misilojn kiom la kvantoj de specifaj gamoj.
 
 ## Instali
 
 ``` bash
+$ git clone https://github.com/masaniwasdp/HakoniwaKilling.git
+$ cd HakoniwaKilling
 $ stack install
 ```
 
