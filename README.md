@@ -30,8 +30,7 @@ $ hakoniwakilling [command] [args...]
 + `command`: Subkomando kiun vi volas uzi.
 + `args`: Argumentoj kiuj estos transdonita al la subkomando.
 
-## Permesiloj
-+ [MIT](https://github.com/masaniwasdp/HakoniwaKilling/blob/master/LICENSE)
+## Permesilo
+© 2017, masaniwa
 
-## Aŭtoroj
-+ masaniwa
+La programaro publikigita sub la [MIT](https://github.com/masaniwasdp/HakoniwaKilling/blob/master/LICENSE).
