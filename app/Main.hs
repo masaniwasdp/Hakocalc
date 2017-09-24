@@ -70,8 +70,7 @@ calcQuantity hp probability = putResult result "Failed to calculate the quantity
 calcTransition :: FlagHP -> FlagMin -> FlagMax -> CmdTransition
 
 calcTransition hp n m = putResult result "Failed to calculate the transition." where
-    result = intercalate "\n" . map showPercentage <$> transition
-
+    result     = intercalate "\n" . map showPercentage <$> transition
     transition = probabilityTransition <$> getNatural hp <*> quantities
     quantities = case (getNatural n, getNatural m) of
         (Just n', Just m') -> Just (n', m')
