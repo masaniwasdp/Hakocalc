@@ -33,4 +33,4 @@ $ hakoniwakilling [command] [args...]
 ## Permesilo
 © 2017, masaniwa
 
-La programaro publikigita sub la [MIT](https://github.com/masaniwasdp/HakoniwaKilling/blob/master/LICENSE).
+La programaro estas licencita sub la [MIT](https://github.com/masaniwasdp/HakoniwaKilling/blob/master/LICENSE).
