@@ -1,110 +1,99 @@
--- メインモジュール。
--- Date: 2017/7/2
--- Authors: masaniwa
+{-# LANGUAGE DataKinds #-}
 
 module Main where
 
+import Control.Monad.IO.Class (liftIO)
 import Data.List (intercalate)
-import System.Environment (getArgs)
+import Data.Maybe (fromMaybe)
+import Numeric.Natural (Natural)
+import Options.Declarative (Cmd, Flag, Group(Group), get, run_, subCmd)
 import Text.Printf (printf)
 
-import HakoniwaKilling
-    ( enoughMissiles
-    , killingProbability
-    , probabilityTransition )
+import HakoniwaKilling.KillingProbability (enoughMissiles, killingProbability, probabilityTransition)
+import HakoniwaKilling.Probability (Probability, fromProbability, toProbability)
 
-import Probability (fromPercentage, toPercentage)
-
--- コマンドライン引数の情報。
--- 確率モード 怪獣の体力 撃つミサイルの数
--- ミサイルの数モード 怪獣の体力 倒したい確率
--- 確率推移モード 怪獣の体力 最小のミサイルの数 最大のミサイルの数
-data Args = Probability Integer Integer
-          | Missiles Integer Rational
-          | Transition Integer Integer Integer
-
--- 文字列から読み取った値。
--- 文字列 -> 値
-maybeRead :: Read r => String -> Maybe r
-maybeRead s = case reads s of
-    [(x, "")] -> Just x
-    _         -> Nothing
-
--- 読み取ったコマンドライン引数の情報。
--- コマンドライン引数 -> 情報
-readArgs :: [String] -> Maybe Args
-readArgs [mode, first, second]
-    | mode == probabilityMode
-        = Probability <$> hp <*> quantity
-
-    | mode == missilesMode
-        = Missiles <$> hp <*> probability
-
-    where
-        hp          = maybeRead first
-        quantity    = maybeRead second
-        probability = fromPercentage <$> maybeRead second
-
-readArgs [mode, first, second, third]
-    | mode == transitionMode
-        = Transition <$> hp <*> from <*> to
-
-    where
-        hp   = maybeRead first
-        from = maybeRead second
-        to   = maybeRead third
-
-readArgs _ = Nothing
-
--- 割合の百分率表記。
--- 割合 -> 百分率
-showPercentage :: Rational -> String
-showPercentage = (++ " %") . printf "%.10f" . toPercentage
-
--- 計算結果。
--- コマンドライン引数 -> 結果を示す文字列
-result :: Args -> Maybe String
-result (Probability hp quantity) = showPercentage <$> probability where
-    probability = killingProbability hp quantity
-
-result (Missiles hp probability) = show <$> missiles where
-    missiles = enoughMissiles hp probability
-
-result (Transition hp from to) = showPercentages <$> transition where
-    showPercentages = intercalate "\n" . map showPercentage
-    transition      = probabilityTransition hp from to
-
--- 確率モードを示す文字列。
-probabilityMode :: String
-probabilityMode = "p"
-
--- ミサイルの数モードを表す文字列。
-missilesMode :: String
-missilesMode = "q"
-
--- 確率推移モードを示す文字列。
-transitionMode :: String
-transitionMode = "t"
-
--- コマンドの使い方。
-usage :: String
-usage = intercalate "\n" [
-    "Usage:",
-    "    p [hp] [quantity]: It calculates probability that the monster will die.",
-    "    q [hp] [probability]: It calculates enough quantity of missiles to kill the monster.",
-    "    t [hp] [from] [to]: It Calculates probability transition that the monster will die."]
-
--- 計算失敗を示す文字列。
-failure :: String
-failure = "Failed calculation."
 
 main :: IO ()
-main = do
-    args' <- readArgs <$> getArgs
 
-    case args' of
-        Just args -> case result args of
-            Just s  -> putStrLn s
-            Nothing -> putStrLn failure
+main = run_ $ Group "The calculator of probability that the monster will die, in Hakoniwa Islands."
+    [ subCmd "probability" calcProbability
+    , subCmd "quantity" calcQuantity
+    , subCmd "transition" calcTransition ]
 
-        Nothing -> putStrLn usage
+
+-- Tipo de HP argumento.
+type FlagHP = Flag "h" '["hp"] "Integer" "The HP of the monster." Integer
+
+-- Tipo de kvanto argumento.
+type FlagQuantity = Flag "q" '["quantity"] "Integer" "The quantity of missiles to launch." Integer
+
+-- Tipo de probablo argumento.
+type FlagProbability = Flag "p" '["probability"] "Double(%)" "The probability of killing the monster." Double
+
+-- Tipo de minimuma kvanto argumento.
+type FlagMin = Flag "n" '["min"] "Integer" "The minimum quantity of missiles to launch." Integer
+
+-- Tipo de maksimuma kvanto argumento.
+type FlagMax = Flag "m" '["max"] "Integer" "The maximum quantity of missiles to launch." Integer
+
+-- Tipo de probablo komando.
+type CmdProbability = Cmd "Calculates probability that the monster will die." ()
+
+-- Tipo de kvanto komando.
+type CmdQuantity = Cmd "Calculates enough quantity of missiles to kill the monster." ()
+
+-- Tipo de transiro komando.
+type CmdTransition = Cmd "Calculates probability transition that the monster dies when launching m missiles from n." ()
+
+
+-- Kalkulas probablon de sukcesi mortigi monstron.
+calcProbability :: FlagHP -> FlagQuantity -> CmdProbability
+
+calcProbability hp quantity = putResult result "Failed to calculate the probability." where
+    result      = showPercentage <$> probability
+    probability = killingProbability <$> getNatural hp <*> getNatural quantity
+
+
+-- Kalkulas postulitan kvanton da misiloj por mortigi monstron.
+calcQuantity :: FlagHP -> FlagProbability -> CmdQuantity
+
+calcQuantity hp probability = putResult result "Failed to calculate the quantity." where
+    result = case quantity of
+        (Just q) -> Just . show $ q
+        _        -> Nothing
+
+    quantity     = enoughMissiles <$> getNatural hp <*> probability'
+    probability' = toProbability . (/ 100) . toRational . get $ probability
+
+
+-- Kalkulas transiron de probablo de sukcesi mortigi monstron.
+calcTransition :: FlagHP -> FlagMin -> FlagMax -> CmdTransition
+
+calcTransition hp n m = putResult result "Failed to calculate the transition." where
+    result = intercalate "\n" . map showPercentage <$> transition
+
+    transition = probabilityTransition <$> getNatural hp <*> quantities
+    quantities = case (getNatural n, getNatural m) of
+        (Just n', Just m') -> Just (n', m')
+        _                  -> Nothing
+
+
+-- Konvertas probablon al kordo.
+showPercentage :: Probability -> String
+
+showPercentage p = (++ "%") . printf "%.10f" $ percentage where
+    percentage = (* 100) . fromRational . fromProbability $ p :: Double
+
+
+-- Akiras naturan nombron de argumento.
+getNatural :: Flag a b c d Integer -> Maybe Natural
+
+getNatural x
+    | get x < 0 = Nothing
+    | otherwise = Just . fromInteger . get $ x
+
+
+-- Montras kalkulon rezulton.
+putResult :: Maybe String -> String -> Cmd a ()
+
+putResult result instead = liftIO . putStrLn $ fromMaybe instead result

@@ -3,50 +3,62 @@ HakoniwaKilling
 
 ![HakoniwaKilling](https://masaniwasdp.github.io/HakoniwaKilling/Screenshot.png)
 
-「箱庭諸島」において怪獣を倒せる確率の計算ツールです。
+Kalkulas probablon de sukcesi mortigi monstron, en la "Hakoniwa Insulo".
 
-## 概要
-「箱庭諸島」において怪獣を倒すときに利用できる確率計算ツールです。
-以下の計算機能があります。
+## Priskribo
+La ilo estas probablo kalkulilo kiun vi povas uzi kiam mortigi monstron, en la "Hakoniwa Insulo".
+Ĝi havas funkciojn kiaj la jenaj.
 
-+ 指定数のPPミサイルを撃ったときに怪獣を倒せる確率。
-+ 指定の確率で怪獣を倒すのに十分なPPミサイルの数。
-+ 指定数の範囲のPPミサイルを撃ったときの怪獣を倒せる確率の推移。
++ Kalkuli la probablon de sukcesi mortigi monstron kiam vi ĵetis PP misilojn kiom la specifaj kvantoj.
++ Kalkuli la postulitan kvanton da misiloj por mortigi monstron en la specifa probablo.
++ Kalkuli transiron de probablo de sukcesi mortigi monstron kiam vi ĵetis PP misilojn,
+  kiom la kvantoj de specifaj gamoj.
 
-## ビルド
-
-``` bash
-$ cd ~
-$ git clone https://github.com/masaniwasdp/HakoniwaKilling.git
-$ cd HakoniwaKilling
-$ stack build
-```
-
-## 実行
+## Instali
 
 ``` bash
-$ cd ~/HakoniwaKilling
-$ stack exec HakoniwaKilling-exe -- [Args]
+$ stack install
 ```
 
-+ `Args`: コマンドライン引数です。
+## Ekzekuto
 
-### コマンドライン引数
+``` bash
+$ hakoniwakilling [command] [args...]
+```
 
-+ `p [hp] [quantity]`: 指定数のPPミサイルを撃ったときに怪獣を倒せる確率を計算します。
-+ `q [hp] [probability]`: 指定の確率で怪獣を倒すのに十分なPPミサイルの数を計算します。
-+ `t [hp] [from] [to]`: 指定数の範囲のPPミサイルを撃ったときの怪獣を倒せる確率の推移を計算します。
++ `command`: Subkomando kiu vi volas uzi.
++ `args`: Argumentoj kiuj estos transdonita al la subkomando.
 
-#### 引数の説明
+### Subkomando "probability"
 
-+ `hp`: 怪獣の体力。
-+ `quantity`: PPミサイルの数。
-+ `probability`: 怪獣を倒す確率。
-+ `from`: 最小のPPミサイルの数。
-+ `to`: 最大のPPミサイルの数。
+`hakoniwakilling probability [args...]`
 
-## ライセンス
-[MITライセンス](https://github.com/masaniwasdp/HakoniwaKilling/blob/master/LICENSE)が適用されます。
+Kalkulas la probablon de sukcesi mortigi monstron kiam vi ĵetis PP misilojn kiom la specifaj kvantoj.
 
-## 作者
++ `-h Integer --hp=Integer`: HP de monstro.
++ `-q Integer --quantity=Integer`: Kvanto da misiloj kiu estos lanĉita.
+
+### Subkomando "quantity"
+
+`hakoniwakilling quantity [args...]`
+
+Kalkulas la postulitan kvanton da misiloj por mortigi monstron en la specifa probablo.
+
++ `-h Integer --hp=Integer`: HP de monstro.
++ `-p Double(%) --probability=Double(%)`: Probablo de sukcesi mortigi monstron.
+
+### Subkomando "transition"
+
+`hakoniwakilling transition [args...]`
+
+Kalkuli transiron de probablo de sukcesi mortigi monstron kiam vi ĵetis PP misilojn, kiom la kvantoj de specifaj gamoj.
+
++ `-h Integer --hp=Integer`: HP de monstro.
++ `-n Integer --min=Integer`: Minimuma kvanto da misiloj kiu estos lanĉita.
++ `-m Integer --max=Integer`: Maksimuma kvanto da misiloj kiu estos lanĉita.
+
+## Permesiloj
++ [MIT](https://github.com/masaniwasdp/HakoniwaKilling/blob/master/LICENSE)
+
+## Aŭtoroj
 + masaniwa
