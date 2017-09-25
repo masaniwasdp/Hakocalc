@@ -78,7 +78,7 @@ calcTransition hp n m = putResult result "Failed to calculate the transition." w
 -- Konvertas probablon al kordo.
 showPercentage :: Probability -> String
 
-showPercentage p = (++ "%") . printf "%.10f" $ percentage where
+showPercentage p = (++ "%") . printf "%.3f" $ percentage where
     percentage = (* 100) . fromRational . fromProbability $ p :: Double
 
 
