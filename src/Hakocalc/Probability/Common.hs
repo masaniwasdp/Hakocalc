@@ -1,20 +1,28 @@
 {-|
- - Description : La modulo de probablo kalkulo.
+ - Description : La modulo de komuna probablo kalkulo.
  - Copyright   : 2017 masaniwa
  -}
 
-module HakoniwaKilling.Probability
-    ( Probability
-    , combination
-    , fromProbability
-    , toProbability
-    , repeated ) where
+module Hakocalc.Probability.Common (Probability, combination, fromProbability, toProbability, repeated) where
 
 import Data.Maybe (fromJust)
 import Numeric.Natural (Natural)
 
-{-| Tipo reprezentanta probablon. -}
-newtype Probability = Probability' Rational deriving (Eq, Ord, Show)
+{-| Reprezentanta probablon. -}
+newtype Probability = Probability' Rational deriving (Eq, Ord)
+
+instance Read Probability where
+    readsPrec _ s = case result of
+        Just x  -> [(x, "")]
+        Nothing -> []
+        where
+            result = case reads s of
+                [(x, "")] -> toProbability . (/ 100) . toRational $ (x :: Double)
+                _         -> Nothing
+
+instance Show Probability where
+    show x = show probability where
+        probability = fromRational . (* 100) . fromProbability $ x :: Double
 
 
 {-| Konvertas probablon al racia nombro. -}

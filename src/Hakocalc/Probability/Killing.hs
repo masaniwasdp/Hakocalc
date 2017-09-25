@@ -3,21 +3,17 @@
  - Copyright   : 2017 masaniwa
  -}
 
-module HakoniwaKilling.KillingProbability
-    ( enoughMissiles
-    , killingProbability
-    , probabilityTransition ) where
+module Hakocalc.Probability.Killing (enoughMissiles, killingProbability, probabilityTransition) where
 
 import Control.Parallel.Strategies (parMap, rpar)
 import Data.Maybe (fromJust)
+import Hakocalc.Probability.Common (Probability, repeated, toProbability, fromProbability)
 import Numeric.Natural (Natural)
-
-import HakoniwaKilling.Probability (Probability, repeated, toProbability, fromProbability)
 
 
 {-| Kalkulas probablon de sukcesi mortigi monstron. -}
 killingProbability :: Natural     -- ^ HP de monstro.
-                   -> Natural     -- ^ Kvanto da misiloj kiu estos lanĉita.
+                   -> Natural     -- ^ Kvanto da misiloj kiuj estos lanĉita.
                    -> Probability -- ^ Probablo de sukcesi mortigi monstoron.
 
 killingProbability hp quantity = fromJust . sum' $ map repeated' list where
@@ -27,22 +23,23 @@ killingProbability hp quantity = fromJust . sum' $ map repeated' list where
 
 
 {-| Kalkulas postulitan kvanton da misiloj por mortigi monstron. -}
-enoughMissiles :: Natural     -- ^ HP de monstro.
-               -> Probability -- ^ Probablo de sukcesi mortigi monstron.
-               -> Natural     -- ^ Postulita kvanto da misiloj.
+enoughMissiles :: Natural       -- ^ HP de monstro.
+               -> Probability   -- ^ Probablo de sukcesi mortigi monstron.
+               -> Maybe Natural -- ^ Postulita kvanto da misiloj.
 
-enoughMissiles hp probability
-    | fromProbability probability == 0 = 0
-    | otherwise                        = try hp
-    where
-        try quantity
-            | killingProbability hp quantity >= probability = quantity
-            | otherwise                                     = try $ quantity + 1
+enoughMissiles hp probability = test hp where
+    test q
+        | not isHappenable = Nothing
+        | isSufficient q   = Just q
+        | otherwise        = test $ q + 1
+
+    isHappenable   = fromProbability probability > 0 && fromProbability probability < 1
+    isSufficient r = killingProbability hp r >= probability
 
 
 {-| Kalkulas transiron de probablo de sukcesi mortigi monstron. -}
 probabilityTransition :: Natural            -- ^ HP de monstro.
-                      -> (Natural, Natural) -- ^ Minimuma kaj maksimuma kvanto da misiloj kiu estos lanĉita.
+                      -> (Natural, Natural) -- ^ Minimuma kaj maksimuma kvanto da misiloj kiuj estos lanĉita.
                       -> [Probability]      -- ^ Transiro de probablo.
 
 probabilityTransition hp (n, m) = parMap rpar (killingProbability hp) list where
