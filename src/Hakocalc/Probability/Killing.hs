@@ -42,9 +42,7 @@ probabilityTransition :: Natural            -- ^ HP de monstro.
                       -> (Natural, Natural) -- ^ Minimuma kaj maksimuma kvanto da misiloj kiuj estos lanĉita.
                       -> [Probability]      -- ^ Transiro de probablo.
 
-probabilityTransition hp (n, m) = parMap rpar (killingProbability hp) list where
-    list | n < m     = [n .. m]
-         | otherwise = [m .. n]
+probabilityTransition hp (n, m) = parMap rpar (killingProbability hp) [n .. m]
 
 
 {-| La precizeco de misilo-sukcesoj. -}

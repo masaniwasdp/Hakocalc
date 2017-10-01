@@ -35,11 +35,12 @@ calcTransition :: TransitionOption -- ^ Opcio de komando.
                -> IO ()
 
 calcTransition option = putStrLn result where
-    result     = intercalate "\n" transition
+    result     = intercalate "\n" $ zipWith (printf "%s:\t%s") indices transition
+    indices    = map show [tMin option .. tMax option]
     transition = map showPercentage $ probabilityTransition (tHP option) (tMin option, tMax option)
 
 {-| Konvertas probablon al procenta kordo. -}
 showPercentage :: Probability -- ^ Probablo kiu estos konvertata.
                -> String      -- ^ Procenta kordo konvertita.
 
-showPercentage = (++ "%") . printf "%.3f" . (read :: String -> Double) . show
+showPercentage = printf "%.3f%%" . (read :: String -> Double) . show
