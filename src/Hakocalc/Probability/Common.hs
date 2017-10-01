@@ -46,7 +46,9 @@ combination :: Natural -- ^ Nombro de tuta okazaĵoj.
             -> Natural -- ^ Nombro de okazaĵoj por elekti.
             -> Natural -- ^ Tuta nonbro de kombinajo.
 
-combination n r = product [(n - r + 1) .. n] `div` product [1 .. r]
+combination n r
+    | n >= r    = product [(n - r + 1) .. n] `div` product [1 .. r]
+    | otherwise = 0
 
 
 {-| Kalkulas probablon ripetitaj provoj. -}
@@ -55,7 +57,9 @@ repeated :: Probability -- ^ Probablo de provo sukceso.
          -> Natural     -- ^ K kiu nombro da fojoj de provo sukceso.
          -> Probability -- ^ Probablo, ke provo sukcesos K fojojn.
 
-repeated p n k = fromJust . toProbability . (* x) . toRational $ c where
-    x = q ^ k * (1 - q) ^ (n - k)
-    c = combination n k
-    q = fromProbability p
+repeated p n k = fromJust . toProbability $ probability where
+    probability
+        | n >= k    = (* coefficient) . toRational $ combination n k
+        | otherwise = 0
+
+    coefficient = fromProbability p ^ k * (1 - fromProbability p) ^ (n - k)

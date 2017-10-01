@@ -39,6 +39,7 @@ calcTransition option = putStrLn result where
     indices    = map show [tMin option .. tMax option]
     transition = map showPercentage $ probabilityTransition (tHP option) (tMin option, tMax option)
 
+
 {-| Konvertas probablon al procenta kordo. -}
 showPercentage :: Probability -- ^ Probablo kiu estos konvertata.
                -> String      -- ^ Procenta kordo konvertita.
