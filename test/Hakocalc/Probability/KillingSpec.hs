@@ -1,7 +1,7 @@
 module Hakocalc.Probability.KillingSpec where
 
-import Data.Maybe
-import Hakocalc.Probability.Common
+import Data.Maybe (fromJust)
+import Hakocalc.Probability.Common (toProbability)
 import Hakocalc.Probability.Killing
 import Test.Hspec
 

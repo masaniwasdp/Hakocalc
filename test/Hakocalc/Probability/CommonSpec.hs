@@ -1,6 +1,6 @@
 module Hakocalc.Probability.CommonSpec where
 
-import Data.Maybe
+import Data.Maybe (fromJust)
 import Hakocalc.Probability.Common
 import Test.Hspec
 

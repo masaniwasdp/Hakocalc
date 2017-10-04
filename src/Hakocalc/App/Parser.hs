@@ -7,10 +7,7 @@ module Hakocalc.App.Parser (optionParser) where
 
 import Data.Semigroup ((<>))
 import Hakocalc.App.Option (Option (..), ProbabilityOption (..), QuantityOption (..), TransitionOption (..))
-import Hakocalc.Probability.Common (Probability)
-import Numeric.Natural (Natural)
-import Options.Applicative
-    (Parser, ParserInfo, argument, auto, command, help, helper, info, metavar, progDesc, subparser)
+import Options.Applicative (ParserInfo, argument, auto, command, help, helper, info, metavar, progDesc, subparser)
 
 
 {-| Analizas komandolinion opcion. -}
