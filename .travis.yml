@@ -1,4 +1,6 @@
-language:   haskell
-sudo:       required
-install:    curl -sSL https://get.haskellstack.org/ | sh && stack setup
-script:     stack test
+language: haskell
+sudo: required
+install:
+    - curl -sSL https://get.haskellstack.org/ | sh
+    - stack setup
+script: stack test
