@@ -29,8 +29,8 @@ $ stack install
 $ hakocalc [command] [args...]
 ```
 
-+ `command`: Subkomando kiun vi volas uzi.
-+ `args`: Argumentoj kiuj estos transdonita al la subkomando.
++ `command` estas subkomando kiun vi volas uzi.
++ `args` estas argumentoj kiuj estos transdonita al la subkomando.
 
 La jenaj estas validaj komandoj.
 
