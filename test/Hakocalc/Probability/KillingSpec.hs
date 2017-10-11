@@ -20,10 +20,10 @@ spec = do
         it "King" $ enoughMissiles 5 (justProbability $ 1 / 16807) `shouldBe` Just 5
 
     describe "probabilityTransition" $ do
-        it "Ghost" $ probabilityTransition 1 (1, 2) `shouldBe` [justProbability $ 1 / 7, justProbability $ 13 / 49]
-        it "Pseudo (1)" $ probabilityTransition 0 (1, 5) `shouldBe` replicate 5 (justProbability 1)
-        it "Pseudo (2)" $ probabilityTransition 0 (5, 1) `shouldBe` []
-        it "Dark" $ probabilityTransition 2 (1, 3) `shouldBe`
+        it "Ghost" $ probabilityTransition 1 1 2 `shouldBe` [justProbability $ 1 / 7, justProbability $ 13 / 49]
+        it "Pseudo (1)" $ probabilityTransition 0 1 5 `shouldBe` replicate 5 (justProbability 1)
+        it "Pseudo (2)" $ probabilityTransition 0 5 1 `shouldBe` []
+        it "Dark" $ probabilityTransition 2 1 3 `shouldBe`
             [justProbability 0, justProbability $ 1 / 49, justProbability $ 19 / 343]
 
     where
