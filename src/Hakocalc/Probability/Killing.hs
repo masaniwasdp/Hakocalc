@@ -5,7 +5,6 @@
 
 module Hakocalc.Probability.Killing (enoughMissiles, killingProbability, probabilityTransition) where
 
-import Control.Parallel.Strategies (parMap, rpar)
 import Data.Maybe (fromJust)
 import Hakocalc.Probability.Common (Probability, repeated, toProbability, fromProbability)
 import Numeric.Natural (Natural)
@@ -38,11 +37,12 @@ enoughMissiles hp probability = test hp where
 
 
 {-| Kalkulas transiron de probablo de sukcesi mortigi monstron. -}
-probabilityTransition :: Natural            -- ^ HP de monstro.
-                      -> (Natural, Natural) -- ^ Minimuma kaj maksimuma kvanto da misiloj kiuj estos lanĉita.
-                      -> [Probability]      -- ^ Transiro de probablo.
+probabilityTransition :: Natural       -- ^ HP de monstro.
+                      -> Natural       -- ^ Minimuma kvanto da misiloj kiuj estos lanĉita.
+                      -> Natural       -- ^ Maksimuma kvanto da misiloj kiuj estos lanĉita.
+                      -> [Probability] -- ^ Transiro de probablo.
 
-probabilityTransition hp (n, m) = parMap rpar (killingProbability hp) [n .. m]
+probabilityTransition hp n m = map (killingProbability hp) [n .. m]
 
 
 {-| La precizeco de misilo-sukcesoj. -}

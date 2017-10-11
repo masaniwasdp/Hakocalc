@@ -37,7 +37,7 @@ calcTransition :: TransitionOption -- ^ Opcio de komando.
 calcTransition option = putStrLn result where
     result     = intercalate "\n" $ zipWith (printf "%s:\t%s") indices transition
     indices    = map show [tMin option .. tMax option]
-    transition = map showPercentage $ probabilityTransition (tHP option) (tMin option, tMax option)
+    transition = map showPercentage $ probabilityTransition (tHP option) (tMin option) (tMax option)
 
 
 {-| Konvertas probablon al procenta kordo. -}
