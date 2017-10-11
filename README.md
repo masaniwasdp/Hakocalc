@@ -32,6 +32,14 @@ $ hakocalc [command] [args...]
 + `command`: Subkomando kiun vi volas uzi.
 + `args`: Argumentoj kiuj estos transdonita al la subkomando.
 
+La jenaj estas validaj komandoj.
+
++ `probability`
++ `quantity`
++ `transition`
+
+Se vi volas legi helpon, bonvolu ekzekti `hakocalc [command] --help`.
+
 ### Ekzemplo
 
 ``` bash
