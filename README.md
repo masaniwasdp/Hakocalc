@@ -26,11 +26,11 @@ $ stack install
 ## Ekzekuto
 
 ``` bash
-$ hakocalc [command] [args...]
+$ hakocalc COMMAND ARGS
 ```
 
-+ `command` estas subkomando kiun vi volas uzi.
-+ `args` estas argumentoj kiuj estos transdonita al la subkomando.
++ `COMMAND` estas subkomando kiun vi volas uzi.
++ `ARGS` estas argumentoj kiuj estos transdonita al la subkomando.
 
 La jenaj estas validaj komandoj.
 
@@ -38,7 +38,7 @@ La jenaj estas validaj komandoj.
 + `quantity`
 + `transition`
 
-Se vi volas legi helpon, bonvolu ekzekti `hakocalc [command] --help`.
+Se vi volas legi helpon, bonvolu ekzekti `hakocalc COMMAND --help`.
 
 ### Ekzemplo
 
