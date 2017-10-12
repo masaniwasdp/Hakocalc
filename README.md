@@ -29,10 +29,7 @@ $ stack install
 $ hakocalc COMMAND ARGS
 ```
 
-+ `COMMAND` estas subkomando kiun vi volas uzi.
-+ `ARGS` estas argumentoj kiuj estos transdonita al la subkomando.
-
-La jenaj estas validaj komandoj.
+La jenaj estas validaj `COMMAND`.
 
 + `probability`
 + `quantity`
