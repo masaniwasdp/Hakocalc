@@ -3,7 +3,7 @@
  - Copyright   : 2017 masaniwa
  -}
 
-module Hakocalc.App.Option (Option (..), ProbabilityOption (..), QuantityOption (..), TransitionOption (..)) where
+module Hakocalc.CLI.Option (Option (..), ProbabilityOption (..), QuantityOption (..), TransitionOption (..)) where
 
 import Hakocalc.Probability.Common (Probability)
 import Numeric.Natural (Natural)

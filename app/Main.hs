@@ -1,6 +1,6 @@
-import Hakocalc.App.Command (calcProbability, calcQuantity, calcTransition)
-import Hakocalc.App.Option (Option (..))
-import Hakocalc.App.Parser (optionParser)
+import Hakocalc.CLI.Command (calcProbability, calcQuantity, calcTransition)
+import Hakocalc.CLI.Option (Option (..))
+import Hakocalc.CLI.Parser (optionParser)
 import Options.Applicative (customExecParser, prefs, showHelpOnError)
 
 

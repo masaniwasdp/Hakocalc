@@ -3,10 +3,10 @@
  - Copyright   : 2017 masaniwa
  -}
 
-module Hakocalc.App.Parser (optionParser) where
+module Hakocalc.CLI.Parser (optionParser) where
 
 import Data.Semigroup ((<>))
-import Hakocalc.App.Option (Option (..), ProbabilityOption (..), QuantityOption (..), TransitionOption (..))
+import Hakocalc.CLI.Option (Option (..), ProbabilityOption (..), QuantityOption (..), TransitionOption (..))
 import Options.Applicative (ParserInfo, argument, auto, command, help, helper, info, metavar, progDesc, subparser)
 
 

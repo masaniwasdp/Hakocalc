@@ -3,10 +3,10 @@
  - Copyright   : 2017 masaniwa
  -}
 
-module Hakocalc.App.Command (calcProbability, calcQuantity, calcTransition) where
+module Hakocalc.CLI.Command (calcProbability, calcQuantity, calcTransition) where
 
 import Data.List (intercalate)
-import Hakocalc.App.Option (ProbabilityOption (..), QuantityOption (..), TransitionOption (..))
+import Hakocalc.CLI.Option (ProbabilityOption (..), QuantityOption (..), TransitionOption (..))
 import Hakocalc.Probability.Common (Probability)
 import Hakocalc.Probability.Killing (enoughMissiles, killingProbability, probabilityTransition)
 import Text.Printf (printf)

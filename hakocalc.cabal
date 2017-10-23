@@ -13,9 +13,9 @@ cabal-version:       >=1.10
 
 library
   hs-source-dirs:      src
-  exposed-modules:     Hakocalc.App.Command
-                     , Hakocalc.App.Option
-                     , Hakocalc.App.Parser
+  exposed-modules:     Hakocalc.CLI.Command
+                     , Hakocalc.CLI.Option
+                     , Hakocalc.CLI.Parser
                      , Hakocalc.Probability.Common
                      , Hakocalc.Probability.Killing
   build-depends:       base >= 4.7 && < 5
