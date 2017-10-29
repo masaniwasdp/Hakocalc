@@ -18,7 +18,7 @@ La ilo estas probablo kalkulilo kiun vi povas uzi kiam mortigi monstron, en la "
 ## Instali
 
 ``` bash
-$ git clone https://github.com/masaniwasdp/Hakocalc.git
+$ git clone https://github.com/masaniwasdp/Hakocalc --depth 1 -b v3.3.3.0
 $ cd Hakocalc
 $ stack install
 ```
