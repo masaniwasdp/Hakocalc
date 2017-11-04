@@ -1,5 +1,5 @@
 {-|
- - Description : La modulo de komando.
+ - Description : Modulo de komando.
  - Copyright   : 2017 masaniwa
  -}
 
@@ -17,7 +17,7 @@ calcProbability :: ProbabilityOption -- ^ Opcio por komando.
                 -> IO ()
 
 calcProbability option = putStrLn result where
-    result = showPercentage $ killingProbability (pHP option) (pQuantity option)
+  result = showPercentage $ killingProbability (pHP option) (pQuantity option)
 
 
 {-| Kalkulas postulitan kvanton da misiloj por mortigi monstron. -}
@@ -25,9 +25,9 @@ calcQuantity :: QuantityOption -- ^ Opcio de komando.
              -> IO ()
 
 calcQuantity option = putStrLn result where
-    result = case enoughMissiles (qHP option) (qProbability option) of
-        Just x  -> show x
-        Nothing -> "Couldn't calculate."
+  result = case enoughMissiles (qHP option) (qProbability option) of
+    Just x  -> show x
+    Nothing -> "Couldn't calculate."
 
 
 {-| Kalkulas transiron de probablo de sukcesi mortigi monstron. -}
@@ -35,9 +35,9 @@ calcTransition :: TransitionOption -- ^ Opcio de komando.
                -> IO ()
 
 calcTransition option = putStrLn result where
-    result     = intercalate "\n" $ zipWith (printf "%s:\t%s") indices transition
-    indices    = map show [tMin option .. tMax option]
-    transition = map showPercentage $ probabilityTransition (tHP option) (tMin option) (tMax option)
+  result     = intercalate "\n" $ zipWith (printf "%s:\t%s") indices transition
+  indices    = map show [tMin option .. tMax option]
+  transition = map showPercentage $ probabilityTransition (tHP option) (tMin option) (tMax option)
 
 
 {-| Konvertas probablon al procenta kordo. -}

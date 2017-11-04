@@ -1,5 +1,5 @@
 {-|
- - Description : La modulo por kalkuli probablon de mortigi monstron.
+ - Description : Modulo por kalkuli probablon de mortigi monstron.
  - Copyright   : 2017 masaniwa
  -}
 
@@ -16,9 +16,9 @@ killingProbability :: Natural     -- ^ HP de monstro.
                    -> Probability -- ^ Probablo de sukcesi mortigi monstoron.
 
 killingProbability hp quantity = fromJust . sum' $ map repeated' list where
-    sum'      = toProbability . sum
-    repeated' = fromProbability . repeated accuracy quantity
-    list      = [hp .. quantity]
+  sum'      = toProbability . sum
+  repeated' = fromProbability . repeated accuracy quantity
+  list      = [hp .. quantity]
 
 
 {-| Kalkulas postulitan kvanton da misiloj por mortigi monstron. -}
@@ -27,13 +27,13 @@ enoughMissiles :: Natural       -- ^ HP de monstro.
                -> Maybe Natural -- ^ Postulita kvanto da misiloj.
 
 enoughMissiles hp probability = test hp where
-    test q
-        | not isHappenable = Nothing
-        | isSufficient q   = Just q
-        | otherwise        = test $ q + 1
+  test q
+    | not isHappenable = Nothing
+    | isSufficient q   = Just q
+    | otherwise        = test $ q + 1
 
-    isHappenable   = fromProbability probability > 0 && fromProbability probability < 1
-    isSufficient r = killingProbability hp r >= probability
+  isHappenable   = fromProbability probability > 0 && fromProbability probability < 1
+  isSufficient r = killingProbability hp r >= probability
 
 
 {-| Kalkulas transiron de probablo de sukcesi mortigi monstron. -}
