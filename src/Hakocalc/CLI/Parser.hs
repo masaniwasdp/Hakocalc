@@ -1,6 +1,7 @@
 {-|
  - Description : Modulo por analizi komandolinion opcion.
  - Copyright   : 2017 masaniwa
+ - License     : MIT
  -}
 
 module Hakocalc.CLI.Parser (optionParser) where

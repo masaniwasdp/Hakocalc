@@ -1,6 +1,7 @@
 {-|
  - Description : Modulo por kalkuli probablon de mortigi monstron.
  - Copyright   : 2017 masaniwa
+ - License     : MIT
  -}
 
 module Hakocalc.Probability.Killing (enoughMissiles, killingProbability, probabilityTransition) where

@@ -1,6 +1,7 @@
 {-|
  - Description : Modulo de komuna probablo kalkulo.
  - Copyright   : 2017 masaniwa
+ - License     : MIT
  -}
 
 module Hakocalc.Probability.Common (Probability, combination, fromProbability, toProbability, repeated) where

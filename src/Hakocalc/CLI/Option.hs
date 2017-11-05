@@ -1,6 +1,7 @@
 {-|
  - Description : Modulo de opcio por komandoj.
  - Copyright   : 2017 masaniwa
+ - License     : MIT
  -}
 
 module Hakocalc.CLI.Option (Option (..), ProbabilityOption (..), QuantityOption (..), TransitionOption (..)) where

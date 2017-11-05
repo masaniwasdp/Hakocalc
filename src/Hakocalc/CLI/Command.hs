@@ -1,6 +1,7 @@
 {-|
  - Description : Modulo de komando.
  - Copyright   : 2017 masaniwa
+ - License     : MIT
  -}
 
 module Hakocalc.CLI.Command (calcProbability, calcQuantity, calcTransition) where
