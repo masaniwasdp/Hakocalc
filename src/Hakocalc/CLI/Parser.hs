@@ -47,7 +47,7 @@ transitionOptionParser :: ParserInfo Option
 
 transitionOptionParser = info parser description where
   parser      = helper <*> (TOption <$> (TransitionOption <$> hp <*> n <*> m))
-  description = progDesc "Calculates probability transition that the monster dies when launching m missiles from n."
+  description = progDesc "Calculates probability transition that the monster dies when launching M missiles from N."
   hp          = argument auto $ help "The HP of the monster." <> metavar "HP"
-  n           = argument auto $ help "The minimum quantity of missiles to launch." <> metavar "MIN"
-  m           = argument auto $ help "The maximum quantity of missiles to launch." <> metavar "MAX"
+  n           = argument auto $ help "The minimum quantity of missiles to launch." <> metavar "N"
+  m           = argument auto $ help "The maximum quantity of missiles to launch." <> metavar "M"

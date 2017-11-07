@@ -18,7 +18,7 @@ La ilo estas probablo kalkulilo kiun vi povas uzi kiam mortigi monstron, en la "
 ## Instali
 
 ``` bash
-$ git clone https://github.com/masaniwasdp/Hakocalc --depth 1 -b v3.3.3.0
+$ git clone https://github.com/masaniwasdp/Hakocalc --depth 1
 $ cd Hakocalc
 $ stack install
 ```
@@ -53,17 +53,17 @@ Couldn't calculate.
 
 ``` bash
 $ hakocalc transition 3 38 48
-38:     92.324%
-39:     93.121%
-40:     93.841%
-41:     94.491%
-42:     95.077%
-43:     95.604%
-44:     96.078%
-45:     96.503%
-46:     96.885%
-47:     97.227%
-48:     97.533%
+38: 92.324%
+39: 93.121%
+40: 93.841%
+41: 94.491%
+42: 95.077%
+43: 95.604%
+44: 96.078%
+45: 96.503%
+46: 96.885%
+47: 97.227%
+48: 97.533%
 ```
 
 ## Permesilo
