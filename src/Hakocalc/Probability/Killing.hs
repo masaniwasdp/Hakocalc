@@ -4,7 +4,10 @@
  - License     : MIT
  -}
 
-module Hakocalc.Probability.Killing (enoughMissiles, killingProbability, probabilityTransition) where
+module Hakocalc.Probability.Killing
+  ( enoughMissiles
+  , killingProbability
+  , probabilityTransition ) where
 
 import Data.Maybe (fromJust)
 import Hakocalc.Probability.Common (Probability, repeated, toProbability, fromProbability)
@@ -16,10 +19,11 @@ killingProbability :: Natural     -- ^ HP de monstro.
                    -> Natural     -- ^ Kvanto da misiloj kiuj estos lanĉita.
                    -> Probability -- ^ Probablo de sukcesi mortigi monstoron.
 
-killingProbability hp quantity = fromJust . sum' $ map repeated' list where
-  sum'      = toProbability . sum
-  repeated' = fromProbability . repeated accuracy quantity
-  list      = [hp .. quantity]
+killingProbability hp quantity = fromJust . sum' $ map repeated' list
+  where
+    sum'      = toProbability . sum
+    repeated' = fromProbability . repeated accuracy quantity
+    list      = [hp .. quantity]
 
 
 {-| Kalkulas postulitan kvanton da misiloj por mortigi monstron. -}
@@ -27,14 +31,15 @@ enoughMissiles :: Natural       -- ^ HP de monstro.
                -> Probability   -- ^ Probablo de sukcesi mortigi monstron.
                -> Maybe Natural -- ^ Postulita kvanto da misiloj.
 
-enoughMissiles hp probability = test hp where
-  test q
-    | not isHappenable = Nothing
-    | isSufficient q   = Just q
-    | otherwise        = test $ q + 1
+enoughMissiles hp probability = test hp
+  where
+    test q
+      | not isHappenable = Nothing
+      | isSufficient q   = Just q
+      | otherwise        = test $ q + 1
 
-  isHappenable   = fromProbability probability > 0 && fromProbability probability < 1
-  isSufficient r = killingProbability hp r >= probability
+    isHappenable   = fromProbability probability > 0 && fromProbability probability < 1
+    isSufficient r = killingProbability hp r >= probability
 
 
 {-| Kalkulas transiron de probablo de sukcesi mortigi monstron. -}

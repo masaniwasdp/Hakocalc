@@ -4,26 +4,33 @@
  - License     : MIT
  -}
 
-module Hakocalc.Probability.Common (Probability, combination, fromProbability, toProbability, repeated) where
+module Hakocalc.Probability.Common
+  ( Probability
+  , combination
+  , fromProbability
+  , toProbability
+  , repeated ) where
 
 import Data.Maybe (fromJust)
 import Numeric.Natural (Natural)
+
 
 {-| Reprezentanta probablon. -}
 newtype Probability = Probability' Rational deriving (Eq, Ord)
 
 instance Read Probability where
   readsPrec _ s = case result of
-    Just x  -> [(x, "")]
-    Nothing -> []
+                    Just x  -> [(x, "")]
+                    Nothing -> []
     where
       result = case reads s of
-        [(x, "")] -> toProbability . (/ 100) . toRational $ (x :: Double)
-        _         -> Nothing
+                 [(x, "")] -> toProbability . (/ 100) . toRational $ (x :: Double)
+                 _         -> Nothing
 
 instance Show Probability where
-  show x = show probability where
-    probability = fromRational . (* 100) . fromProbability $ x :: Double
+  show x = show probability
+    where
+      probability = fromRational . (* 100) . fromProbability $ x :: Double
 
 
 {-| Konvertas probablon al racia nombro. -}
@@ -58,9 +65,10 @@ repeated :: Probability -- ^ Probablo de provo sukceso.
          -> Natural     -- ^ K kiu nombro da fojoj de provo sukceso.
          -> Probability -- ^ Probablo, ke provo sukcesos K fojojn.
 
-repeated p n k = fromJust . toProbability $ probability where
-  probability
-    | n >= k    = (* coefficient) . toRational $ combination n k
-    | otherwise = 0
+repeated p n k = fromJust . toProbability $ probability
+  where
+    probability
+      | n >= k    = (* coefficient) . toRational $ combination n k
+      | otherwise = 0
 
-  coefficient = fromProbability p ^ k * (1 - fromProbability p) ^ (n - k)
+    coefficient = fromProbability p ^ k * (1 - fromProbability p) ^ (n - k)

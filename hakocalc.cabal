@@ -1,6 +1,6 @@
 name:                hakocalc
-version:             3.4.0.0
-description:         The calculator of probability that the monster will die, in Hakoniwa Islands.
+version:             3.4.1.0
+description:         A calculator of probability that a monster will die, in the Hakoniwa Islands.
 homepage:            https://github.com/masaniwasdp/Hakocalc#readme
 license:             MIT
 license-file:        LICENSE
@@ -13,9 +13,9 @@ cabal-version:       >=1.10
 
 library
   hs-source-dirs:      src
-  exposed-modules:     Hakocalc.CLI.Command
-                     , Hakocalc.CLI.Option
-                     , Hakocalc.CLI.Parser
+  exposed-modules:     Hakocalc.Command
+                     , Hakocalc.Option
+                     , Hakocalc.Parser
                      , Hakocalc.Probability.Common
                      , Hakocalc.Probability.Killing
   build-depends:       base >= 4.7 && < 5
