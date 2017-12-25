@@ -32,8 +32,8 @@ calcQuantity :: QuantityOption -- ^ Opcio de komando.
 calcQuantity option = putStrLn result
   where
     result = case enoughMissiles (qHP option) (qProbability option) of
-               Just x  -> show x
-               Nothing -> "Couldn't calculate."
+      Just x  -> show x
+      Nothing -> "Couldn't calculate."
 
 
 {-| Kalkulas transiron de probablo de sukcesi mortigi monstron. -}

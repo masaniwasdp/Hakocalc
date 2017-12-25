@@ -22,21 +22,21 @@ data Option = POption ProbabilityOption -- ^ Opcio por probablo komando.
 
 {-| Opcio por probablo komando. -}
 data ProbabilityOption = ProbabilityOption
-                           { pHP       :: Natural -- ^ HP de monstro.
-                           , pQuantity :: Natural -- ^ Kvanto da misiloj kiuj estos lanĉita.
-                           }
+  { pHP       :: Natural -- ^ HP de monstro.
+  , pQuantity :: Natural -- ^ Kvanto da misiloj kiuj estos lanĉita.
+  }
 
 
 {-| Opcio por kvanto komando. -}
 data QuantityOption = QuantityOption
-                        { qHP          :: Natural     -- ^ HP de monstro.
-                        , qProbability :: Probability -- ^ Probablo de sukcesi mortigi monstron.
-                        }
+  { qHP          :: Natural     -- ^ HP de monstro.
+  , qProbability :: Probability -- ^ Probablo de sukcesi mortigi monstron.
+  }
 
 
 {-| Opcio por transiro komando. -}
 data TransitionOption = TransitionOption
-                          { tHP  :: Natural -- ^ HP de monstro.
-                          , tMin :: Natural -- ^ Minimuma kvanto da misiloj kiuj estos lanĉita.
-                          , tMax :: Natural -- ^ Maksimuma kvanto da misiloj kiuj estos lanĉita.
-                          }
+  { tHP  :: Natural -- ^ HP de monstro.
+  , tMin :: Natural -- ^ Minimuma kvanto da misiloj kiuj estos lanĉita.
+  , tMax :: Natural -- ^ Maksimuma kvanto da misiloj kiuj estos lanĉita.
+  }

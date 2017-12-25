@@ -20,12 +20,12 @@ newtype Probability = Probability' Rational deriving (Eq, Ord)
 
 instance Read Probability where
   readsPrec _ s = case result of
-                    Just x  -> [(x, "")]
-                    Nothing -> []
+    Just x  -> [(x, "")]
+    Nothing -> []
     where
       result = case reads s of
-                 [(x, "")] -> toProbability . (/ 100) . toRational $ (x :: Double)
-                 _         -> Nothing
+        [(x, "")] -> toProbability . (/ 100) . toRational $ (x :: Double)
+        _         -> Nothing
 
 instance Show Probability where
   show x = show probability
