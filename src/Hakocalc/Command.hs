@@ -1,54 +1,39 @@
 {-|
  - Description : Modulo de komando.
- - Copyright   : 2017 masaniwa
+ - Copyright   : 2018 masaniwa
  - License     : MIT
  -}
-
 module Hakocalc.Command
   ( calcProbability
   , calcQuantity
-  , calcTransition ) where
+  )
+  where
 
-import Data.List (intercalate)
-import Hakocalc.Option (ProbabilityOption (..), QuantityOption (..), TransitionOption (..))
-import Hakocalc.Probability.Common (Probability)
-import Hakocalc.Probability.Killing (enoughMissiles, killingProbability, probabilityTransition)
+
+import Hakocalc.Parser (ProbabilityOption' (..), QuantityOption' (..))
+import Hakocalc.Probability.Common (fromProbability)
+import Hakocalc.Probability.Killing (enoughMissiles, killingProbability)
 import Text.Printf (printf)
 
 
 {-| Kalkulas probablon de sukcesi mortigi monstron. -}
-calcProbability :: ProbabilityOption -- ^ Opcio por komando.
-                -> IO ()
+calcProbability
+  :: ProbabilityOption' -- ^ Opcio por komando.
+  -> IO ()
 
-calcProbability option = putStrLn result
+calcProbability (ProbabilityOption' h q) = putStrLn str
   where
-    result = showPercentage $ killingProbability (pHP option) (pQuantity option)
+    str = printf "%.3f%%" . (* 100) . (fromRational :: Rational -> Double) . fromProbability $ res
+
+    res = killingProbability h q
 
 
 {-| Kalkulas postulitan kvanton da misiloj por mortigi monstron. -}
-calcQuantity :: QuantityOption -- ^ Opcio de komando.
-             -> IO ()
+calcQuantity
+  :: QuantityOption' -- ^ Opcio de komando.
+  -> IO ()
 
-calcQuantity option = putStrLn result
-  where
-    result = case enoughMissiles (qHP option) (qProbability option) of
-      Just x  -> show x
-      Nothing -> "Couldn't calculate."
+calcQuantity (QuantityOption' h p) = case enoughMissiles h p of
+  Just q -> print q
 
-
-{-| Kalkulas transiron de probablo de sukcesi mortigi monstron. -}
-calcTransition :: TransitionOption -- ^ Opcio de komando.
-               -> IO ()
-
-calcTransition option = putStrLn result
-  where
-    result     = intercalate "\n" $ zipWith (printf "%s: %s") indices transition
-    indices    = map show [tMin option .. tMax option]
-    transition = map showPercentage $ probabilityTransition (tHP option) (tMin option) (tMax option)
-
-
-{-| Konvertas probablon al procenta kordo. -}
-showPercentage :: Probability -- ^ Probablo kiu estos konvertata.
-               -> String      -- ^ Procenta kordo konvertita.
-
-showPercentage = printf "%.3f%%" . (read :: String -> Double) . show
+  Nothing -> putStrLn "Couldn't calculate."

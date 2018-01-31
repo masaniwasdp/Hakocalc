@@ -1,58 +1,84 @@
 {-|
  - Description : Modulo por analizi komandolinion opcion.
- - Copyright   : 2017 masaniwa
+ - Copyright   : 2018 masaniwa
  - License     : MIT
  -}
-
 module Hakocalc.Parser
-  ( optionParser ) where
+  ( Option (..)
+  , ProbabilityOption' (..)
+  , QuantityOption' (..)
+  , optionParser
+  )
+  where
+
 
 import Data.Semigroup ((<>))
-import Hakocalc.Option (Option (..), ProbabilityOption (..), QuantityOption (..), TransitionOption (..))
-import Options.Applicative (ParserInfo, argument, auto, command, help, helper, info, metavar, progDesc, subparser)
+import Hakocalc.Probability.Common (Probability)
+import Numeric.Natural (Natural)
+
+import qualified Options.Applicative as App
+
+
+{-| Opcio por komandoj. -}
+data Option = ProbabilityOption ProbabilityOption' | QuantityOption QuantityOption'
+
+
+{-| Opcio por probablo komando. -}
+data ProbabilityOption' = ProbabilityOption'
+  Natural -- ^ HP de monstro.
+  Natural -- ^ Kvanto da misiloj kiuj estos lanĉita.
+
+
+{-| Opcio por kvanto komando. -}
+data QuantityOption' = QuantityOption'
+  Natural     -- ^ HP de monstro.
+  Probability -- ^ Probablo de sukcesi mortigi monstron.
 
 
 {-| Analizas komandolinion opcion. -}
-optionParser :: ParserInfo Option
+optionParser :: App.ParserInfo Option
 
-optionParser = info parser description
+optionParser = App.info pars desc
   where
-    parser      = subparser $ probability <> quantity <> transition
-    description = progDesc "Calculates probability that a monster will die, in the Hakoniwa Islands."
-    probability = command "probability" probabilityOptionParser
-    quantity    = command "quantity" quantityOptionParser
-    transition  = command "transition" transitionOptionParser
+    pars = App.subparser $
+      App.command "probability" probabilityOptionParser <>
+      App.command "quantity" quantityOptionParser
+
+    desc = App.progDesc "Calculates probability that a monster will die, in the Hakoniwa Islands."
 
 
 {-| Analizas opcion por probablo komando. -}
-probabilityOptionParser :: ParserInfo Option
+probabilityOptionParser :: App.ParserInfo Option
 
-probabilityOptionParser = info parser description
+probabilityOptionParser = App.info pars desc
   where
-    parser      = helper <*> (POption <$> (ProbabilityOption <$> hp <*> quantity))
-    description = progDesc "Calculates probability that a monster will die."
-    hp          = argument auto $ help "The HP of the monster." <> metavar "HP"
-    quantity    = argument auto $ help "The quantity of missiles to launch." <> metavar "MISSILES"
+    pars = App.helper <*> (ProbabilityOption <$> opt')
+
+    desc = App.progDesc "Calculates probability that a monster will die."
+
+    opt' = ProbabilityOption' <$>
+      helpArg "The HP of the monster." "HP" <*>
+      helpArg "The quantity of missiles to launch." "MISSILES"
 
 
 {-| Analizas opcion por kvanto komando. -}
-quantityOptionParser :: ParserInfo Option
+quantityOptionParser :: App.ParserInfo Option
 
-quantityOptionParser = info parser description
+quantityOptionParser = App.info pars desc
   where
-    parser      = helper <*> (QOption <$> (QuantityOption <$> hp <*> probability))
-    description = progDesc "Calculates enough quantity of missiles to kill a monster."
-    hp          = argument auto $ help "The HP of the monster." <> metavar "HP"
-    probability = argument auto $ help "The probability of killing the monster. (%)" <> metavar "PROBABILITY"
+    pars = App.helper <*> (QuantityOption <$> opt')
+
+    desc = App.progDesc "Calculates quantity of missiles to kill a monster."
+
+    opt' = QuantityOption' <$>
+      helpArg "The HP of the monster." "HP" <*>
+      helpArg "The probability of killing the monster. (%)" "PROBABILITY"
 
 
-{-| Analizas opcion por transiro komando. -}
-transitionOptionParser :: ParserInfo Option
+{-| Kreas argumenton analizilon kun helpo teksto. -}
+helpArg :: Read a
+  => String       -- ^ Helpo teksto.
+  -> String       -- ^ Meta variablo.
+  -> App.Parser a -- ^ Argumento analizilo.
 
-transitionOptionParser = info parser description
-  where
-    parser      = helper <*> (TOption <$> (TransitionOption <$> hp <*> n <*> m))
-    description = progDesc "Calculates probability transition that a monster dies when launching M missiles from N."
-    hp          = argument auto $ help "The HP of the monster." <> metavar "HP"
-    n           = argument auto $ help "The minimum quantity of missiles to launch." <> metavar "N"
-    m           = argument auto $ help "The maximum quantity of missiles to launch." <> metavar "M"
+helpArg h m = App.argument App.auto $ App.help h <> App.metavar m
