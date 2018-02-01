@@ -44,4 +44,4 @@ enoughMissiles h p = test h
 {-| La precizeco de misilo-sukcesoj. -}
 accuracy :: Probability
 
-accuracy = toProbabilityJust $ 1 / 7
+accuracy = toProbabilityJust . recip $ 7
