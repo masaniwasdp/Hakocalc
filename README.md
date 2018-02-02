@@ -13,7 +13,6 @@ La ilo estas probablo kalkulilo kiun vi povas uzi kiam mortigi monstron, en la "
 
 + La probablo sukcesi mortigi monstron kiam vi pafis PP misilojn.
 + La postulita kvanto da misiloj por mortigi monstron.
-+ La transiro de probablo sukcesi mortigi monstron kiam vi pafis PP misilojn.
 
 ## Instali
 
@@ -33,7 +32,6 @@ La jenaj estas validaj `COMMAND`.
 
 + `probability`
 + `quantity`
-+ `transition`
 
 Se vi volas legi helpon, bonvolu ekzekti `hakocalc COMMAND --help`.
 
@@ -51,22 +49,7 @@ $ hakocalc quantity 3 100
 Couldn't calculate.
 ```
 
-``` bash
-$ hakocalc transition 3 38 48
-38: 92.324%
-39: 93.121%
-40: 93.841%
-41: 94.491%
-42: 95.077%
-43: 95.604%
-44: 96.078%
-45: 96.503%
-46: 96.885%
-47: 97.227%
-48: 97.533%
-```
-
 ## Permesilo
-© 2017, masaniwa
+© 2018, masaniwa
 
 La programaro estas licencita sub la [MIT](https://github.com/masaniwasdp/Hakocalc/blob/master/LICENSE).
