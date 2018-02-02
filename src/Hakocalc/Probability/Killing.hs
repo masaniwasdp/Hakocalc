@@ -20,7 +20,7 @@ killingProbability
   -> Natural     -- ^ Kvanto da misiloj kiuj estos lanĉita.
   -> Probability -- ^ Probablo de sukcesi mortigi monstoron.
 
-killingProbability h q = toProbabilityJust . sum $ probs
+killingProbability h q = toProbabilityJust $ sum probs
   where
     probs = map (fromProbability . repeated accuracy q) [h .. q]
 
@@ -44,4 +44,4 @@ enoughMissiles h p = test h
 {-| La precizeco de misilo-sukcesoj. -}
 accuracy :: Probability
 
-accuracy = toProbabilityJust . recip $ 7
+accuracy = toProbabilityJust $ recip 7

@@ -30,13 +30,15 @@ instance Read Probability
 
       where
         res = case reads s of
-          [(x, "")] -> toProbability . (/ 100) . toRational $ (x :: Double)
+          [(x, "")] -> toProbability . (/ 100) $ toRational (x :: Double)
 
           _ -> Nothing
 
 instance Show Probability
   where
-    show x = show (fromRational . (* 100) . fromProbability $ x :: Double)
+    show x = show (per :: Double)
+      where
+        per = fromRational . (* 100) $ fromProbability x
 
 
 {-| Konvertas probablon al racia nombro. -}
@@ -55,7 +57,7 @@ toProbability
 toProbability p
   | p < 0 || p > 1 = Nothing
 
-  | otherwise = Just . Probability' $ p
+  | otherwise = Just $ Probability' p
 
 
 {-| Konvertas racia nombro al probablo. -}
