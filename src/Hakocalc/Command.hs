@@ -21,8 +21,10 @@ calcProbability
   :: ProbabilityOption' -- ^ Opcio por komando.
   -> IO ()
 
-calcProbability (ProbabilityOption' h q) = printf "%.3f%%" (per :: Double)
+calcProbability (ProbabilityOption' h q) = putStrLn str
   where
+    str = printf "%.3f%%" (per :: Double)
+
     per = (* 100) . fromRational $ fromProbability res
 
     res = killingProbability h q
