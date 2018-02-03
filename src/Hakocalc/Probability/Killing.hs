@@ -31,11 +31,13 @@ enoughMissiles
   -> Probability   -- ^ Probablo de sukcesi mortigi monstron.
   -> Maybe Natural -- ^ Postulita kvanto da misiloj.
 
-enoughMissiles h p = test h
+enoughMissiles h p
+  | fromProbability p <= 0 || fromProbability p >= 1 = Nothing
+
+  | otherwise = test h
+
   where
     test q
-      | fromProbability p <= 0 || fromProbability p >= 1 = Nothing
-
       | killingProbability h q >= p = Just q
 
       | otherwise = test $ q + 1
