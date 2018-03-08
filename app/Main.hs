@@ -5,10 +5,11 @@ import Options.Applicative (customExecParser, prefs, showHelpOnError)
 
 main :: IO ()
 
-main = do
-  opt' <- customExecParser (prefs showHelpOnError) optionParser
+main = run =<< customExecParser (prefs showHelpOnError) optionParser
 
-  case opt' of
-    ProbabilityOption opt -> calcProbability opt
 
-    QuantityOption opt -> calcQuantity opt
+run :: Option -> IO ()
+
+run (ProbabilityOption opt) = calcProbability opt
+
+run (QuantityOption opt) = calcQuantity opt
