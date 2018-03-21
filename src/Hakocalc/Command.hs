@@ -4,38 +4,34 @@
  - License     : MIT
  -}
 module Hakocalc.Command
-  ( calcProbability
-  , calcQuantity
+  ( commandP
+  , commandQ
   )
   where
 
 
-import Hakocalc.Parser (ProbabilityOption' (..), QuantityOption' (..))
+import Hakocalc.Parser (PArgs (..), QArgs (..))
 import Hakocalc.Probability.Common (fromProbability)
 import Hakocalc.Probability.Killing (enoughMissiles, killingProbability)
 import Text.Printf (printf)
 
 
 {-| Kalkulas probablon de sukcesi mortigi monstron. -}
-calcProbability
-  :: ProbabilityOption' -- ^ Opcio por komando.
+commandP
+  :: PArgs -- ^ Argumentoj de komando.
   -> IO ()
 
-calcProbability (ProbabilityOption' h q) = putStrLn str
-  where
-    str = printf "%.3f%%" (per :: Double)
-
-    per = (* 100) . fromRational $ fromProbability res
-
-    res = killingProbability h q
+commandP (PArgs h q) = putStrLn
+      . (printf "%.3f%%" :: Double -> String)
+      . (* 100)
+      . fromRational
+      . fromProbability $ killingProbability h q
 
 
 {-| Kalkulas postulitan kvanton da misiloj por mortigi monstron. -}
-calcQuantity
-  :: QuantityOption' -- ^ Opcio de komando.
+commandQ
+  :: QArgs -- ^ Argumentoj de komando.
   -> IO ()
 
-calcQuantity (QuantityOption' h p) = case enoughMissiles h p of
-  Just q -> print q
-
-  Nothing -> putStrLn "Couldn't calculate."
+commandQ (QArgs h p) = putStrLn
+  . maybe "Couldn't calculate." show $ enoughMissiles h p

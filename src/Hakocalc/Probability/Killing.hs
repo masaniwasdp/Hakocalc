@@ -10,6 +10,7 @@ module Hakocalc.Probability.Killing
   where
 
 
+import Data.List (find)
 import Hakocalc.Probability.Common (Probability, repeated, toProbabilityJust, fromProbability)
 import Numeric.Natural (Natural)
 
@@ -20,9 +21,9 @@ killingProbability
   -> Natural     -- ^ Kvanto da misiloj kiuj estos lanĉita.
   -> Probability -- ^ Probablo de sukcesi mortigi monstoron.
 
-killingProbability h q = toProbabilityJust $ sum probs
-  where
-    probs = map (fromProbability . repeated accuracy q) [h .. q]
+killingProbability h q = toProbabilityJust
+  . sum
+  . map (fromProbability . repeated accuracy q) $ [h .. q]
 
 
 {-| Kalkulas postulitan kvanton da misiloj por mortigi monstron. -}
@@ -32,15 +33,11 @@ enoughMissiles
   -> Maybe Natural -- ^ Postulita kvanto da misiloj.
 
 enoughMissiles h p
-  | fromProbability p <= 0 || fromProbability p >= 1 = Nothing
+  | fromProbability p == 0 = Nothing
 
-  | otherwise = test h
+  | fromProbability p == 1 = Nothing
 
-  where
-    test q
-      | killingProbability h q >= p = Just q
-
-      | otherwise = test $ q + 1
+  | otherwise = find (\ q -> killingProbability h q >= p) [h ..]
 
 
 {-| La precizeco de misilo-sukcesoj. -}

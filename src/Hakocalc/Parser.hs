@@ -5,8 +5,8 @@
  -}
 module Hakocalc.Parser
   ( Option (..)
-  , ProbabilityOption' (..)
-  , QuantityOption' (..)
+  , PArgs (..)
+  , QArgs (..)
   , optionParser
   )
   where
@@ -15,70 +15,70 @@ module Hakocalc.Parser
 import Data.Semigroup ((<>))
 import Hakocalc.Probability.Common (Probability)
 import Numeric.Natural (Natural)
-
-import qualified Options.Applicative as App
+import Options.Applicative.Builder (argument, auto, command, help, info, metavar, progDesc, subparser)
+import Options.Applicative.Builder.Internal (CommandFields, Mod)
+import Options.Applicative.Common (Parser, ParserInfo)
+import Options.Applicative.Extra (helper)
 
 
 {-| Opcio por komandoj. -}
-data Option = ProbabilityOption ProbabilityOption' | QuantityOption QuantityOption'
+data Option = POption PArgs | QOption QArgs
 
 
-{-| Opcio por probablo komando. -}
-data ProbabilityOption' = ProbabilityOption'
+{-| Argumentoj por probablo komando. -}
+data PArgs = PArgs
   Natural -- ^ HP de monstro.
   Natural -- ^ Kvanto da misiloj kiuj estos lanĉita.
 
 
-{-| Opcio por kvanto komando. -}
-data QuantityOption' = QuantityOption'
+{-| Argumentoj por kvanto komando. -}
+data QArgs = QArgs
   Natural     -- ^ HP de monstro.
   Probability -- ^ Probablo de sukcesi mortigi monstron.
 
 
 {-| Analizas komandolinion opcion. -}
-optionParser :: App.ParserInfo Option
+optionParser :: ParserInfo Option
 
-optionParser = App.info pars desc
+optionParser = info pars desc
   where
-    pars = App.subparser $
-      App.command "probability" probabilityOptionParser <>
-      App.command "quantity" quantityOptionParser
+    pars = subparser $ pOptionParser <> qOptionParser
 
-    desc = App.progDesc "Calculates probability that a monster will die, in the Hakoniwa Islands."
+    desc = progDesc "Calculates probability that a monster will die, in the Hakoniwa Islands."
 
 
 {-| Analizas opcion por probablo komando. -}
-probabilityOptionParser :: App.ParserInfo Option
+pOptionParser :: Mod CommandFields Option
 
-probabilityOptionParser = App.info pars desc
+pOptionParser = command "probability" $ info pars desc
   where
-    pars = App.helper <*> (ProbabilityOption <$> opt')
+    pars = helper <*> fmap POption args
 
-    desc = App.progDesc "Calculates probability that a monster will die."
-
-    opt' = ProbabilityOption' <$>
+    args = PArgs <$>
       helpArg "The HP of the monster." "HP" <*>
       helpArg "The quantity of missiles to launch." "MISSILES"
 
+    desc = progDesc "Calculates probability that a monster will die."
+
 
 {-| Analizas opcion por kvanto komando. -}
-quantityOptionParser :: App.ParserInfo Option
+qOptionParser :: Mod CommandFields Option
 
-quantityOptionParser = App.info pars desc
+qOptionParser = command "quantity" $ info pars desc
   where
-    pars = App.helper <*> (QuantityOption <$> opt')
+    pars = helper <*> fmap QOption args
 
-    desc = App.progDesc "Calculates quantity of missiles to kill a monster."
-
-    opt' = QuantityOption' <$>
+    args = QArgs <$>
       helpArg "The HP of the monster." "HP" <*>
       helpArg "The probability of killing the monster. (%)" "PROBABILITY"
+
+    desc = progDesc "Calculates quantity of missiles to kill a monster."
 
 
 {-| Kreas argumenton analizilon kun helpo teksto. -}
 helpArg :: Read a
-  => String       -- ^ Helpo teksto.
-  -> String       -- ^ Meta variablo.
-  -> App.Parser a -- ^ Argumento analizilo.
+  => String   -- ^ Helpo teksto.
+  -> String   -- ^ Meta variablo.
+  -> Parser a -- ^ Argumento analizilo.
 
-helpArg h m = App.argument App.auto $ App.help h <> App.metavar m
+helpArg h m = argument auto $ help h <> metavar m

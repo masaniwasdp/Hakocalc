@@ -16,6 +16,7 @@ module Hakocalc.Probability.Common
 
 import Data.Maybe (fromJust)
 import Numeric.Natural (Natural)
+import Text.Read (readMaybe)
 
 
 {-| Reprezentanta probablon. -}
@@ -23,22 +24,18 @@ newtype Probability = Probability' Rational deriving (Eq, Ord)
 
 instance Read Probability
   where
-    readsPrec _ s = case res of
-      Just x -> [(x, "")]
-
-      Nothing -> []
-
+    readsPrec _ s = maybe [] (\ x -> [(x, "")]) prob
       where
-        res = case reads s of
-          [(x, "")] -> toProbability . (/ 100) $ toRational (x :: Double)
-
-          _ -> Nothing
+        prob = toProbability
+          . (/ 100)
+          . toRational =<< (readMaybe s :: Maybe Double)
 
 instance Show Probability
   where
-    show x = show (per :: Double)
-      where
-        per = fromRational . (* 100) $ fromProbability x
+    show = (show :: Double -> String)
+      . fromRational
+      . (* 100)
+      . fromProbability
 
 
 {-| Konvertas probablon al racia nombro. -}
@@ -55,7 +52,9 @@ toProbability
   -> Maybe Probability -- ^ Probablo kovertita de racia nombro.
 
 toProbability p
-  | p < 0 || p > 1 = Nothing
+  | p < 0 = Nothing
+
+  | p > 1 = Nothing
 
   | otherwise = Just $ Probability' p
 
@@ -75,9 +74,9 @@ combination
   -> Natural -- ^ Tuta nonbro de kombinajo.
 
 combination n r
-  | n >= r = product [(n - r + 1) .. n] `div` product [1 .. r]
+  | n < r = 0
 
-  | otherwise = 0
+  | otherwise = product [n - r + 1 .. n] `div` product [1 .. r]
 
 
 {-| Kalkulas probablon ripetitaj provoj. -}
@@ -90,8 +89,8 @@ repeated
 repeated p n k = toProbabilityJust prob
   where
     prob
-      | n >= k = (* c) . toRational $ combination n k
+      | n < k = 0
 
-      | otherwise = 0
+      | otherwise = (* c) . toRational $ combination n k
 
     c = fromProbability p ^ k * (1 - fromProbability p) ^ (n - k)

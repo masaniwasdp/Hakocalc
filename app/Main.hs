@@ -1,15 +1,14 @@
-import Hakocalc.Command (calcProbability, calcQuantity)
-import Hakocalc.Parser (Option (ProbabilityOption, QuantityOption), optionParser)
+import Hakocalc.Command (commandP, commandQ)
+import Hakocalc.Parser (Option (POption, QOption), optionParser)
 import Options.Applicative (customExecParser, prefs, showHelpOnError)
 
 
 main :: IO ()
 
-main = run =<< customExecParser (prefs showHelpOnError) optionParser
+main = do
+  option <- customExecParser (prefs showHelpOnError) optionParser
 
+  case option of
+    POption args -> commandP args
 
-run :: Option -> IO ()
-
-run (ProbabilityOption opt) = calcProbability opt
-
-run (QuantityOption opt) = calcQuantity opt
+    QOption args -> commandQ args
