@@ -22,10 +22,10 @@ commandP
   -> IO ()
 
 commandP (PArgs h q) = putStrLn
-      . (printf "%.3f%%" :: Double -> String)
-      . (* 100)
-      . fromRational
-      . fromProbability $ killingProbability h q
+  . (printf "%.3f%%" :: Double -> String)
+  . (* 100)
+  . fromRational
+  . fromProbability $ killingProbability h q
 
 
 {-| Kalkulas postulitan kvanton da misiloj por mortigi monstron. -}
