@@ -1,5 +1,5 @@
 name:                hakocalc
-version:             4.1.2.0
+version:             4.1.3.0
 description:         A calculator of probability that a monster will die, in the Hakoniwa Islands.
 homepage:            https://github.com/masaniwasdp/Hakocalc#readme
 license:             MIT
@@ -15,8 +15,8 @@ library
   hs-source-dirs:      src
   exposed-modules:     Hakocalc.Command
                      , Hakocalc.Parser
-                     , Hakocalc.Probability.Common
-                     , Hakocalc.Probability.Killing
+                     , Hakocalc.Calc.Common
+                     , Hakocalc.Calc.Monster
   build-depends:       base >= 4.7 && < 5
                      , optparse-applicative
   default-language:    Haskell2010
@@ -34,8 +34,8 @@ test-suite hakocalc-test
   type:                exitcode-stdio-1.0
   hs-source-dirs:      test
   main-is:             Spec.hs
-  other-modules:       Hakocalc.Probability.CommonSpec
-                     , Hakocalc.Probability.KillingSpec
+  other-modules:       Hakocalc.Calc.CommonSpec
+                     , Hakocalc.Calc.MonsterSpec
   build-depends:       base
                      , hakocalc
                      , hspec

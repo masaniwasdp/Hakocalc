@@ -3,7 +3,7 @@
  - Copyright   : 2018 masaniwa
  - License     : MIT
  -}
-module Hakocalc.Probability.Common
+module Hakocalc.Calc.Common
   ( Probability
   , combination
   , fromProbability
@@ -24,9 +24,9 @@ newtype Probability = Probability' Rational deriving (Eq, Ord)
 
 instance Read Probability
   where
-    readsPrec _ s = maybe [] (\ x -> [(x, "")]) prob
+    readsPrec _ s = maybe [] (\ x -> [(x, "")]) p
       where
-        prob = toProbability
+        p = toProbability
           . (/ 100)
           . toRational =<< (readMaybe s :: Maybe Double)
 
@@ -53,7 +53,6 @@ toProbability
 
 toProbability p
   | p < 0 = Nothing
-
   | p > 1 = Nothing
 
   | otherwise = Just $ Probability' p
@@ -91,6 +90,6 @@ repeated p n k = toProbabilityJust prob
     prob
       | n < k = 0
 
-      | otherwise = (* c) . toRational $ combination n k
+      | otherwise = (* coef) . toRational $ combination n k
 
-    c = fromProbability p ^ k * (1 - fromProbability p) ^ (n - k)
+    coef = fromProbability p ^ k * (1 - fromProbability p) ^ (n - k)

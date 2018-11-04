@@ -5,16 +5,13 @@
  -}
 module Hakocalc.Parser
   ( Option (..)
-  , PArgs (..)
-  , QArgs (..)
   , optionParser
   )
   where
 
 
 import Data.Semigroup ((<>))
-import Hakocalc.Probability.Common (Probability)
-import Numeric.Natural (Natural)
+import Hakocalc.Command (PArgs (PArgs), QArgs (QArgs))
 import Options.Applicative.Builder (argument, auto, command, help, info, metavar, progDesc, subparser)
 import Options.Applicative.Builder.Internal (CommandFields, Mod)
 import Options.Applicative.Common (Parser, ParserInfo)
@@ -23,18 +20,6 @@ import Options.Applicative.Extra (helper)
 
 {-| Opcio por komandoj. -}
 data Option = POption PArgs | QOption QArgs
-
-
-{-| Argumentoj por probablo komando. -}
-data PArgs = PArgs
-  Natural -- ^ HP de monstro.
-  Natural -- ^ Kvanto da misiloj kiuj estos lanĉita.
-
-
-{-| Argumentoj por kvanto komando. -}
-data QArgs = QArgs
-  Natural     -- ^ HP de monstro.
-  Probability -- ^ Probablo de sukcesi mortigi monstron.
 
 
 {-| Analizas komandolinion opcion. -}

@@ -3,25 +3,25 @@
  - Copyright   : 2018 masaniwa
  - License     : MIT
  -}
-module Hakocalc.Probability.Killing
-  ( enoughMissiles
-  , killingProbability
+module Hakocalc.Calc.Monster
+  ( defeatProbability
+  , enoughMissiles
   )
   where
 
 
 import Data.List (find)
-import Hakocalc.Probability.Common (Probability, repeated, toProbabilityJust, fromProbability)
+import Hakocalc.Calc.Common (Probability, repeated, toProbabilityJust, fromProbability)
 import Numeric.Natural (Natural)
 
 
 {-| Kalkulas probablon de sukcesi mortigi monstron. -}
-killingProbability
+defeatProbability
   :: Natural     -- ^ HP de monstro.
   -> Natural     -- ^ Kvanto da misiloj kiuj estos lanĉita.
   -> Probability -- ^ Probablo de sukcesi mortigi monstoron.
 
-killingProbability h q = toProbabilityJust
+defeatProbability h q = toProbabilityJust
   . sum
   . map (fromProbability . repeated accuracy q) $ [h .. q]
 
@@ -34,10 +34,9 @@ enoughMissiles
 
 enoughMissiles h p
   | fromProbability p == 0 = Nothing
-
   | fromProbability p == 1 = Nothing
 
-  | otherwise = find (\ q -> killingProbability h q >= p) [h ..]
+  | otherwise = find (\ q -> defeatProbability h q >= p) [h ..]
 
 
 {-| La precizeco de misilo-sukcesoj. -}

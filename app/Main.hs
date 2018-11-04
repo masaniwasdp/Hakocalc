@@ -8,7 +8,6 @@ main :: IO ()
 main = do
   option <- customExecParser (prefs showHelpOnError) optionParser
 
-  case option of
+  putStrLn $ case option of
     POption args -> commandP args
-
     QOption args -> commandQ args
