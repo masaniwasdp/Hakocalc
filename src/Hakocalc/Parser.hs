@@ -17,6 +17,8 @@ import Options.Applicative.Builder.Internal (CommandFields, Mod)
 import Options.Applicative.Common (Parser, ParserInfo)
 import Options.Applicative.Extra (helper)
 
+import qualified Hakocalc.Asset as Asset
+
 
 {-| Opcio por komandoj. -}
 data Option = POption PArgs | QOption QArgs
@@ -29,41 +31,40 @@ optionParser = info pars desc
   where
     pars = subparser $ pOptionParser <> qOptionParser
 
-    desc = progDesc "Calculates probability that a monster will die, in the Hakoniwa Islands."
+    desc = progDesc $ Asset.desc Asset.DescProg
 
 
 {-| Analizas opcion por probablo komando. -}
 pOptionParser :: Mod CommandFields Option
 
-pOptionParser = command "probability" $ info pars desc
+pOptionParser = command (Asset.command Asset.CmdP) (info pars desc)
   where
     pars = helper <*> fmap POption args
 
-    args = PArgs <$>
-      helpArg "The HP of the monster." "HP" <*>
-      helpArg "The quantity of missiles to launch." "MISSILES"
+    args = PArgs <$> helpArg Asset.OptH <*> helpArg Asset.OptQ
 
-    desc = progDesc "Calculates probability that a monster will die."
+    desc = progDesc $ Asset.desc Asset.DescCmdP
 
 
 {-| Analizas opcion por kvanto komando. -}
 qOptionParser :: Mod CommandFields Option
 
-qOptionParser = command "quantity" $ info pars desc
+qOptionParser = command (Asset.command Asset.CmdQ) (info pars desc)
   where
     pars = helper <*> fmap QOption args
 
-    args = QArgs <$>
-      helpArg "The HP of the monster." "HP" <*>
-      helpArg "The probability of killing the monster. (%)" "PROBABILITY"
+    args = QArgs <$> helpArg Asset.OptH <*> helpArg Asset.OptP
 
-    desc = progDesc "Calculates quantity of missiles to kill a monster."
+    desc = progDesc $ Asset.desc Asset.DescCmdQ
 
 
 {-| Kreas argumenton analizilon kun helpo teksto. -}
 helpArg :: Read a
-  => String   -- ^ Helpo teksto.
-  -> String   -- ^ Meta variablo.
-  -> Parser a -- ^ Argumento analizilo.
+  => Asset.OptKey -- ^ Ŝlosilo de la opcio.
+  -> Parser a     -- ^ Argumento analizilo.
 
-helpArg h m = argument auto $ help h <> metavar m
+helpArg k = argument auto $ h <> m
+  where
+    h = help $ Asset.help k
+
+    m = metavar $ Asset.metavar k
