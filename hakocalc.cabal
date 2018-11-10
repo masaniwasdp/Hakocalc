@@ -13,7 +13,8 @@ cabal-version:       >=1.10
 
 library
   hs-source-dirs:      src
-  exposed-modules:     Hakocalc.Command
+  exposed-modules:     Hakocalc.Asset
+                     , Hakocalc.Command
                      , Hakocalc.Parser
                      , Hakocalc.Calc.Common
                      , Hakocalc.Calc.Monster
