@@ -17,7 +17,7 @@ import Options.Applicative.Builder.Internal (CommandFields, Mod)
 import Options.Applicative.Common (Parser, ParserInfo)
 import Options.Applicative.Extra (helper)
 
-import qualified Hakocalc.Asset as Asset
+import qualified Hakocalc.Asset.Text as Text
 
 
 {-| Opcio por komandoj. -}
@@ -27,7 +27,7 @@ data Option = POption PArgs | QOption QArgs
 {-| Analizas komandolinion opcion. -}
 optionParser :: ParserInfo Option
 
-optionParser = info pars $ desc Asset.DescProg
+optionParser = info pars $ progDesc Text.cmddesc_entire
   where
     pars = subparser $ pOptionParser <> qOptionParser
 
@@ -35,32 +35,24 @@ optionParser = info pars $ desc Asset.DescProg
 {-| Analizas opcion por probablo komando. -}
 pOptionParser :: Mod CommandFields Option
 
-pOptionParser = command (Asset.command Asset.CmdP) (info pars $ desc Asset.DescCmdP)
+pOptionParser = command Text.cmdname_p $ info pars $ progDesc Text.cmddesc_p
   where
     pars = helper <*> fmap POption args
 
-    args = PArgs <$> helpArg Asset.OptH <*> helpArg Asset.OptQ
+    args = PArgs <$> helpArg Text.help_h Text.metavar_h <*> helpArg Text.help_q Text.metavar_q
 
 
 {-| Analizas opcion por kvanto komando. -}
 qOptionParser :: Mod CommandFields Option
 
-qOptionParser = command (Asset.command Asset.CmdQ) (info pars $ desc Asset.DescCmdQ)
+qOptionParser = command Text.cmdname_q $ info pars $ progDesc Text.cmddesc_q
   where
     pars = helper <*> fmap QOption args
 
-    args = QArgs <$> helpArg Asset.OptH <*> helpArg Asset.OptP
+    args = QArgs <$> helpArg Text.help_h Text.metavar_h <*> helpArg Text.help_p Text.metavar_p
 
 
 {-| Kreas argumenton analizilon kun helpo teksto. -}
-helpArg :: Read a => Asset.OptKey -> Parser a
+helpArg :: Read a => String -> String -> Parser a
 
-helpArg x = argument auto $ h <> m
-  where
-    h = help $ Asset.help x
-
-    m = metavar $ Asset.metavar x
-
-
-{-| -}
-desc = progDesc . Asset.desc
+helpArg h m = argument auto $ help h <> metavar m

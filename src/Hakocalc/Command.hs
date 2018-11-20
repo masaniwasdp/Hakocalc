@@ -17,7 +17,11 @@ import Hakocalc.Calc.Monster (defeatProbability, enoughMissiles)
 import Numeric.Natural (Natural)
 import Text.Printf (printf)
 
-import qualified Hakocalc.Asset as Asset
+import qualified Hakocalc.Asset.Text as Text
+
+
+{-| Rezolto de komandoj. -}
+type Result = String
 
 
 {-| Argumentoj por probablo komando. -}
@@ -35,7 +39,7 @@ data QArgs = QArgs
 {-| Kalkulas probablon de sukcesi mortigi monstron. -}
 commandP
   :: PArgs  -- ^ Argumentoj de komando.
-  -> String -- ^ Rezolto de komando.
+  -> Result -- ^ Rezolto de komando.
 
 commandP (PArgs h q) = toPercent $ defeatProbability h q
 
@@ -43,9 +47,9 @@ commandP (PArgs h q) = toPercent $ defeatProbability h q
 {-| Kalkulas postulitan kvanton da misiloj por mortigi monstron. -}
 commandQ
   :: QArgs  -- ^ Argumentoj de komando.
-  -> String -- ^ Rezolto de komando.
+  -> Result -- ^ Rezolto de komando.
 
-commandQ (QArgs h p) = maybe Asset.failed show $ enoughMissiles h p
+commandQ (QArgs h p) = maybe Text.fail_message show $ enoughMissiles h p
 
 
 {-| Konvertas probablon al procento kordo. -}
@@ -53,7 +57,7 @@ toPercent
   :: Probability -- ^ Probablo kiu estos konvertata.
   -> String      -- ^ Procento kordo konvertita de probablo.
 
-toPercent = (printf Asset.percent :: Double -> String)
+toPercent = (printf Text.form_percent :: Double -> String)
   . (* 100)
   . fromRational
   . fromProbability

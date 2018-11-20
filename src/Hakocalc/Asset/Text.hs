@@ -1,0 +1,13 @@
+{-# LANGUAGE TemplateHaskell #-}
+
+module Hakocalc.Asset.Text where
+
+
+import Hakocalc.Asset.Util (parseText, textFunD)
+import Language.Haskell.TH (runIO)
+
+
+do
+  xs <- runIO $ parseText <$> readFile "asset/text.yaml"
+
+  return $ map (uncurry textFunD) xs
