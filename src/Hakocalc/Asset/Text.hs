@@ -1,3 +1,4 @@
+{-# OPTIONS_GHC -fno-warn-missing-signatures #-}
 {-# LANGUAGE TemplateHaskell #-}
 
 module Hakocalc.Asset.Text where
