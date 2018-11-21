@@ -1,5 +1,4 @@
-appdesc: Calculates probability that a monster will die, in the Hakoniwa Islands.
-
+cmddesc-a: Calculates probability that a monster will die, in the Hakoniwa Islands.
 cmddesc-p: Calculates probability that a monster will die.
 cmddesc-q: Calculates quantity of missiles to kill a monster.
 
