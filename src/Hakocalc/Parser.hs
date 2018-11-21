@@ -27,7 +27,7 @@ data Option = POption PArgs | QOption QArgs
 {-| Analizas komandolinion opcion. -}
 optionParser :: ParserInfo Option
 
-optionParser = info pars $ progDesc Text.cmddesc_entire
+optionParser = info pars $ progDesc Text.appdesc
   where
     pars = subparser $ pOptionParser <> qOptionParser
 

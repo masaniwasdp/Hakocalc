@@ -1,6 +1,7 @@
-cmddesc-entire: Calculates probability that a monster will die, in the Hakoniwa Islands.
-cmddesc-p:      Calculates probability that a monster will die.
-cmddesc-q:      Calculates quantity of missiles to kill a monster.
+appdesc: Calculates probability that a monster will die, in the Hakoniwa Islands.
+
+cmddesc-p: Calculates probability that a monster will die.
+cmddesc-q: Calculates quantity of missiles to kill a monster.
 
 cmdname-p: probability
 cmdname-q: quantity
