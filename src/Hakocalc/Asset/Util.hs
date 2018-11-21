@@ -29,8 +29,8 @@ parseText = map parseLine . filter (/= "") . lines
 parseLine :: String -> TextPair
 
 parseLine = second (dropWhile (== ' '))
-  . first (map toUnder)
-  . break (== ':')
+  . first (init . map toUnder)
+  . break (== ' ')
 
 
 {-| -}
