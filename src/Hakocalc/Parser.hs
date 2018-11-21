@@ -12,12 +12,11 @@ module Hakocalc.Parser
 
 import Data.Semigroup ((<>))
 import Hakocalc.Command (PArgs (PArgs), QArgs (QArgs))
-import Options.Applicative.Builder (argument, auto, command, help, info, metavar, progDesc, subparser)
-import Options.Applicative.Builder.Internal (CommandFields, Mod)
 import Options.Applicative.Common (Parser, ParserInfo)
 import Options.Applicative.Extra (helper)
 
 import qualified Hakocalc.Asset.Text as Text
+import qualified Options.Applicative.Builder as Opt
 
 
 {-| Opcio por komandoj. -}
@@ -27,15 +26,15 @@ data Option = POption PArgs | QOption QArgs
 {-| Analizas komandolinion opcion. -}
 optionParser :: ParserInfo Option
 
-optionParser = info pars $ progDesc Text.cmddesc_a
+optionParser = Opt.info pars $ Opt.progDesc Text.cmddesc_a
   where
-    pars = subparser $ pOptionParser <> qOptionParser
+    pars = Opt.subparser $ pOptionParser <> qOptionParser
 
 
 {-| Analizas opcion por probablo komando. -}
-pOptionParser :: Mod CommandFields Option
+pOptionParser :: Opt.Mod Opt.CommandFields Option
 
-pOptionParser = command Text.cmdname_p $ info pars $ progDesc Text.cmddesc_p
+pOptionParser = Opt.command Text.cmdname_p $ Opt.info pars $ Opt.progDesc Text.cmddesc_p
   where
     pars = helper <*> fmap POption args
 
@@ -43,9 +42,9 @@ pOptionParser = command Text.cmdname_p $ info pars $ progDesc Text.cmddesc_p
 
 
 {-| Analizas opcion por kvanto komando. -}
-qOptionParser :: Mod CommandFields Option
+qOptionParser :: Opt.Mod Opt.CommandFields Option
 
-qOptionParser = command Text.cmdname_q $ info pars $ progDesc Text.cmddesc_q
+qOptionParser = Opt.command Text.cmdname_q $ Opt.info pars $ Opt.progDesc Text.cmddesc_q
   where
     pars = helper <*> fmap QOption args
 
@@ -55,4 +54,4 @@ qOptionParser = command Text.cmdname_q $ info pars $ progDesc Text.cmddesc_q
 {-| Kreas argumenton analizilon kun helpo teksto. -}
 helpArg :: Read a => String -> String -> Parser a
 
-helpArg h m = argument auto $ help h <> metavar m
+helpArg h m = Opt.argument Opt.auto $ Opt.help h <> Opt.metavar m
