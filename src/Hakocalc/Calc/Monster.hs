@@ -4,7 +4,9 @@
  - License     : MIT
  -}
 module Hakocalc.Calc.Monster
-  ( defeatProbability
+  ( HP
+  , Quantity
+  , defeatProbability
   , enoughMissiles
   )
   where
@@ -15,22 +17,30 @@ import Hakocalc.Calc.Common (Probability, repeated, toProbabilityJust, fromProba
 import Numeric.Natural (Natural)
 
 
+{-| -}
+type HP = Natural
+
+
+{-| -}
+type Quantity = Natural
+
+
 {-| Kalkulas probablon de sukcesi mortigi monstron. -}
 defeatProbability
-  :: Natural     -- ^ HP de monstro.
-  -> Natural     -- ^ Kvanto da misiloj kiuj estos lanĉita.
+  :: HP          -- ^ HP de monstro.
+  -> Quantity    -- ^ Kvanto da misiloj kiuj estos lanĉita.
   -> Probability -- ^ Probablo de sukcesi mortigi monstoron.
 
-defeatProbability h q = toProbabilityJust
-  . sum
-  . map (fromProbability . repeated accuracy q) $ [h .. q]
+defeatProbability h q = toProbabilityJust $ sum xs
+  where
+    xs = map (fromProbability . repeated accuracy q) [h .. q]
 
 
 {-| Kalkulas postulitan kvanton da misiloj por mortigi monstron. -}
 enoughMissiles
-  :: Natural       -- ^ HP de monstro.
-  -> Probability   -- ^ Probablo de sukcesi mortigi monstron.
-  -> Maybe Natural -- ^ Postulita kvanto da misiloj.
+  :: HP             -- ^ HP de monstro.
+  -> Probability    -- ^ Probablo de sukcesi mortigi monstron.
+  -> Maybe Quantity -- ^ Postulita kvanto da misiloj.
 
 enoughMissiles h p
   | fromProbability p == 0 = Nothing

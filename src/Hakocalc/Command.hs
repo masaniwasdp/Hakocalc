@@ -13,8 +13,7 @@ module Hakocalc.Command
 
 
 import Hakocalc.Calc.Common (Probability, fromProbability)
-import Hakocalc.Calc.Monster (defeatProbability, enoughMissiles)
-import Numeric.Natural (Natural)
+import Hakocalc.Calc.Monster (HP, Quantity, defeatProbability, enoughMissiles)
 import Text.Printf (printf)
 
 import qualified Hakocalc.Asset.Text as Text
@@ -26,13 +25,13 @@ type Result = String
 
 {-| Argumentoj por probablo komando. -}
 data PArgs = PArgs
-  Natural -- ^ HP de monstro.
-  Natural -- ^ Kvanto da misiloj kiuj estos lanĉita.
+  HP       -- ^ HP de monstro.
+  Quantity -- ^ Kvanto da misiloj kiuj estos lanĉita.
 
 
 {-| Argumentoj por kvanto komando. -}
 data QArgs = QArgs
-  Natural     -- ^ HP de monstro.
+  HP          -- ^ HP de monstro.
   Probability -- ^ Probablo de sukcesi mortigi monstron.
 
 
