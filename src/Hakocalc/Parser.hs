@@ -5,14 +5,15 @@
  -}
 module Hakocalc.Parser
   ( Option (..)
-  , optionParser
+  , parser
+  , prefs
   )
   where
 
 
 import Data.Semigroup ((<>))
 import Hakocalc.Command (PArgs (PArgs), QArgs (QArgs))
-import Options.Applicative.Common (Parser, ParserInfo)
+import Options.Applicative.Common (Parser, ParserInfo, ParserPrefs)
 import Options.Applicative.Extra (helper)
 
 import qualified Hakocalc.Asset.Text as Text
@@ -20,33 +21,39 @@ import qualified Options.Applicative.Builder as Opt
 
 
 {-| Opcio por komandoj. -}
-data Option = POption PArgs | QOption QArgs
+data Option = POpts PArgs | QOpts QArgs
 
 
 {-| Analizas komandolinion opcion. -}
-optionParser :: ParserInfo Option
+parser :: ParserInfo Option
 
-optionParser = Opt.info pars $ Opt.progDesc Text.cmddesc_a
+parser = Opt.info pars $ Opt.progDesc Text.cmddesc_a
   where
-    pars = Opt.subparser $ pOptionParser <> qOptionParser
+    pars = Opt.subparser $ pParser <> qParser
+
+
+{-| -}
+prefs :: ParserPrefs
+
+prefs = Opt.prefs Opt.showHelpOnEmpty
 
 
 {-| Analizas opcion por probablo komando. -}
-pOptionParser :: Opt.Mod Opt.CommandFields Option
+pParser :: Opt.Mod Opt.CommandFields Option
 
-pOptionParser = Opt.command Text.cmdname_p $ Opt.info pars $ Opt.progDesc Text.cmddesc_p
+pParser = Opt.command Text.cmdname_p $ Opt.info pars $ Opt.progDesc Text.cmddesc_p
   where
-    pars = helper <*> fmap POption args
+    pars = helper <*> fmap POpts args
 
     args = PArgs <$> helpArg Text.help_h Text.metavar_h <*> helpArg Text.help_q Text.metavar_q
 
 
 {-| Analizas opcion por kvanto komando. -}
-qOptionParser :: Opt.Mod Opt.CommandFields Option
+qParser :: Opt.Mod Opt.CommandFields Option
 
-qOptionParser = Opt.command Text.cmdname_q $ Opt.info pars $ Opt.progDesc Text.cmddesc_q
+qParser = Opt.command Text.cmdname_q $ Opt.info pars $ Opt.progDesc Text.cmddesc_q
   where
-    pars = helper <*> fmap QOption args
+    pars = helper <*> fmap QOpts args
 
     args = QArgs <$> helpArg Text.help_h Text.metavar_h <*> helpArg Text.help_p Text.metavar_p
 

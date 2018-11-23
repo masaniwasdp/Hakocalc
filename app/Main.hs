@@ -1,13 +1,13 @@
 import Hakocalc.Command (commandP, commandQ)
-import Hakocalc.Parser (Option (POption, QOption), optionParser)
-import Options.Applicative (customExecParser, prefs, showHelpOnError)
+import Hakocalc.Parser (Option (POpts, QOpts), parser, prefs)
+import Options.Applicative (customExecParser)
 
 
 main :: IO ()
 
 main = do
-  option <- customExecParser (prefs showHelpOnError) optionParser
+  option <- customExecParser prefs parser
 
   putStrLn $ case option of
-    POption args -> commandP args
-    QOption args -> commandQ args
+    POpts args -> commandP args
+    QOpts args -> commandQ args
