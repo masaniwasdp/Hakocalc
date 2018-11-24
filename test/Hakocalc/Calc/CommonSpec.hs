@@ -10,13 +10,31 @@ import Test.Hspec
 
 
 spec = do
+  readProbabilitySpec
+  showProbabilitySpec
   toProbabilitySpec
   toProbabilityJustSpec
   fromProbabilitySpec
-  readProbabilitySpec
-  showProbabilitySpec
   combinationSpec
   repeatedSpec
+
+
+readProbabilitySpec = describe "Read Probability" $
+  describe "read" $ do
+    it "50.0%" $
+      read "50.0" `shouldBe` toProbabilityJust 0.500
+
+    it "75.5%" $
+      read "75.5" `shouldBe` toProbabilityJust 0.755
+
+
+showProbabilitySpec = describe "Show Probability" $
+  describe "show" $ do
+    it "50.0%" $
+      show (toProbabilityJust 0.500) `shouldBe` "50.0"
+
+    it "75.5%" $
+      show (toProbabilityJust 0.755) `shouldBe` "75.5"
 
 
 toProbabilitySpec = describe "toProbability" $ do
@@ -47,22 +65,6 @@ fromProbabilitySpec = describe "fromProbability" $ do
 
   it "75.5%" $
     fromProbability (toProbabilityJust 0.755) `shouldBe` 0.755
-
-
-readProbabilitySpec = describe "read Probability" $ do
-  it "50.0%" $
-    read "50.0" `shouldBe` toProbabilityJust 0.500
-
-  it "75.5%" $
-    read "75.5" `shouldBe` toProbabilityJust 0.755
-
-
-showProbabilitySpec = describe "show Probability" $ do
-  it "50.0%" $
-    show (toProbabilityJust 0.500) `shouldBe` "50.0"
-
-  it "75.5%" $
-    show (toProbabilityJust 0.755) `shouldBe` "75.5"
 
 
 combinationSpec = describe "combination" $ do
