@@ -8,9 +8,13 @@ import Hakocalc.Calc.Monster
 import Test.Hspec
 
 
-spec = do
-  defeatProbabilitySpec
-  enoughMissilesSpec
+spec = sequence_ specList
+
+
+specList =
+  [ defeatProbabilitySpec
+  , enoughMissilesSpec
+  ]
 
 
 defeatProbabilitySpec = describe "defeatProbability" $ do

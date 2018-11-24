@@ -9,14 +9,18 @@ import Hakocalc.Calc.Common
 import Test.Hspec
 
 
-spec = do
-  readProbabilitySpec
-  showProbabilitySpec
-  toProbabilitySpec
-  toProbabilityJustSpec
-  fromProbabilitySpec
-  combinationSpec
-  repeatedSpec
+spec = sequence_ specList
+
+
+specList =
+  [ readProbabilitySpec
+  , showProbabilitySpec
+  , toProbabilitySpec
+  , toProbabilityJustSpec
+  , fromProbabilitySpec
+  , combinationSpec
+  , repeatedSpec
+  ]
 
 
 readProbabilitySpec = describe "Read Probability" $
