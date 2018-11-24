@@ -39,17 +39,13 @@ instance Show Probability
 
 
 {-| Konvertas probablon al racia nombro. -}
-fromProbability
-  :: Probability -- ^ Probablo kiu estos konvertata.
-  -> Rational    -- ^ Racia nombro konvertita de probablo.
+fromProbability :: Probability -> Rational
 
 fromProbability (Probability' p) = p
 
 
 {-| Konvertas racia nombro al probablo. -}
-toProbability
-  :: Rational          -- ^ Racian nombro kiu estos konvertata.
-  -> Maybe Probability -- ^ Probablo kovertita de racia nombro.
+toProbability :: Rational -> Maybe Probability
 
 toProbability p
   | p < 0 = Nothing
@@ -59,9 +55,7 @@ toProbability p
 
 
 {-| Konvertas racia nombro al probablo. -}
-toProbabilityJust
-  :: Rational    -- ^ Racian nombro kiu estos konvertata.
-  -> Probability -- ^ Probablo kovertita de racia nombro.
+toProbabilityJust :: Rational -> Probability
 
 toProbabilityJust = fromJust . toProbability
 

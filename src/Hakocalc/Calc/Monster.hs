@@ -33,10 +33,7 @@ type Quantity = Natural
 
 
 {-| Kalkulas probablon de sukcesi mortigi monstron. -}
-defeatProbability
-  :: HP          -- ^ HP de monstro.
-  -> Quantity    -- ^ Kvanto da misiloj kiuj estos lanĉita.
-  -> Probability -- ^ Probablo de sukcesi mortigi monstoron.
+defeatProbability :: HP -> Quantity -> Probability
 
 defeatProbability h q = toProbabilityJust $ sum xs
   where
@@ -44,10 +41,7 @@ defeatProbability h q = toProbabilityJust $ sum xs
 
 
 {-| Kalkulas postulitan kvanton da misiloj por mortigi monstron. -}
-enoughMissiles
-  :: HP             -- ^ HP de monstro.
-  -> Probability    -- ^ Probablo de sukcesi mortigi monstron.
-  -> Maybe Quantity -- ^ Postulita kvanto da misiloj.
+enoughMissiles :: HP -> Probability -> Maybe Quantity
 
 enoughMissiles h p
   | fromProbability p == 0 = Nothing
