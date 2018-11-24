@@ -13,11 +13,12 @@ module Hakocalc.Parser
 
 import Data.Semigroup ((<>))
 import Hakocalc.Command (PArgs (PArgs), QArgs (QArgs))
+import Options.Applicative.Builder (CommandFields, Mod)
 import Options.Applicative.Common (Parser, ParserInfo, ParserPrefs)
 import Options.Applicative.Extra (helper)
 
 import qualified Hakocalc.Asset.Text as Text
-import qualified Options.Applicative.Builder as Opt
+import qualified Options.Applicative.Builder as Builder
 
 
 {-| Opcio por komandoj. -}
@@ -27,21 +28,21 @@ data Option = POpts PArgs | QOpts QArgs
 {-| Analizas komandolinion opcion. -}
 parser :: ParserInfo Option
 
-parser = Opt.info pars $ Opt.progDesc Text.cmddesc_a
+parser = Builder.info pars $ Builder.progDesc Text.cmddesc_a
   where
-    pars = Opt.subparser $ pParser <> qParser
+    pars = Builder.subparser $ pParser <> qParser
 
 
 {-| -}
 prefs :: ParserPrefs
 
-prefs = Opt.prefs Opt.showHelpOnEmpty
+prefs = Builder.prefs Builder.showHelpOnEmpty
 
 
 {-| Analizas opcion por probablo komando. -}
-pParser :: Opt.Mod Opt.CommandFields Option
+pParser :: Mod CommandFields Option
 
-pParser = Opt.command Text.cmdname_p $ Opt.info pars $ Opt.progDesc Text.cmddesc_p
+pParser = Builder.command Text.cmdname_p $ Builder.info pars $ Builder.progDesc Text.cmddesc_p
   where
     pars = helper <*> fmap POpts args
 
@@ -49,9 +50,9 @@ pParser = Opt.command Text.cmdname_p $ Opt.info pars $ Opt.progDesc Text.cmddesc
 
 
 {-| Analizas opcion por kvanto komando. -}
-qParser :: Opt.Mod Opt.CommandFields Option
+qParser :: Mod CommandFields Option
 
-qParser = Opt.command Text.cmdname_q $ Opt.info pars $ Opt.progDesc Text.cmddesc_q
+qParser = Builder.command Text.cmdname_q $ Builder.info pars $ Builder.progDesc Text.cmddesc_q
   where
     pars = helper <*> fmap QOpts args
 
@@ -61,4 +62,4 @@ qParser = Opt.command Text.cmdname_q $ Opt.info pars $ Opt.progDesc Text.cmddesc
 {-| Kreas argumenton analizilon kun helpo teksto. -}
 helpArg :: Read a => String -> String -> Parser a
 
-helpArg h m = Opt.argument Opt.auto $ Opt.help h <> Opt.metavar m
+helpArg h m = Builder.argument Builder.auto $ Builder.help h <> Builder.metavar m
