@@ -1,3 +1,5 @@
+{-# OPTIONS_GHC -fno-warn-missing-signatures #-}
+
 module Hakocalc.Calc.MonsterSpec where
 
 
@@ -6,14 +8,10 @@ import Hakocalc.Calc.Monster
 import Test.Hspec
 
 
-spec :: Spec
-
 spec = do
   defeatProbabilitySpec
   enoughMissilesSpec
 
-
-defeatProbabilitySpec :: Spec
 
 defeatProbabilitySpec = describe "defeatProbability" $ do
   it "Inora-Ghost" $
@@ -25,8 +23,6 @@ defeatProbabilitySpec = describe "defeatProbability" $ do
   it "King-Inora" $
     defeatProbability 5 5 `shouldBe` toRecipProbability 16807
 
-
-enoughMissilesSpec :: Spec
 
 enoughMissilesSpec = describe "enoughMissiles" $ do
   it "Inora-Ghost" $
