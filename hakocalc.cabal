@@ -39,12 +39,12 @@ test-suite hakocalc-test
   main-is:          Spec.hs
   other-modules:    Hakocalc.Calc.CommonSpec
                   , Hakocalc.Calc.MonsterSpec
+  ghc-options:      -Wall
   build-depends:    base
                   , hakocalc
                   , hspec
-  ghc-options:      -Wall
   default-language: Haskell2010
 
 source-repository head
-  type:     git
-  location: https://github.com/masaniwasdp/Hakocalc
+  type:             git
+  location:         https://github.com/masaniwasdp/Hakocalc
