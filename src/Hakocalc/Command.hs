@@ -25,37 +25,27 @@ type Result = String
 
 
 {-| Argumentoj por probablo komando. -}
-data PArgs = PArgs
-  HP       -- ^ HP de monstro.
-  Quantity -- ^ Kvanto da misiloj kiuj estos lanĉita.
+data PArgs = PArgs HP Quantity
 
 
 {-| Argumentoj por kvanto komando. -}
-data QArgs = QArgs
-  HP          -- ^ HP de monstro.
-  Probability -- ^ Probablo de sukcesi mortigi monstron.
+data QArgs = QArgs HP Probability
 
 
 {-| Kalkulas probablon de sukcesi mortigi monstron. -}
-commandP
-  :: PArgs  -- ^ Argumentoj de komando.
-  -> Result -- ^ Rezolto de komando.
+commandP :: PArgs -> Result
 
 commandP (PArgs h q) = toPercent $ Monster.defeatProbability h q
 
 
 {-| Kalkulas postulitan kvanton da misiloj por mortigi monstron. -}
-commandQ
-  :: QArgs  -- ^ Argumentoj de komando.
-  -> Result -- ^ Rezolto de komando.
+commandQ :: QArgs -> Result
 
 commandQ (QArgs h p) = maybe Text.fail_message show $ Monster.enoughMissiles h p
 
 
 {-| Konvertas probablon al procento kordo. -}
-toPercent
-  :: Probability -- ^ Probablo kiu estos konvertata.
-  -> String      -- ^ Procento kordo konvertita de probablo.
+toPercent :: Probability -> String
 
 toPercent = (printf Text.form_percent :: Double -> String)
   . (* 100)
