@@ -35,13 +35,17 @@ data QArgs = QArgs HP Probability
 {-| Kalkulas probablon de sukcesi mortigi monstron. -}
 commandP :: PArgs -> Result
 
-commandP (PArgs h q) = toPercent $ Monster.defeatProbability h q
+commandP (PArgs h q) = toPercent result
+  where
+    result = Monster.defeatProbability h q
 
 
 {-| Kalkulas postulitan kvanton da misiloj por mortigi monstron. -}
 commandQ :: QArgs -> Result
 
-commandQ (QArgs h p) = maybe Text.fail_message show $ Monster.enoughMissiles h p
+commandQ (QArgs h p) = maybe Text.fail_message show result
+  where
+    result = Monster.enoughMissiles h p
 
 
 {-| Konvertas probablon al procento kordo. -}
