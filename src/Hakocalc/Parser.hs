@@ -44,7 +44,9 @@ pParser :: Mod CommandFields Option
 
 pParser = Builder.command Text.cmdnameP $ Builder.info pars $ Builder.progDesc Text.cmddescP
   where
-    pars = helper <*> fmap POpts args
+    pars = helper <*> opts
+
+    opts = fmap POpts args
 
     args = PArgs <$> helpArg Text.helpH Text.metavarH <*> helpArg Text.helpQ Text.metavarQ
 
@@ -54,7 +56,9 @@ qParser :: Mod CommandFields Option
 
 qParser = Builder.command Text.cmdnameQ $ Builder.info pars $ Builder.progDesc Text.cmddescQ
   where
-    pars = helper <*> fmap QOpts args
+    pars = helper <*> opts
+
+    opts = fmap QOpts args
 
     args = QArgs <$> helpArg Text.helpH Text.metavarH <*> helpArg Text.helpP Text.metavarP
 

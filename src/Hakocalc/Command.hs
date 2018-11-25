@@ -13,11 +13,10 @@ module Hakocalc.Command
 
 
 import Hakocalc.Calc.Common (fromProbability)
-import Hakocalc.Calc.Monster (HP, Probability, Quantity)
+import Hakocalc.Calc.Monster (HP, Probability, Quantity, defeatProbability, enoughMissiles)
 import Text.Printf (printf)
 
 import qualified Hakocalc.Asset.Text as Text
-import qualified Hakocalc.Calc.Monster as Monster
 
 
 {-| Rezolto de komandoj. -}
@@ -35,17 +34,13 @@ data QArgs = QArgs HP Probability
 {-| Kalkulas probablon de sukcesi mortigi monstron. -}
 commandP :: PArgs -> Result
 
-commandP (PArgs h q) = toPercent result
-  where
-    result = Monster.defeatProbability h q
+commandP (PArgs h q) = toPercent $ defeatProbability h q
 
 
 {-| Kalkulas postulitan kvanton da misiloj por mortigi monstron. -}
 commandQ :: QArgs -> Result
 
-commandQ (QArgs h p) = maybe Text.failMessage show result
-  where
-    result = Monster.enoughMissiles h p
+commandQ (QArgs h p) = maybe Text.failMessage show $ enoughMissiles h p
 
 
 {-| Konvertas probablon al procento kordo. -}
