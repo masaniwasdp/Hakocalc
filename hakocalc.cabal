@@ -17,6 +17,7 @@ library
                   , Hakocalc.Asset.Util
                   , Hakocalc.Calc.Common
                   , Hakocalc.Calc.Monster
+                  , Hakocalc.Calc.Probability
                   , Hakocalc.Command
                   , Hakocalc.Parser
   build-depends:    base >= 4.7 && < 5
@@ -39,6 +40,7 @@ test-suite hakocalc-test
   main-is:          Spec.hs
   other-modules:    Hakocalc.Calc.CommonSpec
                   , Hakocalc.Calc.MonsterSpec
+                  , Hakocalc.Calc.ProbabilitySpec
   ghc-options:      -Wall
   build-depends:    base
                   , hakocalc

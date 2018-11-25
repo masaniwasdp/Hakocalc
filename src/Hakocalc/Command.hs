@@ -12,8 +12,8 @@ module Hakocalc.Command
   where
 
 
-import Hakocalc.Calc.Common (fromProbability)
-import Hakocalc.Calc.Monster (HP, Probability, Quantity, defeatProbability, enoughMissiles)
+import Hakocalc.Calc.Probability (Probability, fromProbability)
+import Hakocalc.Calc.Monster (HP, Quantity, defeatProbability, enoughMissiles)
 import Text.Printf (printf)
 
 import qualified Hakocalc.Asset.Text as Text

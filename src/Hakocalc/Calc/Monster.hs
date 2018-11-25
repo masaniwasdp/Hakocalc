@@ -5,7 +5,6 @@
  -}
 module Hakocalc.Calc.Monster
   ( HP
-  , Probability
   , Quantity
   , defeatProbability
   , enoughMissiles
@@ -14,18 +13,13 @@ module Hakocalc.Calc.Monster
 
 
 import Data.List (find)
-import Hakocalc.Calc.Common (repeated, toProbabilityJust, fromProbability)
+import Hakocalc.Calc.Common (repeated)
+import Hakocalc.Calc.Probability (Probability, fromProbability, toProbabilityJust)
 import Numeric.Natural (Natural)
-
-import qualified Hakocalc.Calc.Common as Common
 
 
 {-| -}
 type HP = Natural
-
-
-{-| -}
-type Probability = Common.Probability
 
 
 {-| -}

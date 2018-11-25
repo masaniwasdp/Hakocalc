@@ -3,8 +3,8 @@
 module Hakocalc.Calc.MonsterSpec where
 
 
-import Hakocalc.Calc.Common (toProbabilityJust)
 import Hakocalc.Calc.Monster
+import Hakocalc.Calc.Probability (Probability, toProbabilityJust)
 import Test.Hspec
 
 
