@@ -10,7 +10,7 @@ module Hakocalc.Asset.Util
   where
 
 
-import Control.Arrow (first, second)
+import Control.Arrow (second)
 
 import qualified Language.Haskell.TH as TH
 
