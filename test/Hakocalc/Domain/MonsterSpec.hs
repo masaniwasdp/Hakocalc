@@ -1,10 +1,10 @@
 {-# OPTIONS_GHC -fno-warn-missing-signatures #-}
 
-module Hakocalc.Calc.MonsterSpec where
+module Hakocalc.Domain.MonsterSpec where
 
 
-import Hakocalc.Calc.Monster
-import Hakocalc.Calc.Probability (Probability, toProbabilityJust)
+import Hakocalc.Domain.Monster
+import Hakocalc.Domain.Probability (Probability, toProbabilityJust)
 import Test.Hspec
 
 

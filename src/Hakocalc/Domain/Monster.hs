@@ -3,7 +3,7 @@
  - Copyright   : 2018 masaniwa
  - License     : MIT
  -}
-module Hakocalc.Calc.Monster
+module Hakocalc.Domain.Monster
   ( HP
   , Quantity
   , defeatProbability
@@ -13,8 +13,8 @@ module Hakocalc.Calc.Monster
 
 
 import Data.List (find)
-import Hakocalc.Calc.Common (repeated)
-import Hakocalc.Calc.Probability (Probability, fromProbability, toProbabilityJust)
+import Hakocalc.Domain.Common (repeated)
+import Hakocalc.Domain.Probability (Probability, fromProbability, toProbabilityJust)
 import Numeric.Natural (Natural)
 
 

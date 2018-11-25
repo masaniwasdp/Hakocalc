@@ -3,7 +3,7 @@
  - Copyright   : 2018 masaniwa
  - License     : MIT
  -}
-module Hakocalc.Calc.Probability
+module Hakocalc.Domain.Probability
   ( Probability
   , fromProbability
   , toProbability

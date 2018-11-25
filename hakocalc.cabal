@@ -15,10 +15,10 @@ library
   hs-source-dirs:   src
   exposed-modules:  Hakocalc.Asset.Text
                   , Hakocalc.Asset.Util
-                  , Hakocalc.Calc.Common
-                  , Hakocalc.Calc.Monster
-                  , Hakocalc.Calc.Probability
                   , Hakocalc.Command
+                  , Hakocalc.Domain.Common
+                  , Hakocalc.Domain.Monster
+                  , Hakocalc.Domain.Probability
                   , Hakocalc.Parser
   build-depends:    base >= 4.7 && < 5
                   , optparse-applicative
@@ -38,9 +38,9 @@ test-suite hakocalc-test
   type:             exitcode-stdio-1.0
   hs-source-dirs:   test
   main-is:          Spec.hs
-  other-modules:    Hakocalc.Calc.CommonSpec
-                  , Hakocalc.Calc.MonsterSpec
-                  , Hakocalc.Calc.ProbabilitySpec
+  other-modules:    Hakocalc.Domain.CommonSpec
+                  , Hakocalc.Domain.MonsterSpec
+                  , Hakocalc.Domain.ProbabilitySpec
   ghc-options:      -Wall
   build-depends:    base
                   , hakocalc

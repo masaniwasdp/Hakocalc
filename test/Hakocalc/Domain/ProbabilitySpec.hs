@@ -1,11 +1,11 @@
 {-# OPTIONS_GHC -fno-warn-missing-signatures #-}
 
-module Hakocalc.Calc.ProbabilitySpec where
+module Hakocalc.Domain.ProbabilitySpec where
 
 
 import Control.Exception (evaluate)
 import Data.Maybe (fromJust)
-import Hakocalc.Calc.Probability
+import Hakocalc.Domain.Probability
 import Test.Hspec
 
 
