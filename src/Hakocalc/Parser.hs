@@ -4,25 +4,20 @@
  - License     : MIT
  -}
 module Hakocalc.Parser
-  ( Option (..)
-  , parser
+  ( parser
   , prefs
   )
   where
 
 
 import Data.Semigroup ((<>))
-import Hakocalc.Command (PArgs (PArgs), QArgs (QArgs))
+import Hakocalc.Command (Option (POpts, QOpts))
 import Options.Applicative.Builder (CommandFields, Mod)
 import Options.Applicative.Common (Parser, ParserInfo, ParserPrefs)
 import Options.Applicative.Extra (helper)
 
 import qualified Hakocalc.Asset.Text as Text
 import qualified Options.Applicative.Builder as Builder
-
-
-{-| Opcio por komandoj. -}
-data Option = POpts PArgs | QOpts QArgs
 
 
 {-| Analizas komandolinion opcion. -}
@@ -46,9 +41,7 @@ pParser = Builder.command Text.commandP $ Builder.info pars $ Builder.progDesc T
   where
     pars = helper <*> opts
 
-    opts = fmap POpts args
-
-    args = PArgs <$> helpArg Text.helpH Text.metavarH <*> helpArg Text.helpQ Text.metavarQ
+    opts = POpts <$> helpArg Text.helpH Text.metavarH <*> helpArg Text.helpQ Text.metavarQ
 
 
 {-| Analizas opcion por kvanto komando. -}
@@ -58,9 +51,7 @@ qParser = Builder.command Text.commandQ $ Builder.info pars $ Builder.progDesc T
   where
     pars = helper <*> opts
 
-    opts = fmap QOpts args
-
-    args = QArgs <$> helpArg Text.helpH Text.metavarH <*> helpArg Text.helpP Text.metavarP
+    opts = QOpts <$> helpArg Text.helpH Text.metavarH <*> helpArg Text.helpP Text.metavarP
 
 
 {-| Kreas argumenton analizilon kun helpo teksto. -}

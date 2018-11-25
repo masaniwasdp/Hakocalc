@@ -4,10 +4,9 @@
  - License     : MIT
  -}
 module Hakocalc.Command
-  ( PArgs (..)
-  , QArgs (..)
-  , commandP
-  , commandQ
+  ( Option (..)
+  , Result
+  , command
   )
   where
 
@@ -23,24 +22,16 @@ import qualified Hakocalc.Asset.Text as Text
 type Result = String
 
 
-{-| Argumentoj por probablo komando. -}
-data PArgs = PArgs HP Quantity
+{-| -}
+data Option = POpts HP Quantity | QOpts HP Probability
 
 
-{-| Argumentoj por kvanto komando. -}
-data QArgs = QArgs HP Probability
+{-| -}
+command :: Option -> Result
 
+command (POpts h q) = toPercent $ defeatProbability h q
 
-{-| Kalkulas probablon de sukcesi mortigi monstron. -}
-commandP :: PArgs -> Result
-
-commandP (PArgs h q) = toPercent $ defeatProbability h q
-
-
-{-| Kalkulas postulitan kvanton da misiloj por mortigi monstron. -}
-commandQ :: QArgs -> Result
-
-commandQ (QArgs h p) = maybe Text.failed show $ enoughMissiles h p
+command (QOpts h p) = maybe Text.failed show $ enoughMissiles h p
 
 
 {-| Konvertas probablon al procento kordo. -}
