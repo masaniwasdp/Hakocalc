@@ -9,6 +9,6 @@ import Language.Haskell.TH (runIO)
 
 
 do
-  xs <- runIO $ parseText <$> readFile "asset/text.yaml"
+  xs <- runIO $ parseText <$> readFile "asset/text.prop"
 
   return $ map (uncurry textFunD) xs

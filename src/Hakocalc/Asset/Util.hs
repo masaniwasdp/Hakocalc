@@ -28,15 +28,7 @@ parseText = map parseLine . filter (/= "") . lines
 {-| -}
 parseLine :: String -> TextPair
 
-parseLine = second (dropWhile (== ' '))
-  . first (init . map toUnder)
-  . break (== ' ')
-
-
-{-| -}
-toUnder :: Char -> Char
-
-toUnder c = if c == '-' then '_' else c
+parseLine = second (dropWhile (== ' ') . tail) . break (== ':')
 
 
 {-| -}

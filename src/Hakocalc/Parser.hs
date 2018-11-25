@@ -28,7 +28,7 @@ data Option = POpts PArgs | QOpts QArgs
 {-| Analizas komandolinion opcion. -}
 parser :: ParserInfo Option
 
-parser = Builder.info pars $ Builder.progDesc Text.cmddesc_a
+parser = Builder.info pars $ Builder.progDesc Text.cmddescA
   where
     pars = Builder.subparser $ pParser <> qParser
 
@@ -42,21 +42,21 @@ prefs = Builder.prefs Builder.showHelpOnEmpty
 {-| Analizas opcion por probablo komando. -}
 pParser :: Mod CommandFields Option
 
-pParser = Builder.command Text.cmdname_p $ Builder.info pars $ Builder.progDesc Text.cmddesc_p
+pParser = Builder.command Text.cmdnameP $ Builder.info pars $ Builder.progDesc Text.cmddescP
   where
     pars = helper <*> fmap POpts args
 
-    args = PArgs <$> helpArg Text.help_h Text.metavar_h <*> helpArg Text.help_q Text.metavar_q
+    args = PArgs <$> helpArg Text.helpH Text.metavarH <*> helpArg Text.helpQ Text.metavarQ
 
 
 {-| Analizas opcion por kvanto komando. -}
 qParser :: Mod CommandFields Option
 
-qParser = Builder.command Text.cmdname_q $ Builder.info pars $ Builder.progDesc Text.cmddesc_q
+qParser = Builder.command Text.cmdnameQ $ Builder.info pars $ Builder.progDesc Text.cmddescQ
   where
     pars = helper <*> fmap QOpts args
 
-    args = QArgs <$> helpArg Text.help_h Text.metavar_h <*> helpArg Text.help_p Text.metavar_p
+    args = QArgs <$> helpArg Text.helpH Text.metavarH <*> helpArg Text.helpP Text.metavarP
 
 
 {-| Kreas argumenton analizilon kun helpo teksto. -}
