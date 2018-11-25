@@ -1,9 +1,9 @@
-cmddescA: Calculates probability that a monster will die, in the Hakoniwa Islands.
-cmddescP: Calculates probability that a monster will die.
-cmddescQ: Calculates quantity of missiles to kill a monster.
+descA: Calculates probability that a monster will die, in the Hakoniwa Islands.
+descP: Calculates probability that a monster will die.
+descQ: Calculates quantity of missiles to kill a monster.
 
-cmdnameP: probability
-cmdnameQ: quantity
+commandP: probability
+commandQ: quantity
 
 metavarH: HP
 metavarP: PROBABILITY
@@ -13,6 +13,5 @@ helpH: The HP of the monster.
 helpP: The probability of killing the monster. (%)
 helpQ: The quantity of missiles to launch.
 
-formPercent: %.3f%%
-
-failMessage: Couldn't calculate.
+format: %.3f%%
+failed: Couldn't calculate.

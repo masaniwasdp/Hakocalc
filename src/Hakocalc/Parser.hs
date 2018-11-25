@@ -28,7 +28,7 @@ data Option = POpts PArgs | QOpts QArgs
 {-| Analizas komandolinion opcion. -}
 parser :: ParserInfo Option
 
-parser = Builder.info pars $ Builder.progDesc Text.cmddescA
+parser = Builder.info pars $ Builder.progDesc Text.descA
   where
     pars = Builder.subparser $ pParser <> qParser
 
@@ -42,7 +42,7 @@ prefs = Builder.prefs Builder.showHelpOnEmpty
 {-| Analizas opcion por probablo komando. -}
 pParser :: Mod CommandFields Option
 
-pParser = Builder.command Text.cmdnameP $ Builder.info pars $ Builder.progDesc Text.cmddescP
+pParser = Builder.command Text.commandP $ Builder.info pars $ Builder.progDesc Text.descP
   where
     pars = helper <*> opts
 
@@ -54,7 +54,7 @@ pParser = Builder.command Text.cmdnameP $ Builder.info pars $ Builder.progDesc T
 {-| Analizas opcion por kvanto komando. -}
 qParser :: Mod CommandFields Option
 
-qParser = Builder.command Text.cmdnameQ $ Builder.info pars $ Builder.progDesc Text.cmddescQ
+qParser = Builder.command Text.commandQ $ Builder.info pars $ Builder.progDesc Text.descQ
   where
     pars = helper <*> opts
 

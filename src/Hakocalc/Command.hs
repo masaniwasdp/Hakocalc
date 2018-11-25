@@ -40,13 +40,13 @@ commandP (PArgs h q) = toPercent $ defeatProbability h q
 {-| Kalkulas postulitan kvanton da misiloj por mortigi monstron. -}
 commandQ :: QArgs -> Result
 
-commandQ (QArgs h p) = maybe Text.failMessage show $ enoughMissiles h p
+commandQ (QArgs h p) = maybe Text.failed show $ enoughMissiles h p
 
 
 {-| Konvertas probablon al procento kordo. -}
 toPercent :: Probability -> String
 
-toPercent = (printf Text.formPercent :: Double -> String)
+toPercent = (printf Text.format :: Double -> String)
   . (* 100)
   . fromRational
   . fromProbability
