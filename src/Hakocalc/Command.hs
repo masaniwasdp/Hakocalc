@@ -11,8 +11,8 @@ module Hakocalc.Command
   where
 
 
-import Hakocalc.Domain.Probability (Probability, fromProbability)
 import Hakocalc.Domain.Defeat (HP, Quantity, defeatProbability, enoughMissiles)
+import Hakocalc.Domain.Probability (Probability, fromProbability)
 import Text.Printf (printf)
 
 import qualified Hakocalc.Asset.Text as Text
