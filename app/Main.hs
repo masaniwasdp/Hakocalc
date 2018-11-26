@@ -1,8 +1,8 @@
 import Hakocalc.Command (command)
-import Hakocalc.Parser (parser, prefs)
+import Hakocalc.Options (options, prefs)
 import Options.Applicative (customExecParser)
 
 
 main :: IO ()
 
-main = putStrLn . command =<< customExecParser prefs parser
+main = putStrLn . command =<< customExecParser prefs options

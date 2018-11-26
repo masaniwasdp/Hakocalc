@@ -1,9 +1,9 @@
 {-# OPTIONS_GHC -fno-warn-missing-signatures #-}
 
-module Hakocalc.Domain.MonsterSpec where
+module Hakocalc.Domain.DefeatSpec where
 
 
-import Hakocalc.Domain.Monster
+import Hakocalc.Domain.Defeat
 import Hakocalc.Domain.Probability (Probability, toProbabilityJust)
 import Test.Hspec
 

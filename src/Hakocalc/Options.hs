@@ -3,8 +3,8 @@
  - Copyright   : 2018 masaniwa
  - License     : MIT
  -}
-module Hakocalc.Parser
-  ( parser
+module Hakocalc.Options
+  ( options
   , prefs
   )
   where
@@ -21,9 +21,9 @@ import qualified Options.Applicative.Builder as Builder
 
 
 {-| Analizas komandolinion opcion. -}
-parser :: ParserInfo Option
+options :: ParserInfo Option
 
-parser = Builder.info pars $ Builder.progDesc Text.descA
+options = Builder.info pars $ Builder.progDesc Text.descA
   where
     pars = Builder.subparser $ pParser <> qParser
 

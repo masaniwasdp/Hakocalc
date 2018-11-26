@@ -3,7 +3,7 @@
  - Copyright   : 2018 masaniwa
  - License     : MIT
  -}
-module Hakocalc.Domain.Monster
+module Hakocalc.Domain.Defeat
   ( HP
   , Quantity
   , defeatProbability

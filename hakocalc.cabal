@@ -17,9 +17,9 @@ library
                   , Hakocalc.Asset.Util
                   , Hakocalc.Command
                   , Hakocalc.Domain.Common
-                  , Hakocalc.Domain.Monster
+                  , Hakocalc.Domain.Defeat
                   , Hakocalc.Domain.Probability
-                  , Hakocalc.Parser
+                  , Hakocalc.Options
   build-depends:    base >= 4.7 && < 5
                   , optparse-applicative
                   , template-haskell
@@ -39,7 +39,7 @@ test-suite hakocalc-test
   hs-source-dirs:   test
   main-is:          Spec.hs
   other-modules:    Hakocalc.Domain.CommonSpec
-                  , Hakocalc.Domain.MonsterSpec
+                  , Hakocalc.Domain.DefeatSpec
                   , Hakocalc.Domain.ProbabilitySpec
   ghc-options:      -Wall
   build-depends:    base
