@@ -17,11 +17,11 @@ import Hakocalc.Domain.Probability (Probability, fromProbability, toProbabilityJ
 import Numeric.Natural (Natural)
 
 
-{-| -}
+{-| Reprezentanta HP. -}
 type HP = Natural
 
 
-{-| -}
+{-| Reprezentanta kvanto. -}
 type Quantity = Natural
 
 
