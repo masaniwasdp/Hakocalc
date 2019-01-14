@@ -1,6 +1,6 @@
 {-|
  - Description : Modulo de probablo.
- - Copyright   : 2018 masaniwa
+ - Copyright   : 2019 masaniwa
  - License     : MIT
  -}
 module Hakocalc.Domain.Probability

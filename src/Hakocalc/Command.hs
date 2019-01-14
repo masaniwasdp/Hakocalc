@@ -1,6 +1,6 @@
 {-|
  - Description : Modulo de komando.
- - Copyright   : 2018 masaniwa
+ - Copyright   : 2019 masaniwa
  - License     : MIT
  -}
 module Hakocalc.Command
