@@ -50,6 +50,6 @@ Couldn't calculate.
 ```
 
 ## Permesilo
-© 2018, masaniwa
+© 2019, masaniwa
 
 La programaro estas licencita sub la [MIT](https://github.com/masaniwasdp/Hakocalc/blob/master/LICENSE).

@@ -6,7 +6,7 @@ license:            MIT
 license-file:       LICENSE
 author:             masaniwa
 maintainer:         masaniwasdp@gmail.com
-copyright:          2018 masaniwa
+copyright:          2019 masaniwa
 build-type:         Simple
 extra-source-files: README.md
 cabal-version:      >=1.10
