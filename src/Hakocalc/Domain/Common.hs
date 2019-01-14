@@ -6,8 +6,7 @@
 module Hakocalc.Domain.Common
   ( combination
   , repeated
-  )
-  where
+  ) where
 
 
 import Hakocalc.Domain.Probability (Probability, fromProbability, toProbabilityJust)

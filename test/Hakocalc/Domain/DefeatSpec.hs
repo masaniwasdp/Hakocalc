@@ -8,13 +8,9 @@ import Hakocalc.Domain.Probability (Probability, toProbabilityJust)
 import Test.Hspec
 
 
-spec = sequence_ specList
-
-
-specList =
-  [ defeatProbabilitySpec
-  , enoughMissilesSpec
-  ]
+spec = do
+  defeatProbabilitySpec
+  enoughMissilesSpec
 
 
 defeatProbabilitySpec = describe "defeatProbability" $ do

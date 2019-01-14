@@ -8,8 +8,7 @@ module Hakocalc.Domain.Defeat
   , Quantity
   , defeatProbability
   , enoughMissiles
-  )
-  where
+  ) where
 
 
 import Data.List (find)
@@ -41,7 +40,7 @@ enoughMissiles h p
   | fromProbability p == 0 = Nothing
   | fromProbability p == 1 = Nothing
 
-  | otherwise = find (\ q -> defeatProbability h q >= p) [h ..]
+  | otherwise = find (\q -> defeatProbability h q >= p) [h ..]
 
 
 {-| La precizeco de misilo-sukcesoj. -}

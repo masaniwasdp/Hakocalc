@@ -9,16 +9,12 @@ import Hakocalc.Domain.Probability
 import Test.Hspec
 
 
-spec = sequence_ specList
-
-
-specList =
-  [ readProbabilitySpec
-  , showProbabilitySpec
-  , toProbabilitySpec
-  , toProbabilityJustSpec
-  , fromProbabilitySpec
-  ]
+spec = do
+  readProbabilitySpec
+  showProbabilitySpec
+  toProbabilitySpec
+  toProbabilityJustSpec
+  fromProbabilitySpec
 
 
 readProbabilitySpec = describe "Read Probability" $

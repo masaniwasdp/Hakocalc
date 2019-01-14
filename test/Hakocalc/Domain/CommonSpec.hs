@@ -8,13 +8,9 @@ import Hakocalc.Domain.Probability (toProbabilityJust)
 import Test.Hspec
 
 
-spec = sequence_ specList
-
-
-specList =
-  [ combinationSpec
-  , repeatedSpec
-  ]
+spec = do
+  combinationSpec
+  repeatedSpec
 
 
 combinationSpec = describe "combination" $ do

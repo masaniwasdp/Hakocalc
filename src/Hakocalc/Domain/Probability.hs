@@ -8,8 +8,7 @@ module Hakocalc.Domain.Probability
   , fromProbability
   , toProbability
   , toProbabilityJust
-  )
-  where
+  ) where
 
 
 import Data.Maybe (fromJust, isJust)
@@ -19,20 +18,18 @@ import Text.Read (readMaybe)
 {-| Reprezentanta probablon. -}
 newtype Probability = Prob Rational deriving (Eq, Ord)
 
-instance Read Probability
-  where
-    readsPrec _ s = [(fromJust x, "") | isJust x]
-      where
-        x = toProbability
-          . (/ 100)
-          . toRational =<< (readMaybe s :: Maybe Double)
+instance Read Probability where
+  readsPrec _ s = [(fromJust x, "") | isJust x]
+    where
+      x = toProbability
+        . (/ 100)
+        . toRational =<< (readMaybe s :: Maybe Double)
 
-instance Show Probability
-  where
-    show = (show :: Double -> String)
-      . fromRational
-      . (* 100)
-      . fromProbability
+instance Show Probability where
+  show = (show :: Double -> String)
+    . fromRational
+    . (* 100)
+    . fromProbability
 
 
 {-| Konvertas probablon al racia nombro. -}

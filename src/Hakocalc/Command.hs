@@ -7,8 +7,7 @@ module Hakocalc.Command
   ( Option (..)
   , Result
   , command
-  )
-  where
+  ) where
 
 
 import Hakocalc.Domain.Defeat (HP, Quantity, defeatProbability, enoughMissiles)

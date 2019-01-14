@@ -6,8 +6,7 @@
 module Hakocalc.Options
   ( options
   , pref
-  )
-  where
+  ) where
 
 
 import Data.Semigroup ((<>))

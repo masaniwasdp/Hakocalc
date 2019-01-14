@@ -10,8 +10,7 @@ module Hakocalc.OptUtil
   , parserH
   , parserP
   , parserQ
-  )
-  where
+  ) where
 
 
 import Data.Semigroup ((<>))
