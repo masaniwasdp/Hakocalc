@@ -2,15 +2,16 @@ language: haskell
 
 sudo: required
 
+ghc: 7.8
+
 install:
-  - curl -sSL https://get.haskellstack.org/ | sh
-  - stack setup
+  #- curl -sSL https://get.haskellstack.org/ | sh
+  #- stack setup
 
 script:
-  - stack build
-  - cabal configure --enable-tests --enable-library-coverage
-  - cabal build
-  - cabal test
+  #- stack build
+  #- stack test
+  - cabal configure --enable-tests --enable-library-coverage && cabal build && cabal test
 
 after_script:
   - cabal install codecov-haskell
