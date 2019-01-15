@@ -5,16 +5,17 @@ sudo: required
 ghc: 8.4
 
 install:
-  - curl -sSL https://get.haskellstack.org/ | sh
-  - stack setup
+  #- curl -sSL https://get.haskellstack.org/ | sh
+  #- stack setup
 
 script:
-  - stack build
-  - stack test
+  #- stack build
+  #- stack test
   - cabal configure --enable-tests --enable-library-coverage
   - cabal build
   - cabal test
 
 after_script:
-  - stack install codecov-haskell
-  - codecov-haskell hakocalc-test
+  - cabal sandbox init
+  - cabal install codecov-haskell
+  - .cabal-sandbox/bin/codecov-haskell hakocalc-test
