@@ -2,7 +2,7 @@ language: haskell
 
 sudo: required
 
-ghc: 7.8
+ghc: 8.4
 
 install:
   #- curl -sSL https://get.haskellstack.org/ | sh
