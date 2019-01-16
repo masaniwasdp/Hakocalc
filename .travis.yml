@@ -11,11 +11,12 @@ install:
 script:
   #- stack build
   #- stack test
-  - cabal configure --enable-tests --enable-library-coverage
+  - cabal configure --enable-tests --enable-coverage
   - cabal build
   - cabal test
 
 after_script:
-  - cabal sandbox init
-  - cabal install codecov-haskell
-  - .cabal-sandbox/bin/codecov-haskell hakocalc-test
+  #- cabal sandbox init
+  - cabal install hpc-coveralls
+  #- .cabal-sandbox/bin/codecov-haskell hakocalc-test
+  - hpc-coveralls hakocalc-test
