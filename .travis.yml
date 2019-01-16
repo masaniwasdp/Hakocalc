@@ -1,8 +1,8 @@
 language: haskell
 
-sudo: required
+#sudo: required
 
-ghc: 8.4
+ghc: 7.8
 
 script:
   - cabal configure --enable-tests --enable-coverage
@@ -10,6 +10,7 @@ script:
   - cabal test
 
 after_script:
-  - cabal sandbox init
+  # - cabal sandbox init
   - cabal install hpc-coveralls
-  - .cabal-sandbox/bin/hpc-coveralls hakocalc-test
+  - hpc-coveralls hakocalc-test
+  # - .cabal-sandbox/bin/hpc-coveralls hakocalc-test
