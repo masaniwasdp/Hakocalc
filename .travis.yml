@@ -10,12 +10,12 @@ script:
   - cabal test
 
 after_script:
-  #- cabal sandbox init
+  - cabal sandbox init
   #- cabal install retry-0.5
   #- cabal install cabal-2.0
   #- cabal install codecov-haskell
   - cabal install hpc-coveralls
   #- codecov-haskell hakocalc-test
   #- ./.cabal-sandbox/bin/codecov-haskell hakocalc-test
-  - hpc-coveralls hakocalc-test
-  # - .cabal-sandbox/bin/hpc-coveralls hakocalc-test
+  #- hpc-coveralls hakocalc-test
+  - ./.cabal-sandbox/bin/hpc-coveralls hakocalc-test
