@@ -2,7 +2,7 @@ language: haskell
 
 #sudo: required
 
-ghc: 8.4
+ghc: 8.2
 
 script:
   - cabal configure --enable-tests --enable-coverage
@@ -12,7 +12,7 @@ script:
 after_script:
   #- cabal sandbox init
   #- cabal install retry-0.5
-  - cabal install cabal-2.0
+  #- cabal install cabal-2.0
   #- cabal install codecov-haskell
   - cabal install hpc-coveralls
   #- codecov-haskell hakocalc-test
