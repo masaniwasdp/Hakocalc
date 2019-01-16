@@ -5,9 +5,9 @@ ghc: 8.2
 script:
   - cabal configure --enable-tests --enable-coverage
   - cabal build
-  - cabal test --show-details=always
+  - cabal test
 
 after_script:
   - cabal sandbox init
   - cabal install hpc-coveralls
-  - ./.cabal-sandbox/bin/hpc-coveralls --coverage-mode=StrictlyFullLines --exclude-dir=test hakocalc-test
+  - ./.cabal-sandbox/bin/hpc-coveralls --coverage-mode=StrictlyFullLines hakocalc-test
