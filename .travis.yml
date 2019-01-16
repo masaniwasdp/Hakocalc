@@ -2,7 +2,7 @@ language: haskell
 
 #sudo: required
 
-ghc: 7.10
+ghc: 8.4
 
 script:
   - cabal configure --enable-tests --enable-coverage
