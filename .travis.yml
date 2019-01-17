@@ -10,4 +10,4 @@ script:
 after_script:
   - cabal sandbox init
   - cabal install hpc-coveralls
-  - ./.cabal-sandbox/bin/hpc-coveralls --coverage-mode=StrictlyFullLines hakocalc-test
+  - ./.cabal-sandbox/bin/hpc-coveralls hakocalc-test
