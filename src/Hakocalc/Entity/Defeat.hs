@@ -3,7 +3,7 @@
  - Copyright   : 2019 masaniwa
  - License     : MIT
  -}
-module Hakocalc.Domain.Defeat
+module Hakocalc.Entity.Defeat
   ( HP
   , Quantity
   , defeatProbability
@@ -12,8 +12,8 @@ module Hakocalc.Domain.Defeat
 
 
 import Data.List (find)
-import Hakocalc.Domain.Common (repeated)
-import Hakocalc.Domain.Probability (Probability, fromProbability, toProbabilityJust)
+import Hakocalc.Entity.Common (repeated)
+import Hakocalc.Entity.Probability (Probability, fromProbability, toProbabilityJust)
 import Numeric.Natural (Natural)
 
 

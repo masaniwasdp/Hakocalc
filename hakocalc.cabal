@@ -16,9 +16,9 @@ library
   exposed-modules:  Hakocalc.Asset.Text
                   , Hakocalc.Asset.Util
                   , Hakocalc.Command
-                  , Hakocalc.Domain.Common
-                  , Hakocalc.Domain.Defeat
-                  , Hakocalc.Domain.Probability
+                  , Hakocalc.Entity.Common
+                  , Hakocalc.Entity.Defeat
+                  , Hakocalc.Entity.Probability
                   , Hakocalc.Options
                   , Hakocalc.OptUtil
   build-depends:    base >= 4.7 && < 5
@@ -39,9 +39,9 @@ test-suite hakocalc-test
   type:             exitcode-stdio-1.0
   hs-source-dirs:   test
   main-is:          Spec.hs
-  other-modules:    Hakocalc.Domain.CommonSpec
-                  , Hakocalc.Domain.DefeatSpec
-                  , Hakocalc.Domain.ProbabilitySpec
+  other-modules:    Hakocalc.Entity.CommonSpec
+                  , Hakocalc.Entity.DefeatSpec
+                  , Hakocalc.Entity.ProbabilitySpec
   ghc-options:      -Wall
   build-depends:    base
                   , hakocalc

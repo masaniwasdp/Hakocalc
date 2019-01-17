@@ -1,10 +1,10 @@
 {-# OPTIONS_GHC -fno-warn-missing-signatures #-}
 
-module Hakocalc.Domain.CommonSpec where
+module Hakocalc.Entity.CommonSpec where
 
 
-import Hakocalc.Domain.Common
-import Hakocalc.Domain.Probability (toProbabilityJust)
+import Hakocalc.Entity.Common
+import Hakocalc.Entity.Probability (toProbabilityJust)
 import Test.Hspec
 
 
