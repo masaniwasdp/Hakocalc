@@ -22,11 +22,11 @@ combinationSpec = describe "combination" $ do
 
 
 repeatedSpec = describe "repeated" $ do
-  it "1.0" $
-    repeated (toProbabilityJust 0.0) 0 0 `shouldBe` toProbabilityJust 1.0
+  it "1" $
+    repeated (toProbabilityJust 0) 0 0 `shouldBe` toProbabilityJust 1
 
-  it "0.0" $
-    repeated (toProbabilityJust 0.5) 2 3 `shouldBe` toProbabilityJust 0.0
+  it "0" $
+    repeated (toProbabilityJust 1) 2 3 `shouldBe` toProbabilityJust 0
 
   it "0.8" $
     repeated (toProbabilityJust 0.2) 1 0 `shouldBe` toProbabilityJust 0.8

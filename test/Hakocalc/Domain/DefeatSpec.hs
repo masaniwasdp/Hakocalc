@@ -4,7 +4,7 @@ module Hakocalc.Domain.DefeatSpec where
 
 
 import Hakocalc.Domain.Defeat
-import Hakocalc.Domain.Probability (Probability, toProbabilityJust)
+import Hakocalc.Domain.Probability (toProbabilityJust)
 import Test.Hspec
 
 
@@ -14,27 +14,28 @@ spec = do
 
 
 defeatProbabilitySpec = describe "defeatProbability" $ do
-  it "Inora-Ghost" $
-    defeatProbability 1 1 `shouldBe` toRecipProbability 7
+  it "Inora Ghost" $
+    defeatProbability 1 1 `shouldBe` (toProbabilityJust $ recip 7)
 
-  it "Pseudo" $
-    defeatProbability 0 3 `shouldBe` toRecipProbability 1
+  it "King Inora" $
+    defeatProbability 5 5 `shouldBe` (toProbabilityJust $ recip 16807)
 
-  it "King-Inora" $
-    defeatProbability 5 5 `shouldBe` toRecipProbability 16807
+  it "Pseudo 01" $
+    defeatProbability 3 0 `shouldBe` toProbabilityJust 0
+
+  it "Pseudo 02" $
+    defeatProbability 0 3 `shouldBe` toProbabilityJust 1
 
 
 enoughMissilesSpec = describe "enoughMissiles" $ do
-  it "Inora-Ghost" $
-    enoughMissiles 1 (toRecipProbability 7) `shouldBe` Just 1
+  it "Inora Ghost" $
+    enoughMissiles 1 (toProbabilityJust $ recip 7) `shouldBe` Just 1
 
-  it "Pseudo" $
-    enoughMissiles 1 (toRecipProbability 1) `shouldBe` Nothing
+  it "King Inora" $
+    enoughMissiles 5 (toProbabilityJust $ recip 16807) `shouldBe` Just 5
 
-  it "King-Inora" $
-    enoughMissiles 5 (toRecipProbability 16807) `shouldBe` Just 5
+  it "Pseudo 01" $
+    enoughMissiles 1 (toProbabilityJust 0) `shouldBe` Nothing
 
-
-toRecipProbability :: Rational -> Probability
-
-toRecipProbability = toProbabilityJust . recip
+  it "Pseudo 02" $
+    enoughMissiles 0 (toProbabilityJust 1) `shouldBe` Nothing
