@@ -22,7 +22,7 @@ type Result = String
 
 
 {-| -}
-data Option = POpts HP Quantity | QOpts HP Probability
+data Option = POpts !HP !Quantity | QOpts !HP !Probability
 
 
 {-| -}
