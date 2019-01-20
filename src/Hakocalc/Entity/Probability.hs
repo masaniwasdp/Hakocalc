@@ -18,12 +18,14 @@ import Text.Read (readMaybe)
 {-| Reprezentanta probablon. -}
 newtype Probability = Prob Rational deriving (Eq, Ord)
 
+
 instance Read Probability where
   readsPrec _ s = [(fromJust x, "") | isJust x]
     where
       x = toProbability
         . (/ 100)
         . toRational =<< (readMaybe s :: Maybe Double)
+
 
 instance Show Probability where
   show = (show :: Double -> String)
