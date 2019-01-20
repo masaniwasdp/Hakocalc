@@ -17,6 +17,9 @@ combinationSpec = describe "combination" $ do
   it "0" $
     combination 0 3 `shouldBe` 0
 
+  it "1" $
+    combination 4 4 `shouldBe` 1
+
   it "126" $
     combination 9 5 `shouldBe` 126
 
