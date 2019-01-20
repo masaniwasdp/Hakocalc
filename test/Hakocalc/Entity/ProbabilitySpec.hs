@@ -42,10 +42,10 @@ toProbabilitySpec = describe "toProbability" $ do
     toProbability 0.755 `shouldBe` Just (toProbabilityJust 0.755)
 
   it "Over" $
-    (toProbability 1.2) `shouldBe` Nothing
+    toProbability 1.2 `shouldBe` Nothing
 
   it "Under" $
-    (toProbability $ -0.2) `shouldBe` Nothing
+    toProbability (-0.2) `shouldBe` Nothing
 
 
 toProbabilityJustSpec = describe "toProbabilityJust" $ do
