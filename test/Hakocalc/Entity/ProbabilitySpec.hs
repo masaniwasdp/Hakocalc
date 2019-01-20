@@ -3,6 +3,7 @@
 module Hakocalc.Entity.ProbabilitySpec where
 
 
+import Control.Exception (evaluate)
 import Data.Maybe (fromJust)
 import Hakocalc.Entity.Probability
 import Test.Hspec
@@ -24,6 +25,12 @@ readProbabilitySpec = describe "Read Probability" $
     it "75.5%" $
       read "75.5" `shouldBe` toProbabilityJust 0.755
 
+    it "Invalid 01" $
+      evaluate (read "Alice" :: Probability) `shouldThrow` anyException
+
+    it "Invalid 02" $
+      evaluate (read "50.0%" :: Probability) `shouldThrow` anyException
+
 
 showProbabilitySpec = describe "Show Probability" $
   describe "show" $ do
@@ -35,30 +42,39 @@ showProbabilitySpec = describe "Show Probability" $
 
 
 toProbabilitySpec = describe "toProbability" $ do
-  it "50%" $
-    toProbability 0.5 `shouldBe` Just (toProbabilityJust 0.5)
+  it "0%" $
+    toProbability 0 `shouldBe` Just (toProbabilityJust 0)
 
   it "75.5%" $
     toProbability 0.755 `shouldBe` Just (toProbabilityJust 0.755)
 
+  it "100%" $
+    toProbability 1 `shouldBe` Just (toProbabilityJust 1)
+
   it "Over" $
-    toProbability 1.2 `shouldBe` Nothing
+    toProbability 1.25 `shouldBe` Nothing
 
   it "Under" $
-    toProbability (-0.2) `shouldBe` Nothing
+    toProbability (-1) `shouldBe` Nothing
 
 
 toProbabilityJustSpec = describe "toProbabilityJust" $ do
-  it "50%" $
-    toProbabilityJust 0.5 `shouldBe` fromJust (toProbability 0.5)
+  it "0%" $
+    toProbabilityJust 0 `shouldBe` fromJust (toProbability 0)
 
   it "75.5%" $
     toProbabilityJust 0.755 `shouldBe` fromJust (toProbability 0.755)
 
+  it "100%" $
+    toProbabilityJust 1 `shouldBe` fromJust (toProbability 1)
+
 
 fromProbabilitySpec = describe "fromProbability" $ do
-  it "50%" $
-    fromProbability (toProbabilityJust 0.5) `shouldBe` 0.5
+  it "0%" $
+    fromProbability (toProbabilityJust 0) `shouldBe` 0
 
   it "75.5%" $
     fromProbability (toProbabilityJust 0.755) `shouldBe` 0.755
+
+  it "100%" $
+    fromProbability (toProbabilityJust 1) `shouldBe` 1
