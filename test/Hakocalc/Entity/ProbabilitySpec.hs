@@ -3,7 +3,6 @@
 module Hakocalc.Entity.ProbabilitySpec where
 
 
-import Control.Exception (evaluate)
 import Data.Maybe (fromJust)
 import Hakocalc.Entity.Probability
 import Test.Hspec
@@ -55,12 +54,6 @@ toProbabilityJustSpec = describe "toProbabilityJust" $ do
 
   it "75.5%" $
     toProbabilityJust 0.755 `shouldBe` fromJust (toProbability 0.755)
-
-  it "Over" $
-    evaluate (toProbabilityJust 1.2) `shouldThrow` anyException
-
-  it "Under" $
-    evaluate (toProbabilityJust $ -0.2) `shouldThrow` anyException
 
 
 fromProbabilitySpec = describe "fromProbability" $ do
