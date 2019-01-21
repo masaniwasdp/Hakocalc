@@ -10,11 +10,21 @@ import Test.Hspec
 
 
 spec = do
+  eqProbabilitySpec
   readProbabilitySpec
   showProbabilitySpec
   toProbabilitySpec
   toProbabilityJustSpec
   fromProbabilitySpec
+
+
+eqProbabilitySpec = describe "Eq Probability" $
+  describe "==" $ do
+    it "True" $
+      (toProbabilityJust 0.755 == toProbabilityJust (0.5 + 0.255)) `shouldBe` True
+
+    it "False" $
+      (toProbabilityJust 0.755 == toProbabilityJust (0.5 - 0.255)) `shouldBe` False
 
 
 readProbabilitySpec = describe "Read Probability" $
