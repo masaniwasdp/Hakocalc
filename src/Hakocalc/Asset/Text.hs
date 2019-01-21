@@ -4,11 +4,11 @@
 module Hakocalc.Asset.Text where
 
 
-import Hakocalc.Asset.Util (parseText, textFunD)
+import Hakocalc.Asset.Util (definePropFn, readPropText)
 import Language.Haskell.TH (runIO)
 
 
 do
-  xs <- runIO $ parseText <$> readFile "asset/text.prop"
+  xs <- runIO $ readPropText <$> readFile "asset/text.prop"
 
-  return $ map (uncurry textFunD) xs
+  return $ map definePropFn xs

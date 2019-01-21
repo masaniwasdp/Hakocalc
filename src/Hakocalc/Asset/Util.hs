@@ -1,31 +1,26 @@
 module Hakocalc.Asset.Util
-  ( parseText
-  , textFunD
+  ( definePropFn
+  , readPropText
   ) where
 
 
 import Control.Arrow (second)
 
-import qualified Language.Haskell.TH as TH
+import Language.Haskell.TH as TH
 
 
-type TextPair = (String, String)
+type Property = (String, String)
 
 
-parseText :: String -> [TextPair]
+readPropText :: String -> [Property]
 
-parseText = map parseLine . filter (/= "") . lines
-
-
-parseLine :: String -> TextPair
-
-parseLine = second (dropWhile (== ' ') . tail) . break (== ':')
-
-
-textFunD :: String -> String -> TH.Dec
-
-textFunD n s = TH.FunD name [TH.Clause [] body []]
+readPropText = map proc . filter (/= "") . lines
   where
-    name = TH.mkName n
+    proc = second (dropWhile (== ' ') . tail) . break (== ':')
 
+
+definePropFn :: Property -> TH.Dec
+
+definePropFn (n, s) = TH.FunD (TH.mkName n) [TH.Clause [] body []]
+  where
     body = TH.NormalB . TH.LitE $ TH.StringL s
