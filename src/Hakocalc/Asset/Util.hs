@@ -1,12 +1,9 @@
-module Hakocalc.Asset.Util
-  ( definePropFn
-  , readPropText
-  ) where
+module Hakocalc.Asset.Util where
 
 
 import Control.Arrow (second)
 
-import Language.Haskell.TH as TH
+import qualified Language.Haskell.TH as TH
 
 
 type Property = (String, String)
@@ -21,6 +18,6 @@ readPropText = map proc . filter (/= "") . lines
 
 definePropFn :: Property -> TH.Dec
 
-definePropFn (n, s) = TH.FunD (TH.mkName n) [TH.Clause [] body []]
+definePropFn (k, v) = TH.FunD (TH.mkName k) [TH.Clause [] body []]
   where
-    body = TH.NormalB . TH.LitE $ TH.StringL s
+    body = TH.NormalB . TH.LitE $ TH.StringL v
