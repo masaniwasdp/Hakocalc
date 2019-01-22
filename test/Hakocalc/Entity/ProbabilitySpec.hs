@@ -11,6 +11,7 @@ import Test.Hspec
 
 spec = do
   eqProbabilitySpec
+  ordProbabilitySpec
   readProbabilitySpec
   showProbabilitySpec
   toProbabilitySpec
@@ -25,6 +26,18 @@ eqProbabilitySpec = describe "Eq Probability" $
 
     it "50% == 10% is False" $
       (toProbabilityJust 0.5 == toProbabilityJust 0.1) `shouldBe` False
+
+
+ordProbabilitySpec = describe "Ord Probability" $
+  describe "<=" $ do
+    it "50% <= 90% is True" $
+      (toProbabilityJust 0.5 <= toProbabilityJust 0.9) `shouldBe` True
+
+    it "50% <= 50% is True" $
+      (toProbabilityJust 0.5 <= toProbabilityJust 0.5) `shouldBe` True
+
+    it "50% <= 10% is False" $
+      (toProbabilityJust 0.5 <= toProbabilityJust 0.1) `shouldBe` False
 
 
 readProbabilitySpec = describe "Read Probability" $
