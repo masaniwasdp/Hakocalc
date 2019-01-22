@@ -21,22 +21,22 @@ spec = do
 
 eqProbabilitySpec = describe "Eq Probability" $
   describe "==" $ do
-    it "50% == 50% is True" $
+    it "True" $
       (toProbabilityJust 0.5 == toProbabilityJust 0.5) `shouldBe` True
 
-    it "50% == 10% is False" $
+    it "False" $
       (toProbabilityJust 0.5 == toProbabilityJust 0.1) `shouldBe` False
 
 
 ordProbabilitySpec = describe "Ord Probability" $
   describe "<=" $ do
-    it "50% <= 90% is True" $
+    it "True 01" $
       (toProbabilityJust 0.5 <= toProbabilityJust 0.9) `shouldBe` True
 
-    it "50% <= 50% is True" $
+    it "True 02" $
       (toProbabilityJust 0.5 <= toProbabilityJust 0.5) `shouldBe` True
 
-    it "50% <= 10% is False" $
+    it "False" $
       (toProbabilityJust 0.5 <= toProbabilityJust 0.1) `shouldBe` False
 
 
