@@ -16,7 +16,15 @@ import Text.Read (readMaybe)
 
 
 {-| Reprezentanta probablon. -}
-newtype Probability = Prob Rational deriving (Eq, Ord)
+newtype Probability = Prob Rational
+
+
+instance Eq Probability where
+  (Prob x) == (Prob y) = x == y
+
+
+instance Ord Probability where
+  (Prob x) <= (Prob y) = x <= y
 
 
 instance Read Probability where
