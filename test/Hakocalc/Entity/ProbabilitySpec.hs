@@ -20,11 +20,11 @@ spec = do
 
 eqProbabilitySpec = describe "Eq Probability" $
   describe "==" $ do
-    it "0.5 == 0.1 * 5" $
-      (toProbabilityJust 0.5 == toProbabilityJust (0.1 * 5)) `shouldBe` True
+    it "50% == 50%" $
+      (toProbabilityJust 0.5 == toProbabilityJust 0.5) `shouldBe` True
 
-    it "0.5 /= 0.1 * 3" $
-      (toProbabilityJust 0.5 == toProbabilityJust (0.1 * 3)) `shouldBe` False
+    it "50% /= 10%" $
+      (toProbabilityJust 0.5 == toProbabilityJust 0.1) `shouldBe` False
 
 
 readProbabilitySpec = describe "Read Probability" $
