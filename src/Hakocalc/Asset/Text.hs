@@ -4,8 +4,8 @@
 module Hakocalc.Asset.Text where
 
 
-import Hakocalc.Asset.Util (definePropFn, readPropText)
-import Language.Haskell.TH (runIO)
+import Hakocalc.Asset.Util
+import Language.Haskell.TH
 
 
 do
