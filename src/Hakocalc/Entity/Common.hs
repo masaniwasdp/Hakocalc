@@ -9,7 +9,7 @@ module Hakocalc.Entity.Common
   ) where
 
 
-import Hakocalc.Entity.Probability (Probability, fromProbability, toProbabilityJust)
+import Hakocalc.Entity.Probability (Probability, fromProbability, toProbability)
 import Numeric.Natural (Natural)
 
 
@@ -32,7 +32,7 @@ repeated
   -> Natural     -- ^ K kiu nombro da fojoj de provo sukceso.
   -> Probability -- ^ Probablo, ke provo sukcesos K fojojn.
 
-repeated p n k = toProbabilityJust prob
+repeated p n k = toProbability prob
   where
     prob
       | n < k = 0

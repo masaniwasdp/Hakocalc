@@ -13,7 +13,7 @@ module Hakocalc.Entity.Defeat
 
 import Data.List (find)
 import Hakocalc.Entity.Common (repeated)
-import Hakocalc.Entity.Probability (Probability, fromProbability, toProbabilityJust)
+import Hakocalc.Entity.Probability (Probability, fromProbability, toProbability)
 import Numeric.Natural (Natural)
 
 
@@ -28,7 +28,7 @@ type Quantity = Natural
 {-| Kalkulas probablon de sukcesi mortigi monstron. -}
 defeatProbability :: HP -> Quantity -> Probability
 
-defeatProbability h q = toProbabilityJust $ sum xs
+defeatProbability h q = toProbability $ sum xs
   where
     xs = map (fromProbability . repeated accuracy q) [h .. q]
 
@@ -46,4 +46,4 @@ enoughMissiles h p
 {-| La precizeco de misilo-sukcesoj. -}
 accuracy :: Probability
 
-accuracy = toProbabilityJust $ recip 7
+accuracy = toProbability $ recip 7

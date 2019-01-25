@@ -4,7 +4,7 @@ module Hakocalc.Entity.CommonSpec where
 
 
 import Hakocalc.Entity.Common
-import Hakocalc.Entity.Probability (toProbabilityJust)
+import Hakocalc.Entity.Probability (toProbability)
 import Test.Hspec
 
 
@@ -22,10 +22,10 @@ spec = do
 
   describe "repeated" $ do
     it "1" $
-      repeated (toProbabilityJust 0) 0 0 `shouldBe` toProbabilityJust 1
+      repeated (toProbability 0) 0 0 `shouldBe` toProbability 1
 
     it "0" $
-      repeated (toProbabilityJust 1) 2 3 `shouldBe` toProbabilityJust 0
+      repeated (toProbability 1) 2 3 `shouldBe` toProbability 0
 
     it "0.8" $
-      repeated (toProbabilityJust 0.2) 1 0 `shouldBe` toProbabilityJust 0.8
+      repeated (toProbability 0.2) 1 0 `shouldBe` toProbability 0.8

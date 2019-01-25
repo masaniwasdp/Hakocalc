@@ -7,7 +7,7 @@ module Hakocalc.Entity.Probability
   ( Probability
   , fromProbability
   , toProbability
-  , toProbabilityJust
+  , toProbabilityMaybe
   ) where
 
 
@@ -30,7 +30,7 @@ instance Ord Probability where
 instance Read Probability where
   readsPrec _ s = [(fromJust x, "") | isJust x]
     where
-      x = toProbability
+      x = toProbabilityMaybe
         . (/ 100)
         . toRational =<< (readMaybe s :: Maybe Double)
 
@@ -49,9 +49,9 @@ fromProbability (Prob p) = p
 
 
 {-| Konvertas racia nombro al probablo. -}
-toProbability :: Rational -> Maybe Probability
+toProbabilityMaybe :: Rational -> Maybe Probability
 
-toProbability p
+toProbabilityMaybe p
   | p < 0 = Nothing
   | p > 1 = Nothing
 
@@ -59,6 +59,6 @@ toProbability p
 
 
 {-| Konvertas racia nombro al probablo. -}
-toProbabilityJust :: Rational -> Probability
+toProbability :: Rational -> Probability
 
-toProbabilityJust = fromJust . toProbability
+toProbability = fromJust . toProbabilityMaybe
