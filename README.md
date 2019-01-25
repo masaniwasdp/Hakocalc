@@ -18,15 +18,15 @@ La ilo estas probablo kalkulilo kiun vi povas uzi kiam mortigi monstron, en la "
 ## Instali
 
 ``` bash
-$ git clone https://github.com/masaniwasdp/Hakocalc --depth 1
-$ cd Hakocalc
-$ stack install
+> git clone https://github.com/masaniwasdp/Hakocalc
+> cd Hakocalc
+> stack install
 ```
 
 ## Ekzekuto
 
 ``` bash
-$ hakocalc COMMAND ARGS
+> hakocalc COMMAND ARGS
 ```
 
 La jenaj estas validaj `COMMAND`.
@@ -39,14 +39,14 @@ Se vi volas legi helpon, bonvolu ekzekti `hakocalc COMMAND --help`.
 ### Ekzemplo
 
 ``` bash
-$ hakocalc probability 3 38
+> hakocalc probability 3 38
 92.324%
 ```
 
 ``` bash
-$ hakocalc quantity 3 97.5
+> hakocalc quantity 3 97.5
 48
-$ hakocalc quantity 3 100
+> hakocalc quantity 3 100
 Couldn't calculate.
 ```
 
