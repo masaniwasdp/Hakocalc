@@ -9,6 +9,6 @@ import Language.Haskell.TH
 
 
 do
-  xs <- runIO $ parse <$> readFile "asset/text.prop"
+  xs <- runIO $ props <$> readFile "asset/text.prop"
 
-  return $ map (uncurry define) xs
+  return $ map (uncurry funcs) xs
