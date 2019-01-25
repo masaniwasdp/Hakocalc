@@ -11,4 +11,4 @@ import Language.Haskell.TH
 do
   xs <- runIO $ readPropText <$> readFile "asset/text.prop"
 
-  return $ map definePropFn xs
+  return $ map (uncurry definePropFn) xs
