@@ -20,7 +20,6 @@ library
                   , Hakocalc.Entity.Defeat
                   , Hakocalc.Entity.Probability
                   , Hakocalc.Options
-                  , Hakocalc.OptUtil
   build-depends:    base >= 4.7 && < 5
                   , optparse-applicative
                   , template-haskell
