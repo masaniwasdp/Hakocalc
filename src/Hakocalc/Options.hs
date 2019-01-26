@@ -5,16 +5,14 @@
  -}
 module Hakocalc.Options
   ( options
-  , pref
   ) where
 
 
 import Data.Semigroup ((<>))
 import Hakocalc.Command (Option (POpts, QOpts))
-import Hakocalc.OptUtil (descA, descP, descQ, parserH, parserP, parserQ)
-import Options.Applicative.Builder (command, info, prefs, showHelpOnEmpty, subparser)
-import Options.Applicative.Common (ParserInfo, ParserPrefs)
-import Options.Applicative.Extra (helper)
+import Hakocalc.OptUtil (optionP, optionQ)
+import Options.Applicative.Builder (command, info, subparser, progDesc)
+import Options.Applicative.Common (ParserInfo)
 
 import qualified Hakocalc.Asset.Text as Text
 
@@ -22,16 +20,7 @@ import qualified Hakocalc.Asset.Text as Text
 {-| Analizas komandolinion opcion. -}
 options :: ParserInfo Option
 
-options = info (subparser $ cmdP <> cmdQ) descA
+options = info (subparser $ p <> q) (progDesc Text.descA)
   where
-    cmdP = command Text.commandP $ info optsP descP
-    cmdQ = command Text.commandQ $ info optsQ descQ
-
-    optsP = helper <*> (POpts <$> parserH <*> parserQ)
-    optsQ = helper <*> (QOpts <$> parserH <*> parserP)
-
-
-{-| -}
-pref :: ParserPrefs
-
-pref = prefs showHelpOnEmpty
+    p = command Text.commandP . info optionP $ progDesc Text.descP
+    q = command Text.commandQ . info optionQ $ progDesc Text.descQ

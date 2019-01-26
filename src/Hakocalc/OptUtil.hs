@@ -4,53 +4,32 @@
  - License     : MIT
  -}
 module Hakocalc.OptUtil
-  ( descA
-  , descP
-  , descQ
-  , parserH
-  , parserP
-  , parserQ
+  ( optionP
+  , optionQ
   ) where
 
 
 import Data.Semigroup ((<>))
-import Options.Applicative (InfoMod, Parser)
-import Options.Applicative.Builder (argument, auto, help, metavar, progDesc)
+import Hakocalc.Command (Option (POpts, QOpts))
+import Options.Applicative (InfoMod, Parser, helper)
+import Options.Applicative.Builder (argument, auto, help, metavar)
 
 import qualified Hakocalc.Asset.Text as Text
 
 
 {-| -}
-parserH :: Read a => Parser a
+optionP :: Parser Option
 
-parserH = argument auto $ help Text.helpH <> metavar Text.metavarH
-
-
-{-| -}
-parserP :: Read a => Parser a
-
-parserP = argument auto $ help Text.helpP <> metavar Text.metavarP
+optionP = helper <*> (POpts <$> parserH <*> parserQ)
+  where
+    parserH = argument auto $ help Text.helpH <> metavar Text.metavarH
+    parserQ = argument auto $ help Text.helpQ <> metavar Text.metavarQ
 
 
 {-| -}
-parserQ :: Read a => Parser a
+optionQ :: Parser Option
 
-parserQ = argument auto $ help Text.helpQ <> metavar Text.metavarQ
-
-
-{-| -}
-descA :: InfoMod a
-
-descA = progDesc Text.descA
-
-
-{-| -}
-descP :: InfoMod a
-
-descP = progDesc Text.descP
-
-
-{-| -}
-descQ :: InfoMod a
-
-descQ = progDesc Text.descQ
+optionQ = helper <*> (QOpts <$> parserH <*> parserP)
+  where
+    parserH = argument auto $ help Text.helpH <> metavar Text.metavarH
+    parserP = argument auto $ help Text.helpP <> metavar Text.metavarP
