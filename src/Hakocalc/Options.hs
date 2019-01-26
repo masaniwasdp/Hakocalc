@@ -11,7 +11,7 @@ module Hakocalc.Options
 import Data.Semigroup ((<>))
 import Hakocalc.Command (Option (OptionP, OptionQ))
 import Options.Applicative (command, helper, info, progDesc, subparser)
-import Options.Applicative.Builder (argument, auto, help, metavar, subparser)
+import Options.Applicative.Builder (argument, auto, help, metavar)
 import Options.Applicative.Types (Parser, ParserInfo)
 
 import qualified Hakocalc.Asset.Text as Text
