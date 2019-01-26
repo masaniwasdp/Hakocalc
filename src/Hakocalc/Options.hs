@@ -9,7 +9,7 @@ module Hakocalc.Options
 
 
 import Data.Semigroup ((<>))
-import Hakocalc.Command (Option (POpts, QOpts))
+import Hakocalc.Command (Option (OptionP, OptionQ))
 import Options.Applicative (command, helper, info, progDesc, subparser)
 import Options.Applicative.Builder (argument, auto, help, metavar, subparser)
 import Options.Applicative.Types (Parser, ParserInfo)
@@ -29,7 +29,7 @@ options = info (subparser $ p <> q) (progDesc Text.descA)
 {-| -}
 optionP :: Parser Option
 
-optionP = helper <*> (POpts <$> h <*> q)
+optionP = helper <*> (OptionP <$> h <*> q)
   where
     h = argument auto $ help Text.helpH <> metavar Text.metavarH
     q = argument auto $ help Text.helpQ <> metavar Text.metavarQ
@@ -38,7 +38,7 @@ optionP = helper <*> (POpts <$> h <*> q)
 {-| -}
 optionQ :: Parser Option
 
-optionQ = helper <*> (QOpts <$> h <*> p)
+optionQ = helper <*> (OptionQ <$> h <*> p)
   where
     h = argument auto $ help Text.helpH <> metavar Text.metavarH
     p = argument auto $ help Text.helpP <> metavar Text.metavarP

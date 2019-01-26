@@ -22,15 +22,15 @@ type Result = String
 
 
 {-| -}
-data Option = POpts !HP !Quantity | QOpts !HP !Probability
+data Option = OptionP !HP !Quantity | OptionQ !HP !Probability
 
 
 {-| -}
 command :: Option -> Result
 
-command (POpts h q) = toPercent $ defeatProbability h q
+command (OptionP h q) = toPercent $ defeatProbability h q
 
-command (QOpts h p) = maybe Text.failed show $ enoughMissiles h p
+command (OptionQ h p) = maybe Text.failed show $ enoughMissiles h p
 
 
 {-| Konvertas probablon al procento kordo. -}
