@@ -4,8 +4,6 @@ Hakocalc
 [![Build Status](https://travis-ci.org/masaniwasdp/Hakocalc.svg?branch=master)](https://travis-ci.org/masaniwasdp/Hakocalc)
 [![Coverage Status](https://coveralls.io/repos/github/masaniwasdp/Hakocalc/badge.svg?branch=master)](https://coveralls.io/github/masaniwasdp/Hakocalc?branch=master)
 
-![Hakocalc](https://masaniwasdp.github.io/Hakocalc/Screenshot.png)
-
 Kalkulas probablon de sukcesi mortigi monstron.
 
 ## Priskribo
