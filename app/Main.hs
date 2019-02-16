@@ -5,4 +5,7 @@ import Options.Applicative (customExecParser, prefs, showHelpOnEmpty)
 
 main :: IO ()
 
-main = putStrLn . command =<< customExecParser (prefs showHelpOnEmpty) options
+main = do
+  opt <- customExecParser (prefs showHelpOnEmpty) options
+
+  putStrLn $ command opt
