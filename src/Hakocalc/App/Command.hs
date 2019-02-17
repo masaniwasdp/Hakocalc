@@ -23,15 +23,10 @@ data Option = OptionP HP Quantity | OptionQ HP Probability
 {-| -}
 command :: Option -> IO ()
 
-command = putStrLn . calculate
+command opt = putStrLn $ case opt of
+  (OptionP h q) -> toPercent $ defeatProbability h q
 
-
-{-| -}
-calculate :: Option -> String
-
-calculate (OptionP h q) = toPercent $ defeatProbability h q
-
-calculate (OptionQ h p) = maybe Text.failed show $ enoughMissiles h p
+  (OptionQ h p) -> maybe Text.failed show $ enoughMissiles h p
 
 
 {-| Konvertas probablon al procento kordo. -}
