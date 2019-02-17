@@ -1,5 +1,4 @@
-Hakocalc
-===
+# Hakocalc
 
 [![Build Status](https://travis-ci.org/masaniwasdp/Hakocalc.svg?branch=master)](https://travis-ci.org/masaniwasdp/Hakocalc)
 [![Coverage Status](https://coveralls.io/repos/github/masaniwasdp/Hakocalc/badge.svg?branch=master)](https://coveralls.io/github/masaniwasdp/Hakocalc?branch=master)
@@ -7,6 +6,7 @@ Hakocalc
 Kalkulas probablon de sukcesi mortigi monstron.
 
 ## Priskribo
+
 La ilo estas probablo kalkulilo kiun vi povas uzi kiam mortigi monstron, en la "Hakoniwa Insuloj".
 Ĝi havas jenajn kalkulajn funkciojn.
 
@@ -49,6 +49,7 @@ Couldn't calculate.
 ```
 
 ## Permesilo
+
 © 2019, masaniwa
 
 La programaro estas licencita sub la [MIT](https://github.com/masaniwasdp/Hakocalc/blob/master/LICENSE).
