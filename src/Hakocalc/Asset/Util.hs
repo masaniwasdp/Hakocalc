@@ -1,17 +1,13 @@
-{-# OPTIONS_GHC -fno-warn-missing-signatures #-}
-
-module Hakocalc.Asset.Util where
-
-
-import Control.Arrow
-import Language.Haskell.TH
+module Hakocalc.Asset.Util
+  ( genText
+  ) where
 
 
-props = map proc . filter (/= "") . lines
+import qualified Language.Haskell.TH as TH
+
+
+genText :: String -> String -> TH.Dec
+
+genText n v = TH.FunD (TH.mkName n) [TH.Clause [] body []]
   where
-    proc = second (dropWhile (== ' ') . tail) . break (== ':')
-
-
-funcs k v = FunD (mkName k) [Clause [] body []]
-  where
-    body = NormalB . LitE $ StringL v
+    body = TH.NormalB . TH.LitE $ TH.StringL v
