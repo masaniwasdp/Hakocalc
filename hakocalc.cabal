@@ -13,13 +13,13 @@ cabal-version:      >=1.10
 
 library
   hs-source-dirs:   src
-  exposed-modules:  Hakocalc.Asset.Text
+  exposed-modules:  Hakocalc.App.Command
+                  , Hakocalc.App.Options
+                  , Hakocalc.Asset.Text
                   , Hakocalc.Asset.Util
-                  , Hakocalc.Command
                   , Hakocalc.Entity.Common
                   , Hakocalc.Entity.Defeat
                   , Hakocalc.Entity.Probability
-                  , Hakocalc.Options
   build-depends:    base >= 4.7 && < 5
                   , optparse-applicative
                   , template-haskell

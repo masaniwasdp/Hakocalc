@@ -3,13 +3,13 @@
  - Copyright   : 2019 masaniwa
  - License     : MIT
  -}
-module Hakocalc.Options
+module Hakocalc.App.Options
   ( options
   ) where
 
 
 import Data.Semigroup ((<>))
-import Hakocalc.Command (Option (OptionP, OptionQ))
+import Hakocalc.App.Command (Option (OptionP, OptionQ))
 import Options.Applicative (command, helper, info, progDesc, subparser)
 import Options.Applicative.Builder (argument, auto, help, metavar)
 import Options.Applicative.Types (Parser, ParserInfo)

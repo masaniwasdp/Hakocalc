@@ -3,7 +3,7 @@
  - Copyright   : 2019 masaniwa
  - License     : MIT
  -}
-module Hakocalc.Command
+module Hakocalc.App.Command
   ( Option (..)
   , Result
   , command
