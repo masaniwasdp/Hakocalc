@@ -40,7 +40,10 @@ enoughMissiles h p
   | fromProbability p == 0 = Nothing
   | fromProbability p == 1 = Nothing
 
-  | otherwise = find (\q -> defeatProbability h q >= p) [h ..]
+  | otherwise = find cmp [h ..]
+
+  where
+    cmp = \x -> fromProbability (defeatProbability h x) >= fromProbability p
 
 
 {-| La precizeco de misilo-sukcesoj. -}

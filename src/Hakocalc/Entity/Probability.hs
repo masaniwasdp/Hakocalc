@@ -1,5 +1,5 @@
 {-|
- - Description : Modulo de probablo.
+ - Description : Modulo de trakti probablo.
  - Copyright   : 2019 masaniwa
  - License     : MIT
  -}
@@ -16,15 +16,7 @@ import Text.Read (readMaybe)
 
 
 {-| Reprezentanta probablon. -}
-newtype Probability = Prob Rational
-
-
-instance Eq Probability where
-  (Prob x) == (Prob y) = x == y
-
-
-instance Ord Probability where
-  (Prob x) <= (Prob y) = x <= y
+newtype Probability = Prob Rational deriving Eq
 
 
 instance Read Probability where

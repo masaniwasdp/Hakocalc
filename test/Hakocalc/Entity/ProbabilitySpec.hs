@@ -19,18 +19,6 @@ spec = do
         (toProbability 0.5 == toProbability 0.1) `shouldBe` False
 
 
-  describe "Ord Probability" $
-    describe "<=" $ do
-      it "<" $
-        (toProbability 0.5 <= toProbability 0.9) `shouldBe` True
-
-      it "==" $
-        (toProbability 0.5 <= toProbability 0.5) `shouldBe` True
-
-      it ">" $
-        (toProbability 0.5 <= toProbability 0.1) `shouldBe` False
-
-
   describe "Read Probability" $
     describe "read" $ do
       it "Valid 01" $
