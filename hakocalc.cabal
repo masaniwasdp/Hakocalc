@@ -13,10 +13,10 @@ cabal-version:      >=1.10
 
 library
   hs-source-dirs:   src
-  exposed-modules:  Hakocalc.App.Command
-                  , Hakocalc.App.Options
-                  , Hakocalc.Asset.Text
+  exposed-modules:  Hakocalc.Asset.Text
                   , Hakocalc.Asset.Util
+                  , Hakocalc.CLI.Command
+                  , Hakocalc.CLI.Options
                   , Hakocalc.Entity.Common
                   , Hakocalc.Entity.Defeat
                   , Hakocalc.Entity.Probability

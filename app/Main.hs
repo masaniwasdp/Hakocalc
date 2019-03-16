@@ -1,5 +1,5 @@
-import Hakocalc.App.Command (command)
-import Hakocalc.App.Options (options)
+import Hakocalc.CLI.Command (command)
+import Hakocalc.CLI.Options (options)
 import Options.Applicative (customExecParser, prefs, showHelpOnEmpty)
 
 
