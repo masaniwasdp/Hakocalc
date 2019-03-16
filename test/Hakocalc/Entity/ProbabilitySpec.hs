@@ -10,13 +10,20 @@ import Test.Hspec
 
 
 spec = do
-  describe "Eq Probability" $
+  describe "Eq Probability" $ do
     describe "==" $ do
       it "==" $
         (toProbability 0.5 == toProbability 0.5) `shouldBe` True
 
       it "!=" $
         (toProbability 0.5 == toProbability 0.1) `shouldBe` False
+
+    describe "/=" $ do
+      it "==" $
+        (toProbability 0.5 /= toProbability 0.5) `shouldBe` False
+
+      it "!=" $
+        (toProbability 0.5 /= toProbability 0.1) `shouldBe` True
 
 
   describe "Read Probability" $
