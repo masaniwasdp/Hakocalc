@@ -5,4 +5,6 @@ import Options.Applicative (customExecParser, prefs, showHelpOnEmpty)
 
 main :: IO ()
 
-main = command =<< customExecParser (prefs showHelpOnEmpty) options
+main = command =<< customExecParser conf options
+  where
+    conf = prefs showHelpOnEmpty

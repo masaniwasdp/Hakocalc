@@ -9,7 +9,7 @@ module Hakocalc.CLI.Options
 
 
 import Data.Semigroup ((<>))
-import Hakocalc.CLI.Command (Option (OptionP, OptionQ))
+import Hakocalc.CLI.Context (Option (OptionP, OptionQ))
 import Options.Applicative (command, helper, info, progDesc, subparser)
 import Options.Applicative.Builder (argument, auto, help, metavar)
 import Options.Applicative.Types (Parser, ParserInfo)

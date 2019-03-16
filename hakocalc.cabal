@@ -16,6 +16,7 @@ library
   exposed-modules:  Hakocalc.Asset.Text
                   , Hakocalc.Asset.Util
                   , Hakocalc.CLI.Command
+                  , Hakocalc.CLI.Context
                   , Hakocalc.CLI.Options
                   , Hakocalc.Entity.Common
                   , Hakocalc.Entity.Defeat
