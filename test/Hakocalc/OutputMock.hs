@@ -10,20 +10,28 @@ import Hakocalc.Entity.Defeat (Quantity)
 import Hakocalc.Entity.Probability (Probability)
 
 
-data OutputMock = OutputMock [Quantity] [Probability] [()] deriving (Eq, Show)
+newtype OutputMock = OutputMock ([Quantity], [Probability], [()])
+
+
+instance Eq OutputMock where
+  (OutputMock lhs) == (OutputMock rhs) = lhs == rhs
+
+
+instance Show OutputMock where
+  show (OutputMock mock) = show mock
 
 
 instance Output (State OutputMock) where
   outputQuantity q = modify $
-    \ (OutputMock qs ps fs) -> OutputMock (q : qs) ps fs
+    \ (OutputMock (qs, ps, fs)) -> OutputMock ((q : qs), ps, fs)
 
   outputProbability p = modify $
-    \ (OutputMock qs ps fs) -> OutputMock qs (p : ps) fs
+    \ (OutputMock (qs, ps, fs)) -> OutputMock (qs, (p : ps), fs)
 
   notifyFailed = modify $
-    \ (OutputMock qs ps fs) -> OutputMock qs ps (() : fs)
+    \ (OutputMock (qs, ps, fs)) -> OutputMock (qs, ps, (() : fs))
 
 
 initMock :: OutputMock
 
-initMock = OutputMock [] [] []
+initMock = OutputMock ([], [], [])

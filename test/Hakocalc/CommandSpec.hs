@@ -15,14 +15,14 @@ spec = do
     it "King Inora" $ do
       let action = commandP 5 5
 
-      let result = OutputMock [] [toProbability $ recip 16807] []
+      let result = OutputMock ([], [toProbability $ recip 16807], [])
 
       execState action initMock `shouldBe` result
 
     it "Pseudo" $ do
       let action = commandP 3 0
 
-      let result = OutputMock [] [toProbability 0] []
+      let result = OutputMock ([], [toProbability 0], [])
 
       execState action initMock `shouldBe` result
 
@@ -30,13 +30,13 @@ spec = do
     it "King Inora" $ do
       let action = commandQ 5 (toProbability $ recip 16807)
 
-      let result = OutputMock [5] [] []
+      let result = OutputMock ([5], [], [])
 
       execState action initMock `shouldBe` result
 
     it "Pseudo" $ do
       let action = commandQ 0 (toProbability 1)
 
-      let result = OutputMock [] [] [()]
+      let result = OutputMock ([], [], [()])
 
       execState action initMock `shouldBe` result
