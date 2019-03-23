@@ -45,7 +45,7 @@ enoughMissiles h p
   | otherwise = find cond [h ..]
 
   where
-    cond = \x -> fromProbability (defeatProbability h x) >= fromProbability p
+    cond = \ x -> fromProbability (defeatProbability h x) >= fromProbability p
 
 
 accuracy = toProbability $ recip 7 -- ^ La precizeco de misilo-sukcesoj.
