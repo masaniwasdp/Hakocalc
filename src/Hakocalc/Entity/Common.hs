@@ -1,8 +1,9 @@
-{-|
- - Description : Modulo de komuna probablo kalkulo.
- - Copyright   : 2019 masaniwa
- - License     : MIT
- -}
+-- |
+-- Description : Modulo de komuna probablo kalkulo.
+-- Copyright   : 2019 masaniwa
+-- License     : MIT
+--
+
 module Hakocalc.Entity.Common
   ( combination
   , repeated
@@ -13,7 +14,7 @@ import Hakocalc.Entity.Probability (Probability, fromProbability, toProbability)
 import Numeric.Natural (Natural)
 
 
-{-| Kalkulas tutan nombron de kombinajo. -}
+-- | Kalkulas tutan nombron de kombinajo.
 combination
   :: Natural -- ^ Nombro de tuta okazaĵoj.
   -> Natural -- ^ Nombro de okazaĵoj por elekti.
@@ -25,7 +26,7 @@ combination n r
   | otherwise = product [n - r + 1 .. n] `div` product [1 .. r]
 
 
-{-| Kalkulas probablon ripetitaj provoj. -}
+-- | Kalkulas probablon ripetitaj provoj.
 repeated
   :: Probability -- ^ Probablo de provo sukceso.
   -> Natural     -- ^ Nombro da fojoj por ripeti provon.

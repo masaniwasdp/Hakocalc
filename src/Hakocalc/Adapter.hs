@@ -1,11 +1,12 @@
 {-# OPTIONS_GHC -fno-warn-missing-signatures #-}
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
-{-|
- - Description : Modulo por adaptiĝi komandoj al IO.
- - Copyright   : 2019 masaniwa
- - License     : MIT
- -}
+-- |
+-- Description : Modulo por adaptiĝi komandoj al IO.
+-- Copyright   : 2019 masaniwa
+-- License     : MIT
+--
+
 module Hakocalc.Adapter () where
 
 

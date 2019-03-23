@@ -1,8 +1,9 @@
-{-|
- - Description : Modulo de trakti probablo.
- - Copyright   : 2019 masaniwa
- - License     : MIT
- -}
+-- |
+-- Description : Modulo de trakti probablo.
+-- Copyright   : 2019 masaniwa
+-- License     : MIT
+--
+
 module Hakocalc.Entity.Probability
   ( Probability
   , fromProbability
@@ -15,7 +16,7 @@ import Data.Maybe (fromJust, isJust)
 import Text.Read (readMaybe)
 
 
-{-| Reprezentanta probablon. -}
+-- | Reprezentanta probablon.
 newtype Probability = Prob Rational deriving Eq
 
 
@@ -34,13 +35,13 @@ instance Show Probability where
     . fromProbability
 
 
-{-| Konvertas probablon al racia nombro. -}
+-- | Konvertas probablon al racia nombro.
 fromProbability :: Probability -> Rational
 
 fromProbability (Prob p) = p
 
 
-{-| Konvertas racia nombro al probablo. -}
+-- | Konvertas racia nombro al probablo.
 toProbabilityMaybe :: Rational -> Maybe Probability
 
 toProbabilityMaybe p
@@ -50,7 +51,7 @@ toProbabilityMaybe p
   | otherwise = Just $ Prob p
 
 
-{-| Konvertas racia nombro al probablo. -}
+-- | Konvertas racia nombro al probablo.
 toProbability :: Rational -> Probability
 
 toProbability = fromJust . toProbabilityMaybe

@@ -1,10 +1,11 @@
 {-# OPTIONS_GHC -fno-warn-missing-signatures #-}
 
-{-|
- - Description : Modulo por kalkuli probablon de mortigi monstron.
- - Copyright   : 2019 masaniwa
- - License     : MIT
- -}
+-- |
+-- Description : Modulo por kalkuli probablon de mortigi monstron.
+-- Copyright   : 2019 masaniwa
+-- License     : MIT
+--
+
 module Hakocalc.Entity.Defeat
   ( HP
   , Quantity
@@ -19,15 +20,15 @@ import Hakocalc.Entity.Probability (Probability, fromProbability, toProbability)
 import Numeric.Natural (Natural)
 
 
-{-| Reprezentanta HP. -}
+-- | Reprezentanta HP.
 type HP = Natural
 
 
-{-| Reprezentanta kvanto. -}
+-- | Reprezentanta kvanto.
 type Quantity = Natural
 
 
-{-| Kalkulas probablon de sukcesi mortigi monstron. -}
+-- | Kalkulas probablon de sukcesi mortigi monstron.
 defeatProbability :: HP -> Quantity -> Probability
 
 defeatProbability h q = toProbability $ sum xs
@@ -35,7 +36,7 @@ defeatProbability h q = toProbability $ sum xs
     xs = map (fromProbability . repeated accuracy q) [h .. q]
 
 
-{-| Kalkulas postulitan kvanton da misiloj por mortigi monstron. -}
+-- | Kalkulas postulitan kvanton da misiloj por mortigi monstron.
 enoughMissiles :: HP -> Probability -> Maybe Quantity
 
 enoughMissiles h p
