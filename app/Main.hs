@@ -1,10 +1,8 @@
-import Hakocalc.CLI.Command (command)
-import Hakocalc.CLI.Options (options)
+import Control.Monad (join)
 import Options.Applicative (customExecParser, prefs, showHelpOnEmpty)
+import Parser (parser)
 
 
 main :: IO ()
 
-main = command =<< customExecParser conf options
-  where
-    conf = prefs showHelpOnEmpty
+main = join $ customExecParser (prefs showHelpOnEmpty) parser
