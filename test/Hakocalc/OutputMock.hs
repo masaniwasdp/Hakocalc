@@ -6,8 +6,7 @@ module Hakocalc.OutputMock where
 
 import Control.Monad.State (State, modify)
 import Hakocalc.Command (Output, notifyFailed, outputProbability, outputQuantity)
-import Hakocalc.Entity.Defeat (Quantity)
-import Hakocalc.Entity.Probability (Probability)
+import Hakocalc.Entity.Defeat (Probability, Quantity)
 
 
 newtype OutputMock = OutputMock ([Quantity], [Probability], [()])

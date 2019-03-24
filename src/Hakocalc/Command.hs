@@ -14,8 +14,7 @@ module Hakocalc.Command
   ) where
 
 
-import Hakocalc.Entity.Defeat (HP, Quantity, defeatProbability, enoughMissiles)
-import Hakocalc.Entity.Probability (Probability)
+import Hakocalc.Entity.Defeat (HP, Probability, Quantity, defeatProbability, enoughMissiles)
 
 
 -- |

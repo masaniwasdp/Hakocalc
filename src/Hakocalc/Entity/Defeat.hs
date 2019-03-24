@@ -8,6 +8,7 @@
 
 module Hakocalc.Entity.Defeat
   ( HP
+  , Probability
   , Quantity
   , defeatProbability
   , enoughMissiles
@@ -16,12 +17,18 @@ module Hakocalc.Entity.Defeat
 
 import Data.List (find)
 import Hakocalc.Entity.Common (repeated)
-import Hakocalc.Entity.Probability (Probability, fromProbability, toProbability)
+import Hakocalc.Entity.Probability (fromProbability, toProbability)
 import Numeric.Natural (Natural)
+
+import qualified Hakocalc.Entity.Probability as P
 
 
 -- | Reprezentanta HP.
 type HP = Natural
+
+
+-- | Reprezentanta probablo.
+type Probability = P.Probability
 
 
 -- | Reprezentanta kvanto.
