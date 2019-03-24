@@ -17,7 +17,7 @@ import Text.Read (readMaybe)
 
 
 -- | Reprezentanta probablon.
-newtype Probability = Prob Rational deriving Eq
+newtype Probability = Probability Rational deriving Eq
 
 
 instance Read Probability where
@@ -38,7 +38,7 @@ instance Show Probability where
 -- | Konvertas probablon al racia nombro.
 fromProbability :: Probability -> Rational
 
-fromProbability (Prob p) = p
+fromProbability (Probability p) = p
 
 
 -- | Konvertas racia nombro al probablo.
@@ -48,7 +48,7 @@ toProbabilityMaybe p
   | p < 0 = Nothing
   | p > 1 = Nothing
 
-  | otherwise = Just $ Prob p
+  | otherwise = Just $ Probability p
 
 
 -- | Konvertas racia nombro al probablo.
