@@ -40,7 +40,7 @@ test-suite hakocalc-test
                   , Hakocalc.Entity.CommonSpec
                   , Hakocalc.Entity.DefeatSpec
                   , Hakocalc.Entity.ProbabilitySpec
-                  , Hakocalc.OutputMock
+                  , Hakocalc.OutputLog
   ghc-options:      -Wall
   build-depends:    base
                   , hakocalc
