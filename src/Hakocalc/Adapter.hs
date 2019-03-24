@@ -27,4 +27,4 @@ quantityFormat = "%d\n" -- ^
 
 probabilityFormat = "%.3f%%\n" -- ^
 
-failedMessage = "Couldn't calculate." -- ^
+failedMessage = "Could not calculate." -- ^

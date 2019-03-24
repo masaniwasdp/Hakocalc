@@ -45,7 +45,7 @@ Se vi volas legi helpon, bonvolu ekzekti `hakocalc COMMAND --help`.
 > hakocalc quantity 3 97.5
 48
 > hakocalc quantity 3 100
-Couldn't calculate.
+Could not calculate.
 ```
 
 ## Permesilo
