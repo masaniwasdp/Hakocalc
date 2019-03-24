@@ -4,33 +4,30 @@
 module Hakocalc.OutputMock where
 
 
-import Control.Monad.State (State, modify)
+import Control.Monad.State (State, execState, modify)
 import Hakocalc.Command (Output, notifyFailed, outputProbability, outputQuantity)
 import Hakocalc.Entity.Defeat (Probability, Quantity)
 
 
-newtype OutputMock = OutputMock ([Quantity], [Probability], [()])
-
-
-instance Eq OutputMock where
-  (OutputMock lhs) == (OutputMock rhs) = lhs == rhs
-
-
-instance Show OutputMock where
-  show (OutputMock mock) = show mock
+newtype OutputMock = OutputMock [OutputLog] deriving (Eq, Show)
 
 
 instance Output (State OutputMock) where
-  outputQuantity q = modify $
-    \ (OutputMock (qs, ps, fs)) -> OutputMock ((q : qs), ps, fs)
+  outputQuantity x = modify $ add (QLog x)
 
-  outputProbability p = modify $
-    \ (OutputMock (qs, ps, fs)) -> OutputMock (qs, (p : ps), fs)
+  outputProbability x = modify $ add (PLog x)
 
-  notifyFailed = modify $
-    \ (OutputMock (qs, ps, fs)) -> OutputMock (qs, ps, (() : fs))
+  notifyFailed = modify $ add FLog
 
 
-initMock :: OutputMock
+data OutputLog = QLog Quantity | PLog Probability | FLog deriving (Eq, Show)
 
-initMock = OutputMock ([], [], [])
+
+run :: State OutputMock () -> OutputMock
+
+run a = execState a $ OutputMock []
+
+
+add :: OutputLog -> OutputMock -> OutputMock
+
+add x (OutputMock xs) = OutputMock $ xs ++ [x]
