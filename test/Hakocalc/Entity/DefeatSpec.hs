@@ -9,29 +9,29 @@ import Test.Hspec
 
 
 spec = do
-  describe "defeatProbability" $ do
+  describe "probability" $ do
     it "Inora Ghost" $
-      defeatProbability 1 1 `shouldBe` (toProbability $ recip 7)
+      probability 1 1 `shouldBe` (toProbability $ recip 7)
 
     it "King Inora" $
-      defeatProbability 5 5 `shouldBe` (toProbability $ recip 16807)
+      probability 5 5 `shouldBe` (toProbability $ recip 16807)
 
     it "Pseudo 01" $
-      defeatProbability 3 0 `shouldBe` toProbability 0
+      probability 3 0 `shouldBe` toProbability 0
 
     it "Pseudo 02" $
-      defeatProbability 0 3 `shouldBe` toProbability 1
+      probability 0 3 `shouldBe` toProbability 1
 
 
-  describe "enoughMissiles" $ do
+  describe "missiles" $ do
     it "Inora Ghost" $
-      enoughMissiles 1 (toProbability $ recip 7) `shouldBe` Just 1
+      missiles 1 (toProbability $ recip 7) `shouldBe` Just 1
 
     it "King Inora" $
-      enoughMissiles 5 (toProbability $ recip 16807) `shouldBe` Just 5
+      missiles 5 (toProbability $ recip 16807) `shouldBe` Just 5
 
     it "Pseudo 01" $
-      enoughMissiles 1 (toProbability 0) `shouldBe` Nothing
+      missiles 1 (toProbability 0) `shouldBe` Nothing
 
     it "Pseudo 02" $
-      enoughMissiles 0 (toProbability 1) `shouldBe` Nothing
+      missiles 0 (toProbability 1) `shouldBe` Nothing

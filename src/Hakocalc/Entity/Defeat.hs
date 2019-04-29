@@ -9,8 +9,8 @@ module Hakocalc.Entity.Defeat
   ( HP
   , Probability
   , Quantity
-  , defeatProbability
-  , enoughMissiles
+  , missiles
+  , probability
   ) where
 
 
@@ -35,24 +35,24 @@ type Quantity = Natural
 
 
 -- | Kalkulas probablon de sukcesi mortigi monstron.
-defeatProbability :: HP -> Quantity -> Probability
+probability :: HP -> Quantity -> Probability
 
-defeatProbability h q = toProbability $ sum xs
+probability h q = toProbability $ sum xs
   where
     xs = map (fromProbability . repeated accuracy q) [h .. q]
 
 
 -- | Kalkulas postulitan kvanton da misiloj por mortigi monstron.
-enoughMissiles :: HP -> Probability -> Maybe Quantity
+missiles :: HP -> Probability -> Maybe Quantity
 
-enoughMissiles h p
+missiles h p
   | fromProbability p == 0 = Nothing
   | fromProbability p == 1 = Nothing
 
   | otherwise = find cond [h ..]
 
   where
-    cond = \ x -> fromProbability (defeatProbability h x) >= fromProbability p
+    cond = \ x -> fromProbability (probability h x) >= fromProbability p
 
 
 accuracy = toProbability $ recip 7 -- ^ La precizeco de misilo-sukcesoj.
