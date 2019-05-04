@@ -13,9 +13,7 @@ cabal-version:      >=1.10
 
 library
   hs-source-dirs:   src
-  exposed-modules:  Hakocalc.Adapter
-                  , Hakocalc.Command
-                  , Hakocalc.Entity.Common
+  exposed-modules:  Hakocalc.Entity.Common
                   , Hakocalc.Entity.Defeat
                   , Hakocalc.Entity.Probability
   ghc-options:      -Wall
@@ -38,16 +36,13 @@ test-suite hakocalc-test
   type:             exitcode-stdio-1.0
   hs-source-dirs:   test
   main-is:          Spec.hs
-  other-modules:    Hakocalc.CommandSpec
-                  , Hakocalc.Entity.CommonSpec
+  other-modules:    Hakocalc.Entity.CommonSpec
                   , Hakocalc.Entity.DefeatSpec
                   , Hakocalc.Entity.ProbabilitySpec
-                  , Hakocalc.OutputLog
   ghc-options:      -Wall
   build-depends:    base
                   , hakocalc
                   , hspec
-                  , mtl
   default-language: Haskell2010
 
 source-repository head
