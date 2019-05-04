@@ -18,7 +18,7 @@ responseQuantity :: Quantity -> IO ()
 responseQuantity = printf "%d\n"
 
 
-responseProbability :: Probability :: IO ()
+responseProbability :: Probability -> IO ()
 
 responseProbability = (printf "%.3f%%\n") . (read :: String -> Double) . show
 
