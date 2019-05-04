@@ -25,7 +25,8 @@ library
 executable hakocalc
   hs-source-dirs:   app
   main-is:          Main.hs
-  other-modules:    Params
+  other-modules:    Command
+                  , Params
                   , Parser
   ghc-options:      -Wall -O2
   build-depends:    base
