@@ -1,5 +1,3 @@
-{-# OPTIONS_GHC -fno-warn-missing-signatures #-}
-
 -- |
 -- Description : Modulo por kalkuli probablon de mortigi monstron.
 -- Copyright   : 2019 masaniwa
@@ -55,4 +53,7 @@ missiles h p
     cond = \ x -> fromProbability (probability h x) >= fromProbability p
 
 
-accuracy = toProbability $ recip 7 -- ^ La precizeco de misilo-sukcesoj.
+-- | La precizeco de misilo-sukcesoj.
+accuracy :: Probability
+
+accuracy = toProbability $ recip 7
