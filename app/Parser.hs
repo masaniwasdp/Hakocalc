@@ -4,14 +4,13 @@ module Parser where
 
 
 import Data.Semigroup ((<>))
-import Hakocalc.Adapter ()
-import Hakocalc.Command (commandP, commandQ)
 import Options.Applicative (command, helper, info, progDesc, subparser)
 import Options.Applicative.Builder (argument, auto, help, metavar)
 import Options.Applicative.Types (Parser, ParserInfo)
+import Params (Params (ParamsP, ParamsQ))
 
 
-parser :: ParserInfo (IO ())
+parser :: ParserInfo Params
 
 parser = info (subparser $ p <> q) (progDesc descA)
   where
@@ -19,17 +18,17 @@ parser = info (subparser $ p <> q) (progDesc descA)
     q = command cmdnameQ . info parserQ $ progDesc descQ
 
 
-parserP :: Parser (IO ())
+parserP :: Parser Params
 
-parserP = helper <*> (commandP <$> h <*> q)
+parserP = helper <*> (ParamsP <$> h <*> q)
   where
     h = argument auto $ help helpH <> metavar metavarH
     q = argument auto $ help helpQ <> metavar metavarQ
 
 
-parserQ :: Parser (IO ())
+parserQ :: Parser Params
 
-parserQ = helper <*> (commandQ <$> h <*> p)
+parserQ = helper <*> (ParamsQ <$> h <*> p)
   where
     h = argument auto $ help helpH <> metavar metavarH
     p = argument auto $ help helpP <> metavar metavarP
