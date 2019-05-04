@@ -1,7 +1,7 @@
 module Command where
 
 
-import Hakocalc.Entity.Defeat (HP, Probability, Quantity, missiles, probability)
+import Hakocalc.Entity.Defeat (Probability, Quantity, missiles, probability)
 import Params (Params (ParamsP, ParamsQ))
 import Text.Printf (printf)
 
