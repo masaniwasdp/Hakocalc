@@ -1,6 +1,8 @@
 {-# OPTIONS_GHC -fno-warn-missing-signatures #-}
 
-module CLI.Parser where
+module CLI.Parser
+  ( parser
+  ) where
 
 
 import CLI.Params (Params (ParamsP, ParamsQ))

@@ -1,4 +1,6 @@
-module CLI.Command where
+module CLI.Command
+  ( command
+  ) where
 
 
 import CLI.Params (Params (ParamsP, ParamsQ))
