@@ -1,8 +1,7 @@
-import CLI.Command (command)
-import CLI.Parser (parser)
-import Options.Applicative (customExecParser, prefs, showHelpOnEmpty)
+import CLI.Command (execute)
+import CLI.Parser (parse)
 
 
 main :: IO ()
 
-main = command =<< customExecParser (prefs showHelpOnEmpty) parser
+main = execute =<< parse

@@ -1,15 +1,20 @@
 {-# OPTIONS_GHC -fno-warn-missing-signatures #-}
 
 module CLI.Parser
-  ( parser
+  ( parse
   ) where
 
 
 import CLI.Params (Params (ParamsP, ParamsQ))
 import Data.Semigroup ((<>))
-import Options.Applicative (command, helper, info, progDesc, subparser)
-import Options.Applicative.Builder (argument, auto, help, metavar)
+import Options.Applicative (command, customExecParser, helper, info, progDesc, subparser)
+import Options.Applicative.Builder (argument, auto, help, metavar, prefs, showHelpOnEmpty)
 import Options.Applicative.Types (Parser, ParserInfo)
+
+
+parse :: IO Params
+
+parse = customExecParser (prefs showHelpOnEmpty) parser
 
 
 parser :: ParserInfo Params

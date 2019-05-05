@@ -1,5 +1,5 @@
 module CLI.Command
-  ( command
+  ( execute
   ) where
 
 
@@ -8,11 +8,11 @@ import Hakocalc.Entity.Defeat (Probability, Quantity, missiles, probability)
 import Text.Printf (printf)
 
 
-command :: Params -> IO ()
+execute :: Params -> IO ()
 
-command (ParamsP h q) = responseProbability $ probability h q
+execute (ParamsP h q) = responseProbability $ probability h q
 
-command (ParamsQ h p) = maybe notifyFailed responseQuantity $ missiles h p
+execute (ParamsQ h p) = maybe notifyFailed responseQuantity $ missiles h p
 
 
 responseQuantity :: Quantity -> IO ()
