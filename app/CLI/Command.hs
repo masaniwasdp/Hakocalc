@@ -7,6 +7,8 @@ import CLI.Params (Params (ParamsP, ParamsQ))
 import Hakocalc.Entity.Defeat (Probability, Quantity, missiles, probability)
 import Text.Printf (printf)
 
+import qualified CLI.Text as T
+
 
 execute :: Params -> IO ()
 
@@ -17,14 +19,14 @@ execute (ParamsQ h p) = maybe notifyFailed responseQuantity $ missiles h p
 
 responseQuantity :: Quantity -> IO ()
 
-responseQuantity = printf "%d\n"
+responseQuantity = printf T.fmtresQ
 
 
 responseProbability :: Probability -> IO ()
 
-responseProbability = (printf "%.3f%%\n") . (read :: String -> Double) . show
+responseProbability = printf T.fmtresP . (read :: String -> Double) . show
 
 
 notifyFailed :: IO ()
 
-notifyFailed = putStrLn "Could not calculate."
+notifyFailed = putStrLn T.txtnotiF

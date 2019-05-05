@@ -26,6 +26,7 @@ executable hakocalc
   other-modules:    CLI.Command
                   , CLI.Params
                   , CLI.Parser
+                  , CLI.Text
   ghc-options:      -Wall -O2
   build-depends:    base
                   , hakocalc
