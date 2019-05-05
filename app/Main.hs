@@ -1,7 +1,7 @@
-import qualified CLI.Command as Command
-import qualified CLI.Parser as Parser
+import CLI.Command (execute)
+import CLI.Parser (receive)
 
 
 main :: IO ()
 
-main = Command.execute =<< Parser.execute
+main = execute =<< receive
