@@ -1,6 +1,6 @@
-import Command (command)
+import CLI.Command (command)
+import CLI.Parser (parser)
 import Options.Applicative (customExecParser, prefs, showHelpOnEmpty)
-import Parser (parser)
 
 
 main :: IO ()

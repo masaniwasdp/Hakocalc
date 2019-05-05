@@ -1,4 +1,4 @@
-module Params where
+module CLI.Params where
 
 
 import Hakocalc.Entity.Defeat (HP, Probability, Quantity)

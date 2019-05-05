@@ -1,8 +1,8 @@
-module Command where
+module CLI.Command where
 
 
+import CLI.Params (Params (ParamsP, ParamsQ))
 import Hakocalc.Entity.Defeat (Probability, Quantity, missiles, probability)
-import Params (Params (ParamsP, ParamsQ))
 import Text.Printf (printf)
 
 
