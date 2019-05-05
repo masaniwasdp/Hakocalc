@@ -1,7 +1,7 @@
 {-# OPTIONS_GHC -fno-warn-missing-signatures #-}
 
 module CLI.Parser
-  ( parse
+  ( execute
   ) where
 
 
@@ -12,9 +12,9 @@ import Options.Applicative.Builder (argument, auto, help, metavar, prefs, showHe
 import Options.Applicative.Types (Parser, ParserInfo)
 
 
-parse :: IO Params
+execute :: IO Params
 
-parse = customExecParser (prefs showHelpOnEmpty) parser
+execute = customExecParser (prefs showHelpOnEmpty) parser
 
 
 parser :: ParserInfo Params
