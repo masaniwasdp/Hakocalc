@@ -1,6 +1,6 @@
-import CLI.Parser (receive)
+import CLI.Runner (run)
 
 
 main :: IO ()
 
-main = receive
+main = run
