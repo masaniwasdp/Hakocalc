@@ -7,9 +7,6 @@ module Hakocalc.App.Command
 import Hakocalc.Entity.Defeat (HP, Probability, Quantity, missiles, probability)
 import Text.Printf (printf)
 
-import qualified Hakocalc.App.Define as D
-
-
 commandP :: HP -> Quantity -> IO ()
 
 commandP h q = responseProbability $ probability h q
@@ -22,14 +19,14 @@ commandQ h p = maybe notifyFailed responseQuantity $ missiles h p
 
 responseQuantity :: Quantity -> IO ()
 
-responseQuantity = printf D.responseFormatQ
+responseQuantity = printf "%d\n"
 
 
 responseProbability :: Probability -> IO ()
 
-responseProbability = printf D.responseFormatP . (read :: String -> Double) . show
+responseProbability = printf "%.3f%%\n" . (read :: String -> Double) . show
 
 
 notifyFailed :: IO ()
 
-notifyFailed = putStrLn D.notifyTextF
+notifyFailed = putStrLn "Could not calculate."
