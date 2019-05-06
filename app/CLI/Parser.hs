@@ -3,8 +3,9 @@ module CLI.Parser
   ) where
 
 
-import Hakocalc.App.Command (Params (ParamsP, ParamsQ))
+import Control.Monad (join)
 import Data.Semigroup ((<>))
+import Hakocalc.App.Command (commandP, commandQ)
 import Options.Applicative (command, customExecParser, helper, info, progDesc, subparser)
 import Options.Applicative.Builder (argument, auto, help, metavar, prefs, showHelpOnEmpty)
 import Options.Applicative.Types (Parser, ParserInfo)
@@ -12,12 +13,12 @@ import Options.Applicative.Types (Parser, ParserInfo)
 import qualified CLI.Text as T
 
 
-receive :: IO Params
+receive :: IO ()
 
-receive = customExecParser (prefs showHelpOnEmpty) parser
+receive = join $ customExecParser (prefs showHelpOnEmpty) parser
 
 
-parser :: ParserInfo Params
+parser :: ParserInfo (IO ())
 
 parser = info (subparser $ p <> q) (progDesc T.descA)
   where
@@ -25,17 +26,17 @@ parser = info (subparser $ p <> q) (progDesc T.descA)
     q = command T.cmdnameQ . info parserQ $ progDesc T.descQ
 
 
-parserP :: Parser Params
+parserP :: Parser (IO ())
 
-parserP = helper <*> (ParamsP <$> h <*> q)
+parserP = helper <*> (commandP <$> h <*> q)
   where
     h = argument auto $ help T.helpH <> metavar T.metavarH
     q = argument auto $ help T.helpQ <> metavar T.metavarQ
 
 
-parserQ :: Parser Params
+parserQ :: Parser (IO ())
 
-parserQ = helper <*> (ParamsQ <$> h <*> p)
+parserQ = helper <*> (commandQ <$> h <*> p)
   where
     h = argument auto $ help T.helpH <> metavar T.metavarH
     p = argument auto $ help T.helpP <> metavar T.metavarP

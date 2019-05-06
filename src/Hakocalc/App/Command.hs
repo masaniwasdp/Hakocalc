@@ -1,6 +1,6 @@
 module Hakocalc.App.Command
-  ( Params (ParamsP, ParamsQ)
-  , execute
+  ( commandP
+  , commandQ
   ) where
 
 
@@ -10,14 +10,14 @@ import Text.Printf (printf)
 import qualified Hakocalc.App.Define as D
 
 
-data Params = ParamsP HP Quantity | ParamsQ HP Probability
+commandP :: HP -> Quantity -> IO ()
+
+commandP h q = responseProbability $ probability h q
 
 
-execute :: Params -> IO ()
+commandQ :: HP -> Probability -> IO ()
 
-execute (ParamsP h q) = responseProbability $ probability h q
-
-execute (ParamsQ h p) = maybe notifyFailed responseQuantity $ missiles h p
+commandQ h p = maybe notifyFailed responseQuantity $ missiles h p
 
 
 responseQuantity :: Quantity -> IO ()
