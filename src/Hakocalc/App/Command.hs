@@ -7,6 +7,7 @@ module Hakocalc.App.Command
 import Hakocalc.Entity.Defeat (HP, Probability, Quantity, missiles, probability)
 import Text.Printf (printf)
 
+
 commandP :: HP -> Quantity -> IO ()
 
 commandP h q = responseProbability $ probability h q
