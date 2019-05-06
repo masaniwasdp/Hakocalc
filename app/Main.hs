@@ -1,4 +1,4 @@
-import CLI.Command (execute)
+import Hakocalc.App.Command (execute)
 import CLI.Parser (receive)
 
 

@@ -3,7 +3,7 @@ module CLI.Parser
   ) where
 
 
-import CLI.Params (Params (ParamsP, ParamsQ))
+import Hakocalc.App.Command (Params (ParamsP, ParamsQ))
 import Data.Semigroup ((<>))
 import Options.Applicative (command, customExecParser, helper, info, progDesc, subparser)
 import Options.Applicative.Builder (argument, auto, help, metavar, prefs, showHelpOnEmpty)

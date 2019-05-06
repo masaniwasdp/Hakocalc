@@ -13,7 +13,9 @@ cabal-version:      >=1.10
 
 library
   hs-source-dirs:   src
-  exposed-modules:  Hakocalc.Entity.Common
+  exposed-modules:  Hakocalc.App.Command
+                  , Hakocalc.App.Define
+                  , Hakocalc.Entity.Common
                   , Hakocalc.Entity.Defeat
                   , Hakocalc.Entity.Probability
   ghc-options:      -Wall
@@ -23,9 +25,7 @@ library
 executable hakocalc
   hs-source-dirs:   app
   main-is:          Main.hs
-  other-modules:    CLI.Command
-                  , CLI.Params
-                  , CLI.Parser
+  other-modules:    CLI.Parser
                   , CLI.Text
   ghc-options:      -Wall -O2
   build-depends:    base
