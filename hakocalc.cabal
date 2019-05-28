@@ -9,6 +9,7 @@ maintainer:         masaniwasdp@gmail.com
 copyright:          2019 masaniwa
 build-type:         Simple
 extra-source-files: README.md
+data-files:         assets/config.yaml
 cabal-version:      >=1.10
 
 library
