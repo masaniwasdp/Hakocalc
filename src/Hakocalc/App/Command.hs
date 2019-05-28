@@ -4,30 +4,23 @@ module Hakocalc.App.Command
   ) where
 
 
+import Control.Lens ((^.))
 import Hakocalc.Entity.Defeat (HP, Probability, Quantity, missiles, probability)
 import Text.Printf (printf)
 
-
-commandP :: HP -> Quantity -> IO ()
-
-commandP h q = responseProbability $ probability h q
+import qualified Hakocalc.App.CommandConfig as C
 
 
-commandQ :: HP -> Probability -> IO ()
+commandP :: C.CommandConfig -> HP -> Quantity -> IO ()
 
-commandQ h p = maybe notifyFailed responseQuantity $ missiles h p
-
-
-responseQuantity :: Quantity -> IO ()
-
-responseQuantity = printf "%d\n"
+commandP c h q = printf fmt . (read :: String -> Double) . show $ probability h q
+  where
+    fmt = c ^. C.fmtP
 
 
-responseProbability :: Probability -> IO ()
+commandQ :: C.CommandConfig -> HP -> Probability -> IO ()
 
-responseProbability = printf "%.3f%%\n" . (read :: String -> Double) . show
-
-
-notifyFailed :: IO ()
-
-notifyFailed = putStrLn "Could not calculate."
+commandQ c h p = maybe (printf fmt) (printf txt) $ missiles h p
+  where
+    fmt = c ^. C.fmtQ
+    txt = c ^. C.txtF
