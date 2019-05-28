@@ -8,30 +8,30 @@ import Data.Semigroup ((<>))
 import Hakocalc.App.Command (commandP, commandQ)
 
 import qualified CLI.ParserConfig as P
-import qualified Options.Applicative as O
+import qualified Options.Applicative as A
 
 
-parser :: P.ParserConfig -> O.ParserInfo (IO ())
+parser :: P.ParserConfig -> A.ParserInfo (IO ())
 
-parser c = O.info (O.subparser $ p <> q) $ O.progDesc (c ^. P.descA)
+parser c = A.info (A.subparser $ p <> q) $ A.progDesc (c ^. P.descA)
   where
-    p = O.command (c ^. P.nameP) . O.info (parserP c) $ O.progDesc (c ^. P.descP)
-    q = O.command (c ^. P.nameQ) . O.info (parserQ c) $ O.progDesc (c ^. P.descQ)
+    p = A.command (c ^. P.nameP) . A.info (parserP c) $ A.progDesc (c ^. P.descP)
+    q = A.command (c ^. P.nameQ) . A.info (parserQ c) $ A.progDesc (c ^. P.descQ)
 
 
-parserP :: P.ParserConfig -> O.Parser (IO ())
+parserP :: P.ParserConfig -> A.Parser (IO ())
 
-parserP cfg = O.helper <*> (c <$> h <*> q)
+parserP cfg = A.helper <*> (c <$> h <*> q)
   where
     c = commandP (cfg ^. P.cmndC)
-    h = O.argument O.auto $ O.help (cfg ^. P.helpH) <> O.metavar (cfg ^. P.metaH)
-    q = O.argument O.auto $ O.help (cfg ^. P.helpQ) <> O.metavar (cfg ^. P.metaQ)
+    h = A.argument A.auto $ A.help (cfg ^. P.helpH) <> A.metavar (cfg ^. P.metaH)
+    q = A.argument A.auto $ A.help (cfg ^. P.helpQ) <> A.metavar (cfg ^. P.metaQ)
 
 
-parserQ :: P.ParserConfig -> O.Parser (IO ())
+parserQ :: P.ParserConfig -> A.Parser (IO ())
 
-parserQ cfg = O.helper <*> (c <$> h <*> p)
+parserQ cfg = A.helper <*> (c <$> h <*> p)
   where
     c = commandQ (cfg ^. P.cmndC)
-    h = O.argument O.auto $ O.help (cfg ^. P.helpH) <> O.metavar (cfg ^. P.metaH)
-    p = O.argument O.auto $ O.help (cfg ^. P.helpP) <> O.metavar (cfg ^. P.metaP)
+    h = A.argument A.auto $ A.help (cfg ^. P.helpH) <> A.metavar (cfg ^. P.metaH)
+    p = A.argument A.auto $ A.help (cfg ^. P.helpP) <> A.metavar (cfg ^. P.metaP)
