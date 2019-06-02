@@ -21,17 +21,22 @@ parser c = A.info (A.subparser $ p <> q) $ A.progDesc (c ^. P.descA)
 
 parserP :: P.ParserConfig -> A.Parser (IO ())
 
-parserP cfg = A.helper <*> (c <$> h <*> q)
+parserP c = A.helper <*> (p <$> h <*> q)
   where
-    c = commandP (cfg ^. P.cmndC)
-    h = A.argument A.auto $ A.help (cfg ^. P.helpH) <> A.metavar (cfg ^. P.metaH)
-    q = A.argument A.auto $ A.help (cfg ^. P.helpQ) <> A.metavar (cfg ^. P.metaQ)
+    p = commandP (c ^. P.cmndC)
+    h = argument (c ^. P.helpH) (c ^. P.metaH)
+    q = argument (c ^. P.helpQ) (c ^. P.metaQ)
 
 
 parserQ :: P.ParserConfig -> A.Parser (IO ())
 
-parserQ cfg = A.helper <*> (c <$> h <*> p)
+parserQ c = A.helper <*> (q <$> h <*> p)
   where
-    c = commandQ (cfg ^. P.cmndC)
-    h = A.argument A.auto $ A.help (cfg ^. P.helpH) <> A.metavar (cfg ^. P.metaH)
-    p = A.argument A.auto $ A.help (cfg ^. P.helpP) <> A.metavar (cfg ^. P.metaP)
+    q = commandQ (c ^. P.cmndC)
+    h = argument (c ^. P.helpH) (c ^. P.metaH)
+    p = argument (c ^. P.helpP) (c ^. P.metaP)
+
+
+argument :: Read a => String -> String -> A.Parser a
+
+argument h m = A.argument A.auto $ A.help h <> A.metavar m
