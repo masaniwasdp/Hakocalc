@@ -4,7 +4,7 @@
 {-# LANGUAGE TemplateHaskell #-}
 {-# LANGUAGE TypeSynonymInstances #-}
 
-module Hakocalc.App.CommandConfig where
+module Hakocalc.App.Config where
 
 
 import Control.Lens (makeFields)
@@ -12,15 +12,15 @@ import Data.Aeson.TH (defaultOptions, deriveJSON, fieldLabelModifier)
 import Text.Casing (dropPrefix, fromAny, toKebab)
 
 
-data CommandConfig = CommandConfig
-  { _commandConfigFormatP :: String
-  , _commandConfigFormatQ :: String
-  , _commandConfigNoticeQ :: String
+data Config = Config
+  { _configFormatP :: String
+  , _configFormatQ :: String
+  , _configNoticeQ :: String
   }
 
-makeFields ''CommandConfig
+makeFields ''Config
 
 $(do
-  let option = defaultOptions { fieldLabelModifier = toKebab . dropPrefix . dropPrefix . fromAny }
+  let option = defaultOptions { fieldLabelModifier = toKebab . dropPrefix . fromAny }
 
-  deriveJSON option ''CommandConfig)
+  deriveJSON option ''Config)

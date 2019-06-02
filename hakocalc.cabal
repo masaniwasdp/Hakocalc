@@ -9,15 +9,15 @@ maintainer:         masaniwasdp@gmail.com
 copyright:          2019 masaniwa
 build-type:         Simple
 extra-source-files: README.md
-data-files:         assets/parserconfig.yaml
+data-files:         assets/cli/config.yaml
 cabal-version:      >=1.10
 
 library
   hs-source-dirs:   src
   exposed-modules:  Hakocalc.App.Command
-                  , Hakocalc.App.CommandConfig
+                  , Hakocalc.App.Config
+                  , Hakocalc.CLI.Config
                   , Hakocalc.CLI.Parser
-                  , Hakocalc.CLI.ParserConfig
                   , Hakocalc.Entity.Common
                   , Hakocalc.Entity.Defeat
                   , Hakocalc.Entity.Probability
