@@ -21,7 +21,7 @@ library
                   , Hakocalc.Entity.Common
                   , Hakocalc.Entity.Defeat
                   , Hakocalc.Entity.Probability
-  ghc-options:      -Wall
+  ghc-options:      -Wall -O2
   build-depends:    aeson
                   , base
                   , casing
