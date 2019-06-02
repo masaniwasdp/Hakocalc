@@ -8,8 +8,9 @@ module CLI.ParserConfig where
 
 
 import Control.Lens (makeFields)
-import Data.Aeson.TH (defaultOptions, deriveJSON)
+import Data.Aeson.TH (defaultOptions, deriveJSON, fieldLabelModifier)
 import Hakocalc.App.CommandConfig (CommandConfig)
+import Text.Casing (dropPrefix, fromAny, toKebab)
 
 
 data ParserConfig = ParserConfig
@@ -29,4 +30,7 @@ data ParserConfig = ParserConfig
 
 makeFields ''ParserConfig
 
-$(deriveJSON defaultOptions ''ParserConfig)
+$(do
+  let option = defaultOptions { fieldLabelModifier = toKebab . dropPrefix . dropPrefix . fromAny }
+
+  deriveJSON option ''ParserConfig)

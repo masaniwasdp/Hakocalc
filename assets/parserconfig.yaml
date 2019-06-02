@@ -1,19 +1,19 @@
-_parserConfigDescA: "Calculates probability that a monster will die, in the Hakoniwa Islands."
-_parserConfigDescP: "Calculates probability that a monster will die."
-_parserConfigDescQ: "Calculates quantity of missiles to kill a monster."
+desc-a: "Calculates probability that a monster will die, in the Hakoniwa Islands."
+desc-p: "Calculates probability that a monster will die."
+desc-q: "Calculates quantity of missiles to kill a monster."
 
-_parserConfigNameP: "probability"
-_parserConfigNameQ: "quantity"
+name-p: "probability"
+name-q: "quantity"
 
-_parserConfigMetaH: "HP"
-_parserConfigMetaP: "PROBABILITY"
-_parserConfigMetaQ: "MISSILES"
+meta-h: "HP"
+meta-p: "PROBABILITY"
+meta-q: "MISSILES"
 
-_parserConfigHelpH: "The HP of the monster."
-_parserConfigHelpP: "The probability of killing the monster. (%)"
-_parserConfigHelpQ: "The quantity of missiles to launch."
+help-h: "The HP of the monster."
+help-p: "The probability of killing the monster. (%)"
+help-q: "The quantity of missiles to launch."
 
-_parserConfigCmndC:
-  _commandConfigFmtP: "%.3f%%\n"
-  _commandConfigFmtQ: "%d\n"
-  _commandConfigTxtF: "Could not calculate.\n"
+cmnd-c:
+  format-p: "%.3f%%\n"
+  format-q: "%d\n"
+  notice-q: "Could not calculate.\n"
