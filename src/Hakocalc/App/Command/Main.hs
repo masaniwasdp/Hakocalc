@@ -13,14 +13,14 @@ import qualified Hakocalc.App.Command.Config as C
 
 commandP :: C.Config -> HP -> Quantity -> IO ()
 
-commandP cfg h q = printf fmt . (read :: String -> Double) . show $ probability h q
+commandP cfg h q = printf f . (read :: String -> Double) . show $ probability h q
   where
-    fmt = cfg ^. C.formatP
+    f = cfg ^. C.formatP
 
 
 commandQ :: C.Config -> HP -> Probability -> IO ()
 
-commandQ cfg h p = maybe (printf fmt) (printf ntc) $ missiles h p
+commandQ cfg h p = maybe (printf f) (printf n) $ missiles h p
   where
-    fmt = cfg ^. C.formatQ
-    ntc = cfg ^. C.noticeQ
+    f = cfg ^. C.formatQ
+    n = cfg ^. C.noticeQ

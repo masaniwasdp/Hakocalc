@@ -13,28 +13,28 @@ import qualified Options.Applicative as A
 
 parser :: C.Config -> A.ParserInfo (IO ())
 
-parser c = A.info (A.subparser $ p <> q) $ A.progDesc (c ^. C.descA)
+parser cfg = A.info (A.subparser $ p <> q) $ A.progDesc (cfg ^. C.descA)
   where
-    p = A.command (c ^. C.nameP) . A.info (parserP c) $ A.progDesc (c ^. C.descP)
-    q = A.command (c ^. C.nameQ) . A.info (parserQ c) $ A.progDesc (c ^. C.descQ)
+    p = A.command (cfg ^. C.nameP) . A.info (parserP cfg) $ A.progDesc (cfg ^. C.descP)
+    q = A.command (cfg ^. C.nameQ) . A.info (parserQ cfg) $ A.progDesc (cfg ^. C.descQ)
 
 
 parserP :: C.Config -> A.Parser (IO ())
 
-parserP c = A.helper <*> (p <$> h <*> q)
+parserP cfg = A.helper <*> (c <$> h <*> q)
   where
-    p = commandP (c ^. C.cmndC)
-    h = argument (c ^. C.helpH) (c ^. C.metaH)
-    q = argument (c ^. C.helpQ) (c ^. C.metaQ)
+    c = commandP (cfg ^. C.cmndC)
+    h = argument (cfg ^. C.helpH) (cfg ^. C.metaH)
+    q = argument (cfg ^. C.helpQ) (cfg ^. C.metaQ)
 
 
 parserQ :: C.Config -> A.Parser (IO ())
 
-parserQ c = A.helper <*> (q <$> h <*> p)
+parserQ cfg = A.helper <*> (c <$> h <*> p)
   where
-    q = commandQ (c ^. C.cmndC)
-    h = argument (c ^. C.helpH) (c ^. C.metaH)
-    p = argument (c ^. C.helpP) (c ^. C.metaP)
+    c = commandQ (cfg ^. C.cmndC)
+    h = argument (cfg ^. C.helpH) (cfg ^. C.metaH)
+    p = argument (cfg ^. C.helpP) (cfg ^. C.metaP)
 
 
 argument :: Read a => String -> String -> A.Parser a
