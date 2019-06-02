@@ -1,7 +1,7 @@
 import Control.Monad (join)
 import Data.Yaml (decodeFileThrow)
 import Hakocalc.CLI.Config (Config)
-import Hakocalc.CLI.Parser (parser)
+import Hakocalc.CLI.Main (parser)
 import Options.Applicative (customExecParser, prefs, showHelpOnEmpty)
 import Paths_hakocalc (getDataFileName)
 

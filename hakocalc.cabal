@@ -14,13 +14,13 @@ cabal-version:      >=1.10
 
 library
   hs-source-dirs:   src
-  exposed-modules:  Hakocalc.App.Command
-                  , Hakocalc.App.Config
+  exposed-modules:  Hakocalc.App.Command.Config
+                  , Hakocalc.App.Command.Main
+                  , Hakocalc.App.Entity.Common
+                  , Hakocalc.App.Entity.Defeat
+                  , Hakocalc.App.Entity.Probability
                   , Hakocalc.CLI.Config
-                  , Hakocalc.CLI.Parser
-                  , Hakocalc.Entity.Common
-                  , Hakocalc.Entity.Defeat
-                  , Hakocalc.Entity.Probability
+                  , Hakocalc.CLI.Main
   ghc-options:      -Wall -O2
   build-depends:    aeson
                   , base
@@ -44,9 +44,9 @@ test-suite hakocalc-test
   type:             exitcode-stdio-1.0
   hs-source-dirs:   test
   main-is:          Spec.hs
-  other-modules:    Hakocalc.Entity.CommonSpec
-                  , Hakocalc.Entity.DefeatSpec
-                  , Hakocalc.Entity.ProbabilitySpec
+  other-modules:    Hakocalc.App.Entity.CommonSpec
+                  , Hakocalc.App.Entity.DefeatSpec
+                  , Hakocalc.App.Entity.ProbabilitySpec
   ghc-options:      -Wall
   build-depends:    base
                   , hakocalc

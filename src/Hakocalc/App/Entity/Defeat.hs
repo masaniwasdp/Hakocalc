@@ -3,7 +3,7 @@
 -- Copyright   : 2019 masaniwa
 -- License     : MIT
 --
-module Hakocalc.Entity.Defeat
+module Hakocalc.App.Entity.Defeat
   ( HP
   , Probability
   , Quantity
@@ -13,11 +13,11 @@ module Hakocalc.Entity.Defeat
 
 
 import Data.List (find)
-import Hakocalc.Entity.Common (repeated)
-import Hakocalc.Entity.Probability (fromProbability, toProbability)
+import Hakocalc.App.Entity.Common (repeated)
+import Hakocalc.App.Entity.Probability (fromProbability, toProbability)
 import Numeric.Natural (Natural)
 
-import qualified Hakocalc.Entity.Probability as P
+import qualified Hakocalc.App.Entity.Probability as P
 
 
 -- | Reprezentanta HP.

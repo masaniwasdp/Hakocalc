@@ -1,14 +1,14 @@
-module Hakocalc.App.Command
+module Hakocalc.App.Command.Main
   ( commandP
   , commandQ
   ) where
 
 
 import Control.Lens ((^.))
-import Hakocalc.Entity.Defeat (HP, Probability, Quantity, missiles, probability)
+import Hakocalc.App.Entity.Defeat (HP, Probability, Quantity, missiles, probability)
 import Text.Printf (printf)
 
-import qualified Hakocalc.App.Config as C
+import qualified Hakocalc.App.Command.Config as C
 
 
 commandP :: C.Config -> HP -> Quantity -> IO ()
