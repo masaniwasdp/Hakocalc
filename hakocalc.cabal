@@ -16,6 +16,8 @@ library
   hs-source-dirs:   src
   exposed-modules:  Hakocalc.App.Command
                   , Hakocalc.App.CommandConfig
+                  , Hakocalc.CLI.Parser
+                  , Hakocalc.CLI.ParserConfig
                   , Hakocalc.Entity.Common
                   , Hakocalc.Entity.Defeat
                   , Hakocalc.Entity.Probability
@@ -24,20 +26,16 @@ library
                   , base
                   , casing
                   , lens
+                  , optparse-applicative
                   , yaml
   default-language: Haskell2010
 
 executable hakocalc
   hs-source-dirs:   app
   main-is:          Main.hs
-  other-modules:    CLI.Parser
-                  , CLI.ParserConfig
   ghc-options:      -Wall -O2
-  build-depends:    aeson
-                  , base
-                  , casing
+  build-depends:    base
                   , hakocalc
-                  , lens
                   , optparse-applicative
                   , yaml
   default-language: Haskell2010

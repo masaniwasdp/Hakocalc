@@ -1,4 +1,4 @@
-module CLI.Parser
+module Hakocalc.CLI.Parser
   ( parser
   ) where
 
@@ -7,7 +7,7 @@ import Control.Lens ((^.))
 import Data.Semigroup ((<>))
 import Hakocalc.App.Command (commandP, commandQ)
 
-import qualified CLI.ParserConfig as P
+import qualified Hakocalc.CLI.ParserConfig as P
 import qualified Options.Applicative as A
 
 
