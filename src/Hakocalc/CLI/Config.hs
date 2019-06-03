@@ -11,8 +11,6 @@ import Control.Lens (makeFields)
 import Data.Aeson.TH (defaultOptions, deriveJSON, fieldLabelModifier)
 import Text.Casing (dropPrefix, fromAny, toKebab)
 
-import qualified Hakocalc.App.Command.Config as C
-
 
 data Config = Config
   { _configDescA :: String
@@ -26,7 +24,6 @@ data Config = Config
   , _configHelpH :: String
   , _configHelpP :: String
   , _configHelpQ :: String
-  , _configCmndC :: C.Config
   }
 
 makeFields ''Config

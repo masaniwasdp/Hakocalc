@@ -12,8 +12,3 @@ meta-q: "MISSILES"
 help-h: "The HP of the monster."
 help-p: "The probability of killing the monster. (%)"
 help-q: "The quantity of missiles to launch."
-
-cmnd-c:
-  format-p: "%.3f%%\n"
-  format-q: "%d\n"
-  notice-q: "Could not calculate.\n"

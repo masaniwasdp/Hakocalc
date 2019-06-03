@@ -9,7 +9,8 @@ maintainer:         masaniwasdp@gmail.com
 copyright:          2019 masaniwa
 build-type:         Simple
 extra-source-files: README.md
-data-files:         assets/cli/config.yaml
+data-files:         assets/app/command/config.yaml
+                  , assets/cli/config.yaml
 cabal-version:      >=1.10
 
 library
@@ -21,6 +22,7 @@ library
                   , Hakocalc.App.Entity.Probability
                   , Hakocalc.CLI.Config
                   , Hakocalc.CLI.Main
+                  , Hakocalc.CLI.Option
   ghc-options:      -Wall -O2
   build-depends:    aeson
                   , base
