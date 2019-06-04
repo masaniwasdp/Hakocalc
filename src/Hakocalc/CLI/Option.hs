@@ -1,7 +1,7 @@
 module Hakocalc.CLI.Option where
 
 
-import Hakocalc.App.Entity.Defeat (HP, Probability, Quantity)
+import Hakocalc.Entity.Defeat (HP, Probability, Quantity)
 
 
 data Option

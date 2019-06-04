@@ -9,20 +9,20 @@ maintainer:         masaniwasdp@gmail.com
 copyright:          2019 masaniwa
 build-type:         Simple
 extra-source-files: README.md
-data-files:         assets/app/command/config.yaml
-                  , assets/cli/config.yaml
+data-files:         assets/cli/config.yaml
+                  , assets/command/config.yaml
 cabal-version:      >=1.10
 
 library
   hs-source-dirs:   src
-  exposed-modules:  Hakocalc.App.Command.Config
-                  , Hakocalc.App.Command.Main
-                  , Hakocalc.App.Entity.Common
-                  , Hakocalc.App.Entity.Defeat
-                  , Hakocalc.App.Entity.Probability
-                  , Hakocalc.CLI.Config
+  exposed-modules:  Hakocalc.CLI.Config
                   , Hakocalc.CLI.Main
                   , Hakocalc.CLI.Option
+                  , Hakocalc.Command.Config
+                  , Hakocalc.Command.Main
+                  , Hakocalc.Entity.Common
+                  , Hakocalc.Entity.Defeat
+                  , Hakocalc.Entity.Probability
   ghc-options:      -Wall -O2
   build-depends:    aeson
                   , base
@@ -46,9 +46,9 @@ test-suite hakocalc-test
   type:             exitcode-stdio-1.0
   hs-source-dirs:   test
   main-is:          Spec.hs
-  other-modules:    Hakocalc.App.Entity.CommonSpec
-                  , Hakocalc.App.Entity.DefeatSpec
-                  , Hakocalc.App.Entity.ProbabilitySpec
+  other-modules:    Hakocalc.Entity.CommonSpec
+                  , Hakocalc.Entity.DefeatSpec
+                  , Hakocalc.Entity.ProbabilitySpec
   ghc-options:      -Wall
   build-depends:    base
                   , hakocalc

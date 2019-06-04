@@ -3,7 +3,7 @@
 -- Copyright   : 2019 masaniwa
 -- License     : MIT
 --
-module Hakocalc.App.Entity.Probability
+module Hakocalc.Entity.Probability
   ( Probability
   , fromProbability
   , toProbability

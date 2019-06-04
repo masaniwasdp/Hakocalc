@@ -3,13 +3,13 @@
 -- Copyright   : 2019 masaniwa
 -- License     : MIT
 --
-module Hakocalc.App.Entity.Common
+module Hakocalc.Entity.Common
   ( combination
   , repeated
   ) where
 
 
-import Hakocalc.App.Entity.Probability (Probability, fromProbability, toProbability)
+import Hakocalc.Entity.Probability (Probability, fromProbability, toProbability)
 import Numeric.Natural (Natural)
 
 
