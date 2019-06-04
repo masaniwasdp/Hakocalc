@@ -1,4 +1,4 @@
-module Hakocalc.CLI.Option where
+module Hakocalc.Parser.Option where
 
 
 import Hakocalc.Entity.Defeat (HP, Probability, Quantity)

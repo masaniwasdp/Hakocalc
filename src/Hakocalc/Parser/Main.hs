@@ -1,13 +1,13 @@
-module Hakocalc.CLI.Main
+module Hakocalc.Parser.Main
   ( parser
   ) where
 
 
 import Control.Lens ((^.))
 import Data.Semigroup ((<>))
-import Hakocalc.CLI.Option (Option (OptionP, OptionQ))
+import Hakocalc.Parser.Option (Option (OptionP, OptionQ))
 
-import qualified Hakocalc.CLI.Config as C
+import qualified Hakocalc.Parser.Config as C
 import qualified Options.Applicative as A
 
 
