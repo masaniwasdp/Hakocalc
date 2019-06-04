@@ -5,13 +5,13 @@ module Hakocalc.Parser.Main
 
 import Control.Lens ((^.))
 import Data.Semigroup ((<>))
-import Hakocalc.Parser.Option (Option (OptionP, OptionQ))
+import Hakocalc.Command.Params (Params (ParamsP, ParamsQ))
 
 import qualified Hakocalc.Parser.Config as C
 import qualified Options.Applicative as A
 
 
-parser :: C.Config -> A.ParserInfo Option
+parser :: C.Config -> A.ParserInfo Params
 
 parser cfg = A.info (A.subparser $ p <> q) $ A.progDesc (cfg ^. C.descA)
   where
@@ -19,17 +19,17 @@ parser cfg = A.info (A.subparser $ p <> q) $ A.progDesc (cfg ^. C.descA)
     q = A.command (cfg ^. C.nameQ) . A.info (parserQ cfg) $ A.progDesc (cfg ^. C.descQ)
 
 
-parserP :: C.Config -> A.Parser Option
+parserP :: C.Config -> A.Parser Params
 
-parserP cfg = A.helper <*> (OptionP <$> h <*> q)
+parserP cfg = A.helper <*> (ParamsP <$> h <*> q)
   where
     h = defineArg (cfg ^. C.helpH) (cfg ^. C.metaH)
     q = defineArg (cfg ^. C.helpQ) (cfg ^. C.metaQ)
 
 
-parserQ :: C.Config -> A.Parser Option
+parserQ :: C.Config -> A.Parser Params
 
-parserQ cfg = A.helper <*> (OptionQ <$> h <*> p)
+parserQ cfg = A.helper <*> (ParamsQ <$> h <*> p)
   where
     h = defineArg (cfg ^. C.helpH) (cfg ^. C.metaH)
     p = defineArg (cfg ^. C.helpP) (cfg ^. C.metaP)

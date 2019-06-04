@@ -17,12 +17,12 @@ library
   hs-source-dirs:   src
   exposed-modules:  Hakocalc.Command.Config
                   , Hakocalc.Command.Main
+                  , Hakocalc.Command.Params
                   , Hakocalc.Entity.Common
                   , Hakocalc.Entity.Defeat
                   , Hakocalc.Entity.Probability
                   , Hakocalc.Parser.Config
                   , Hakocalc.Parser.Main
-                  , Hakocalc.Parser.Option
   ghc-options:      -Wall -O2
   build-depends:    aeson
                   , base

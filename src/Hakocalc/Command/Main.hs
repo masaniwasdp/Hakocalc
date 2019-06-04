@@ -1,26 +1,28 @@
 module Hakocalc.Command.Main
-  ( commandP
-  , commandQ
+  ( command
   ) where
 
 
 import Control.Lens ((^.))
-import Hakocalc.Entity.Defeat (HP, Probability, Quantity, missiles, probability)
+import Hakocalc.Command.Config (Config, formatP, formatQ, noticeQ)
+import Hakocalc.Command.Params (Params (ParamsP, ParamsQ))
+import Hakocalc.Entity.Defeat (missiles, probability)
+import Hakocalc.Entity.Probability (Probability, fromProbability)
 import Text.Printf (printf)
 
-import qualified Hakocalc.Command.Config as C
 
+command :: Config -> Params -> IO ()
 
-commandP :: C.Config -> HP -> Quantity -> IO ()
-
-commandP cfg h q = printf f . (read :: String -> Double) . show $ probability h q
+command cfg (ParamsP h q) = printf f . toDouble $ probability h q
   where
-    f = cfg ^. C.formatP
+    f = cfg ^. formatP
 
-
-commandQ :: C.Config -> HP -> Probability -> IO ()
-
-commandQ cfg h p = maybe (printf f) (printf n) $ missiles h p
+command cfg (ParamsQ h p) = maybe (printf f) (printf n) $ missiles h p
   where
-    f = cfg ^. C.formatQ
-    n = cfg ^. C.noticeQ
+    f = cfg ^. formatQ
+    n = cfg ^. noticeQ
+
+
+toDouble :: Probability -> Double
+
+toDouble = fromRational . fromProbability

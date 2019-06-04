@@ -1,7 +1,7 @@
 import Data.Yaml (decodeFileThrow)
-import Hakocalc.Command.Main (commandP, commandQ)
+import Hakocalc.Command.Main (command)
+import Hakocalc.Command.Params (Params)
 import Hakocalc.Parser.Main (parser)
-import Hakocalc.Parser.Option (Option (OptionP, OptionQ))
 import Options.Applicative (customExecParser, prefs, showHelpOnEmpty)
 import Paths_hakocalc (getDataFileName)
 
@@ -14,7 +14,7 @@ main :: IO ()
 main = execute =<< parse
 
 
-parse :: IO Option
+parse :: IO Params
 
 parse = do
   f <- getDataFileName "assets/parser/config.yaml"
@@ -24,13 +24,11 @@ parse = do
   customExecParser (prefs showHelpOnEmpty) (parser c)
 
 
-execute :: Option -> IO ()
+execute :: Params -> IO ()
 
-execute opt = do
+execute p = do
   f <- getDataFileName "assets/command/config.yaml"
 
   c <- (decodeFileThrow f :: IO C.Config)
 
-  case opt of
-    OptionP h q -> commandP c h q
-    OptionQ h p -> commandQ c h p
+  command c p
