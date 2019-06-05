@@ -1,3 +1,18 @@
-format-p: "%.3f%%\n"
-format-q: "%d\n"
-notice-q: "Could not calculate.\n"
+desc-a: "Calculates probability that a monster will die, in the Hakoniwa Islands."
+desc-p: "Calculates probability that a monster will die."
+desc-q: "Calculates quantity of missiles to kill a monster."
+
+name-p: "probability"
+name-q: "quantity"
+
+meta-h: "HP"
+meta-p: "PROBABILITY"
+meta-q: "MISSILES"
+
+help-h: "The HP of the monster."
+help-p: "The probability of killing the monster. (%)"
+help-q: "The quantity of missiles to launch."
+
+rslt-p: "%.3f%%\n"
+rslt-q: "%d\n"
+fail-q: "Could not calculate.\n"

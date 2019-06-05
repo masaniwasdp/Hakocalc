@@ -13,9 +13,20 @@ import Text.Casing (dropPrefix, fromAny, toKebab)
 
 
 data Config = Config
-  { _configFormatP :: String
-  , _configFormatQ :: String
-  , _configNoticeQ :: String
+  { _configDescA :: String
+  , _configDescP :: String
+  , _configDescQ :: String
+  , _configNameP :: String
+  , _configNameQ :: String
+  , _configMetaH :: String
+  , _configMetaP :: String
+  , _configMetaQ :: String
+  , _configHelpH :: String
+  , _configHelpP :: String
+  , _configHelpQ :: String
+  , _configRsltP :: String
+  , _configRsltQ :: String
+  , _configFailQ :: String
   }
 
 makeFields ''Config

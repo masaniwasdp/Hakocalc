@@ -1,34 +1,16 @@
+import Control.Monad (join)
 import Data.Yaml (decodeFileThrow)
+import Hakocalc.Command.Config (Config)
 import Hakocalc.Command.Main (command)
-import Hakocalc.Command.Params (Params)
-import Hakocalc.Parser.Main (parser)
 import Options.Applicative (customExecParser, prefs, showHelpOnEmpty)
 import Paths_hakocalc (getDataFileName)
-
-import qualified Hakocalc.Parser.Config as P
-import qualified Hakocalc.Command.Config as C
 
 
 main :: IO ()
 
-main = execute =<< parse
-
-
-parse :: IO Params
-
-parse = do
-  f <- getDataFileName "assets/parser/config.yaml"
-
-  c <- (decodeFileThrow f :: IO P.Config)
-
-  customExecParser (prefs showHelpOnEmpty) (parser c)
-
-
-execute :: Params -> IO ()
-
-execute p = do
+main = do
   f <- getDataFileName "assets/command/config.yaml"
 
-  c <- (decodeFileThrow f :: IO C.Config)
+  c <- (decodeFileThrow f :: IO Config)
 
-  command c p
+  join $ customExecParser (prefs showHelpOnEmpty) (command c)

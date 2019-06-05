@@ -4,25 +4,39 @@ module Hakocalc.Command.Main
 
 
 import Control.Lens ((^.))
-import Hakocalc.Command.Config (Config, formatP, formatQ, noticeQ)
-import Hakocalc.Command.Params (Params (ParamsP, ParamsQ))
-import Hakocalc.Entity.Defeat (missiles, probability)
-import Hakocalc.Entity.Probability (Probability, fromProbability)
-import Text.Printf (printf)
+import Data.Semigroup ((<>))
+
+import qualified Hakocalc.Command.Behavior as B
+import qualified Hakocalc.Command.Config as C
+import qualified Options.Applicative as A
 
 
-command :: Config -> Params -> IO ()
+command :: C.Config -> A.ParserInfo (IO ())
 
-command cfg (ParamsP h q) = printf f . toDouble $ probability h q
+command cfg = A.info (A.subparser $ p <> q) $ A.progDesc (cfg ^. C.descA)
   where
-    f = cfg ^. formatP
+    p = A.command (cfg ^. C.nameP) . A.info (commandP cfg) $ A.progDesc (cfg ^. C.descP)
+    q = A.command (cfg ^. C.nameQ) . A.info (commandQ cfg) $ A.progDesc (cfg ^. C.descQ)
 
-command cfg (ParamsQ h p) = maybe (printf f) (printf n) $ missiles h p
+
+commandP :: C.Config -> A.Parser (IO ())
+
+commandP cfg = A.helper <*> (c <$> h <*> q)
   where
-    f = cfg ^. formatQ
-    n = cfg ^. noticeQ
+    c = B.commandP cfg
+    h = defineArg (cfg ^. C.helpH) (cfg ^. C.metaH)
+    q = defineArg (cfg ^. C.helpQ) (cfg ^. C.metaQ)
 
 
-toDouble :: Probability -> Double
+commandQ :: C.Config -> A.Parser (IO ())
 
-toDouble = fromRational . fromProbability
+commandQ cfg = A.helper <*> (c <$> h <*> p)
+  where
+    c = B.commandQ cfg
+    h = defineArg (cfg ^. C.helpH) (cfg ^. C.metaH)
+    p = defineArg (cfg ^. C.helpP) (cfg ^. C.metaP)
+
+
+defineArg :: Read a => String -> String -> A.Parser a
+
+defineArg h m = A.argument A.auto $ A.help h <> A.metavar m

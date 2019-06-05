@@ -10,19 +10,16 @@ copyright:          2019 masaniwa
 build-type:         Simple
 extra-source-files: README.md
 data-files:         assets/command/config.yaml
-                  , assets/parser/config.yaml
 cabal-version:      >=1.10
 
 library
   hs-source-dirs:   src
-  exposed-modules:  Hakocalc.Command.Config
+  exposed-modules:  Hakocalc.Command.Behavior
+                  , Hakocalc.Command.Config
                   , Hakocalc.Command.Main
-                  , Hakocalc.Command.Params
                   , Hakocalc.Entity.Common
                   , Hakocalc.Entity.Defeat
                   , Hakocalc.Entity.Probability
-                  , Hakocalc.Parser.Config
-                  , Hakocalc.Parser.Main
   ghc-options:      -Wall -O2
   build-depends:    aeson
                   , base
