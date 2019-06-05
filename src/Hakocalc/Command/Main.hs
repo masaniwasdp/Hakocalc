@@ -13,28 +13,32 @@ import qualified Options.Applicative as A
 
 command :: C.Config -> A.ParserInfo (IO ())
 
-command cfg = A.info (A.subparser $ p <> q) $ A.progDesc (cfg ^. C.descA)
+command cfg = A.info p $ A.progDesc (cfg ^. C.descA)
   where
-    p = A.command (cfg ^. C.nameP) . A.info (commandP cfg) $ A.progDesc (cfg ^. C.descP)
-    q = A.command (cfg ^. C.nameQ) . A.info (commandQ cfg) $ A.progDesc (cfg ^. C.descQ)
+    p = A.subparser $ (commandP cfg) <> (commandQ cfg)
 
 
-commandP :: C.Config -> A.Parser (IO ())
+commandP :: C.Config -> A.Mod A.CommandFields (IO ())
 
-commandP cfg = A.helper <*> (c <$> h <*> q)
+commandP cfg = defineCmd p (cfg ^. C.nameP) (cfg ^. C.descP)
   where
-    c = B.commandP cfg
-    h = defineArg (cfg ^. C.helpH) (cfg ^. C.metaH)
-    q = defineArg (cfg ^. C.helpQ) (cfg ^. C.metaQ)
+    p = (B.commandP cfg)
+      <$> (defineArg (cfg ^. C.helpH) (cfg ^. C.metaH))
+      <*> (defineArg (cfg ^. C.helpQ) (cfg ^. C.metaQ))
 
 
-commandQ :: C.Config -> A.Parser (IO ())
+commandQ :: C.Config -> A.Mod A.CommandFields (IO ())
 
-commandQ cfg = A.helper <*> (c <$> h <*> p)
+commandQ cfg = defineCmd p (cfg ^. C.nameQ) (cfg ^. C.descQ)
   where
-    c = B.commandQ cfg
-    h = defineArg (cfg ^. C.helpH) (cfg ^. C.metaH)
-    p = defineArg (cfg ^. C.helpP) (cfg ^. C.metaP)
+    p = (B.commandQ cfg)
+      <$> (defineArg (cfg ^. C.helpH) (cfg ^. C.metaH))
+      <*> (defineArg (cfg ^. C.helpP) (cfg ^. C.metaP))
+
+
+defineCmd :: A.Parser a -> String -> String -> A.Mod A.CommandFields a
+
+defineCmd p n d = A.command n . A.info (A.helper <*> p) $ A.progDesc d
 
 
 defineArg :: Read a => String -> String -> A.Parser a
