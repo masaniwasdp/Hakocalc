@@ -16,6 +16,7 @@ library
   hs-source-dirs:   src
   exposed-modules:  Hakocalc.Command.Behavior
                   , Hakocalc.Command.Config
+                  , Hakocalc.Command.Helper
                   , Hakocalc.Command.Main
                   , Hakocalc.Entity.Common
                   , Hakocalc.Entity.Defeat
