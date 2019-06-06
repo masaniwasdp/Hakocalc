@@ -22,16 +22,11 @@ newtype Probability = Probability Rational deriving Eq
 instance Read Probability where
   readsPrec _ s = [(fromJust x, "") | isJust x]
     where
-      x = toProbabilityMaybe
-        . (/ 100)
-        . toRational =<< (readMaybe s :: Maybe Double)
+      x = toProbabilityMaybe . (/ 100) . toRational =<< (readMaybe s :: Maybe Double)
 
 
 instance Show Probability where
-  show = (show :: Double -> String)
-    . fromRational
-    . (* 100)
-    . fromProbability
+  show = (show :: Double -> String) . fromRational . (* 100) . fromProbability
 
 
 -- | Konvertas probablon al racia nombro.
