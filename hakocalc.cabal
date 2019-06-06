@@ -14,10 +14,10 @@ cabal-version:      >=1.10
 
 library
   hs-source-dirs:   src
-  exposed-modules:  Hakocalc.Command.Behavior
+  exposed-modules:  Hakocalc.Command.Commands
                   , Hakocalc.Command.Config
+                  , Hakocalc.Command.Function
                   , Hakocalc.Command.Helper
-                  , Hakocalc.Command.Main
                   , Hakocalc.Entity.Common
                   , Hakocalc.Entity.Defeat
                   , Hakocalc.Entity.Probability
@@ -33,6 +33,7 @@ library
 executable hakocalc
   hs-source-dirs:   app
   main-is:          Main.hs
+  other-modules:    Paths_hakocalc
   ghc-options:      -Wall -O2
   build-depends:    base
                   , hakocalc
