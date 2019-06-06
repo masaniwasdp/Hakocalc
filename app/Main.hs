@@ -11,6 +11,6 @@ main :: IO ()
 main = do
   f <- getDataFileName "assets/command/config.yaml"
 
-  c <- (decodeFileThrow f :: IO Config)
+  c <- decodeFileThrow f :: IO Config
 
   join $ customExecParser (prefs showHelpOnEmpty) (command c)
