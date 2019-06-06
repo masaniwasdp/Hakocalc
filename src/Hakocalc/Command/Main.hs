@@ -16,22 +16,22 @@ command :: C.Config -> ParserInfo (IO ())
 
 command cfg = info p $ progDesc (cfg ^. C.descA)
   where
-    p = subparser $ (commandP cfg) <> (commandQ cfg)
+    p = subparser $ commandP cfg <> commandQ cfg
 
 
 commandP :: C.Config -> Mod CommandFields (IO ())
 
 commandP cfg = defineCmd p (cfg ^. C.nameP) (cfg ^. C.descP)
   where
-    p = (B.commandP cfg)
-      <$> (defineArg (cfg ^. C.helpH) (cfg ^. C.metaH))
-      <*> (defineArg (cfg ^. C.helpQ) (cfg ^. C.metaQ))
+    p = B.commandP cfg
+      <$> defineArg (cfg ^. C.helpH) (cfg ^. C.metaH)
+      <*> defineArg (cfg ^. C.helpQ) (cfg ^. C.metaQ)
 
 
 commandQ :: C.Config -> Mod CommandFields (IO ())
 
 commandQ cfg = defineCmd p (cfg ^. C.nameQ) (cfg ^. C.descQ)
   where
-    p = (B.commandQ cfg)
-      <$> (defineArg (cfg ^. C.helpH) (cfg ^. C.metaH))
-      <*> (defineArg (cfg ^. C.helpP) (cfg ^. C.metaP))
+    p = B.commandQ cfg
+      <$> defineArg (cfg ^. C.helpH) (cfg ^. C.metaH)
+      <*> defineArg (cfg ^. C.helpP) (cfg ^. C.metaP)
