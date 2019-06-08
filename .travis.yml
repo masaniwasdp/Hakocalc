@@ -6,17 +6,17 @@ ghc: 8.6.3
 
 cache:
   directories:
-    - $HOME/.cabal
+    - $HOME/.cabal/store
 
 script:
   - cabal configure --enable-tests --enable-coverage
-  - cabal new-build
-  - cabal new-test
+  - cabal build
+  - cabal test
 
 after_script:
-  - mkdir hpc-coveralls
-  - cd hpc-coveralls
-  - cabal sandbox init
-  - cabal new-install hpc-coveralls
-  - cd ..
-  - hpc-coveralls/.cabal-sandbox/bin/hpc-coveralls --exclude-dir=test hakocalc-test
+  #- mkdir hpc-coveralls
+  #- cd hpc-coveralls
+  #- cabal sandbox init
+  #- cabal install hpc-coveralls
+  #- cd ..
+  #- hpc-coveralls/.cabal-sandbox/bin/hpc-coveralls --exclude-dir=test hakocalc-test
