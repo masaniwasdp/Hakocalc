@@ -4,8 +4,7 @@ sudo: false
 
 cache:
   directories:
-    - $HOME/.cabal/packages
-    - $HOME/.cabal/store
+    - $HOME/.cabal
 
 ghc: 8.6.3
 
