@@ -16,5 +16,5 @@ script:
 
 after_script:
   - cabal sandbox init
-  - cabal install hpc-coveralls
+  - cabal install hpc-coveralls --force-reinstalls
   - ./.cabal-sandbox/bin/hpc-coveralls --exclude-dir=test hakocalc-test
