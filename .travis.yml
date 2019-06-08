@@ -2,7 +2,7 @@ language: haskell
 
 sudo: false
 
-ghc: 8.2
+ghc: 8.6.3
 
 script:
   - cabal configure --enable-tests --enable-coverage
