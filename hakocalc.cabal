@@ -7,7 +7,7 @@ license-file:       LICENSE
 author:             masaniwa
 copyright:          2019 masaniwa
 build-type:         Simple
-data-files:         assets/command/config.yaml
+data-files:         assets/config.yaml
 cabal-version:      >=1.10
 
 library

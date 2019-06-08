@@ -9,7 +9,7 @@ import Paths_hakocalc (getDataFileName)
 main :: IO ()
 
 main = do
-  f <- getDataFileName "assets/command/config.yaml"
+  f <- getDataFileName "assets/config.yaml"
 
   c <- decodeFileThrow f :: IO Config
 
