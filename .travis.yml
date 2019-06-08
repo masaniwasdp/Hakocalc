@@ -1,15 +1,12 @@
 language: haskell
 
-sudo: false
-
-cache:
-  directories:
-    - $HOME/masaniwasdp/Hakocalc/.cabal-sandbox
+sudo: true
 
 ghc: 8.6.3
 
-before_install:
-  - cabal sandbox init
+cache:
+  directories:
+    - $HOME/.cabal
 
 script:
   - cabal configure --enable-tests --enable-coverage
