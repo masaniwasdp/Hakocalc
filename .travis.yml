@@ -2,24 +2,25 @@ language: haskell
 
 sudo: false
 
-#ghc: 8.6.3
+ghc: 8.2
 
 cache:
   directories:
     - $HOME/.stack
+    - $TRAVIS_BUILD_DIR/codecov-haskell
 
 install:
   - curl -sSL https://get.haskellstack.org/ | sh
   - stack setup
+  - mkdir codecov-haskell
+  - cd codecov-haskell
+  - cabal sandbox init
+  - cabal install codecov-haskell
+  - cd ..
 
 script:
   - stack build
   - stack test --coverage
 
 after_script:
-  #- mkdir hpc-coveralls
-  #- cd hpc-coveralls
-  #- cabal sandbox init
-  #- cabal install hpc-coveralls
-  #- cd ..
-  #- hpc-coveralls/.cabal-sandbox/bin/hpc-coveralls --exclude-dir=test hakocalc-test
+  # - codecov-haskell/.cabal-sandbox/bin/codecov-haskell --exclude-dir=test hakocalc-test
