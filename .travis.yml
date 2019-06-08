@@ -1,6 +1,6 @@
 language: haskell
 
-sudo: true
+sudo: false
 
 ghc: 8.6.3
 
