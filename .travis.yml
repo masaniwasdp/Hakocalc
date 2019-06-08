@@ -2,6 +2,11 @@ language: haskell
 
 sudo: false
 
+cache:
+  directories:
+    - $HOME/.cabal/packages
+    - $HOME/.cabal/store
+
 ghc: 8.6.3
 
 script:
