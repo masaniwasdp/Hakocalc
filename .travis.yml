@@ -10,13 +10,13 @@ cache:
 
 script:
   - cabal configure --enable-tests --enable-coverage
-  - cabal build
-  - cabal test
+  - cabal new-build
+  - cabal new-test
 
 after_script:
   - mkdir hpc-coveralls
   - cd hpc-coveralls
   - cabal sandbox init
-  - cabal install hpc-coveralls
+  - cabal new-install hpc-coveralls
   - cd ..
   - hpc-coveralls/.cabal-sandbox/bin/hpc-coveralls --exclude-dir=test hakocalc-test
