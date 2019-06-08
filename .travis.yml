@@ -2,16 +2,15 @@ language: haskell
 
 sudo: false
 
-ghc: 8.6.3
+#ghc: 8.6.3
 
 cache:
   directories:
-    - $HOME/.cabal
+    - $HOME/.stack
 
 script:
-  - cabal configure --enable-tests --enable-coverage
-  - cabal build
-  - cabal test
+  - stack build
+  - stack test --coverage
 
 after_script:
   #- mkdir hpc-coveralls
