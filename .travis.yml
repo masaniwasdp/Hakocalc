@@ -10,7 +10,7 @@ install:
   - cd $HOME
   - curl -sSL https://get.haskellstack.org/ | sh
   - stack setup
-  - git clone https://github.com/gabysbrain/codecov-haskell
+  - git clone https://github.com/guillaume-nargeot/codecov-haskell
   - cd codecov-haskell
   - stack install
   - cd $TRAVIS_BUILD_DIR
