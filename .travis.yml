@@ -9,7 +9,7 @@ cache:
   timeout: 300
 
 install:
-  - curl -sSL https://get.haskellstack.org/ | sh
+  - curl -sSL https://get.haskellstack.org | sh
   - cd $HOME
   - git clone https://github.com/nirum-lang/codecov-haskell -b fix-broken-build-with-retry-0.7
   - cd codecov-haskell
@@ -21,4 +21,5 @@ script:
   - stack test --coverage
 
 after_script:
-  - $HOME/.local/bin/codecov-haskell --exclude-dir=test --tix-dir=$(stack path --local-hpc-root) hakocalc-test
+  - tree $(stack path --local-hpc-root)
+  # - $HOME/.local/bin/codecov-haskell --exclude-dir=test --tix-dir=$(stack path --local-hpc-root) hakocalc-test
