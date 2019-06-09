@@ -12,9 +12,9 @@ cache:
 install:
   - curl -sSL https://get.haskellstack.org/ | sh
   - stack setup
+  - git clone https://github.com/gabysbrain/codecov-haskell
   - cd codecov-haskell
-  - cabal sandbox init
-  - cabal install codecov-haskell
+  - stack install
   - cd ..
 
 script:
