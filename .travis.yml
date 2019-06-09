@@ -12,7 +12,6 @@ cache:
 install:
   - curl -sSL https://get.haskellstack.org/ | sh
   - stack setup
-  - mkdir codecov-haskell
   - cd codecov-haskell
   - cabal sandbox init
   - cabal install codecov-haskell
