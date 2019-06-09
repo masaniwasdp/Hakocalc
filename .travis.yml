@@ -9,8 +9,7 @@ cache:
 install:
   - cd $HOME
   - curl -sSL https://get.haskellstack.org/ | sh
-  # - stack setup
-  - git clone https://github.com/nirum-lang/codecov-haskell
+  - git clone https://github.com/nirum-lang/codecov-haskell -b fix-broken-build-with-retry-0.7
   - cd codecov-haskell
   - stack install
   - cd $TRAVIS_BUILD_DIR
