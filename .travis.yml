@@ -2,20 +2,18 @@ language: haskell
 
 sudo: false
 
-ghc: 8.2
-
 cache:
   directories:
     - $HOME/.stack
-    - $TRAVIS_BUILD_DIR/codecov-haskell
 
 install:
+  - cd $HOME
   - curl -sSL https://get.haskellstack.org/ | sh
   - stack setup
   - git clone https://github.com/gabysbrain/codecov-haskell
   - cd codecov-haskell
   - stack install
-  - cd ..
+  - cd $TRAVIS_BUILD_DIR
 
 script:
   - stack build
