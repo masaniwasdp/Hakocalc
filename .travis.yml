@@ -1,3 +1,5 @@
+language: nix
+
 sudo: false
 
 cache:
@@ -9,7 +11,7 @@ cache:
 install:
   - curl -sSL https://get.haskellstack.org | sh
   - cd $HOME
-  - git clone https://github.com/creichert/codecov-haskell -b feat-flags-upload-param
+  - git clone https://github.com/lunaticare/codecov-haskell
   - cd codecov-haskell
   - stack install
   - cd $TRAVIS_BUILD_DIR
