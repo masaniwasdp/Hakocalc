@@ -6,9 +6,11 @@ cache:
   directories:
     - $HOME/.stack
 
+  timeout: 300
+
 install:
-  - cd $HOME
   - curl -sSL https://get.haskellstack.org/ | sh
+  - cd $HOME
   - git clone https://github.com/nirum-lang/codecov-haskell -b fix-broken-build-with-retry-0.7
   - cd codecov-haskell
   - stack install
