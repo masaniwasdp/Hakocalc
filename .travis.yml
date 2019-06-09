@@ -11,7 +11,7 @@ cache:
 install:
   - curl -sSL https://get.haskellstack.org | sh
   - cd $HOME
-  - git clone https://github.com/lunaticare/codecov-haskell
+  - git clone https://github.com/nirum-lang/codecov-haskell -b fix-broken-build-with-retry-0.7
   - cd codecov-haskell
   - stack install
   - cd $TRAVIS_BUILD_DIR
@@ -24,6 +24,6 @@ script:
   - stack --verbosity warn test --coverage
 
 after_script:
-  - export MIX_DIR="$(stack path --dist-dir)/hpc/"
-  - export TIX_DIR="$(stack path --local-hpc-root)/hakocalc/"
-  - codecov-haskell hakocalc-test --exclude-dir=test --mix-dir=$MIX_DIR --tix-dir=$TIX_DIR
+  - export MIX_DIR=$(stack path --dist-dir)/hpc/
+  - export TIX_DIR=$(stack path --local-hpc-root)/hakocalc/
+  - codecov-haskell hakocalc-test --exclude-dir test --mix-dir $MIX_DIR --tix-dir $TIX_DIR
