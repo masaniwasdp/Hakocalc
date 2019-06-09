@@ -13,12 +13,12 @@ install:
   - cd $HOME
   - git clone https://github.com/nirum-lang/codecov-haskell -b fix-broken-build-with-retry-0.7
   - cd codecov-haskell
-  - stack install
+  - stack --verbosity warn install
   - cd $TRAVIS_BUILD_DIR
 
 script:
-  - stack build
-  - stack test --coverage
+  - stack --verbosity warn build
+  - stack --verbosity warn test --coverage
 
 after_script:
   - find $(stack path --local-hpc-root) -ls
