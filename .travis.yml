@@ -9,18 +9,21 @@ cache:
   timeout: 300
 
 install:
-  - export PATH=$HOME/.local/bin:$PATH
   - curl -sSL https://get.haskellstack.org | sh
   - cd $HOME
-  - git clone https://github.com/nirum-lang/codecov-haskell -b fix-broken-build-with-retry-0.7
+  - git clone https://github.com/lunaticare/codecov-haskell
   - cd codecov-haskell
-  - stack --verbosity warn install
+  - stack install
   - cd $TRAVIS_BUILD_DIR
+
+before_script:
+  - export PATH=$HOME/.local/bin:$PATH
 
 script:
   - stack --verbosity warn build
   - stack --verbosity warn test --coverage
 
 after_script:
-  - find $(stack path --local-hpc-root) -ls
-  - codecov-haskell --exclude-dir=test --tix-dir=$(stack path --local-hpc-root)/hakocalc/ hakocalc-test
+  - export MIX_DIR="$(stack path --dist-dir)/hpc/"
+  - export TIX_DIR="$(stack path --local-hpc-root)/hakocalc/"
+  - codecov-haskell hakocalc-test --exclude-dir=test --mix-dir=$MIX_DIR --tix-dir=$TIX_DIR
