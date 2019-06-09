@@ -21,4 +21,4 @@ script:
   - stack test --coverage
 
 after_script:
-  - .local/bin/codecov-haskell --exclude-dir=test hakocalc-test
+  - $HOME/.local/bin/codecov-haskell --exclude-dir=test hakocalc-test
