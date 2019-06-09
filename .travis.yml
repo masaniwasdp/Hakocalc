@@ -22,4 +22,4 @@ script:
 
 after_script:
   - find $(stack path --local-hpc-root) -ls
-  # - $HOME/.local/bin/codecov-haskell --exclude-dir=test --tix-dir=$(stack path --local-hpc-root) hakocalc-test
+  - $HOME/.local/bin/codecov-haskell --exclude-dir=test --tix-dir=$(stack path --local-hpc-root) hakocalc-test
