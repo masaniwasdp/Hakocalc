@@ -4,24 +4,25 @@ sudo: false
 
 cache:
   directories:
+    - $HOME/nix.store
     - $HOME/.stack
 
-  timeout: 300
+  timeout: 600
 
 install:
   - curl -sSL https://get.haskellstack.org | sh
   - cd $HOME
   - git clone https://github.com/lunaticare/codecov-haskell
   - cd codecov-haskell
-  - stack install
+  - travis_wait stack install
   - cd $TRAVIS_BUILD_DIR
 
 before_script:
   - export PATH=$HOME/.local/bin:$PATH
 
 script:
-  - stack --verbosity warn build
-  - stack --verbosity warn test --coverage
+  - travis_wait stack --verbosity warn build
+  - travis_wait stack --verbosity warn test --coverage
 
 after_script:
   - export MIX_DIR=$(stack path --dist-dir)/hpc/
