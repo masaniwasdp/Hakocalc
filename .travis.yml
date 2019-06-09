@@ -26,4 +26,4 @@ script:
 after_script:
   - export MIX_DIR=$(stack path --dist-dir)/hpc/
   - export TIX_DIR=$(stack path --local-hpc-root)/hakocalc/
-  - codecov-haskell hakocalc-test --exclude-dir test --mix-dir $MIX_DIR --tix-dir $TIX_DIR
+  - codecov-haskell hakocalc-test --exclude-dir test --mix-dir $MIX_DIR --tix-dir $TIX_DIR -t $CODECOV_TOKEN
