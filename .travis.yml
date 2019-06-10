@@ -1,29 +1,30 @@
-language: minimal
+language: nix
 
 sudo: false
 
 cache:
   directories:
+    - $HOME/nix.store
     - $HOME/.stack
 
   timeout: 600
 
 install:
   - curl -sSL https://get.haskellstack.org | sh
-  # - cd $HOME
-  # - git clone https://github.com/lunaticare/codecov-haskell
-  # - cd codecov-haskell
-  # - stack install
-  # - cd $TRAVIS_BUILD_DIR
+  - cd $HOME
+  - git clone https://github.com/lunaticare/codecov-haskell
+  - cd codecov-haskell
+  - stack install
+  - cd $TRAVIS_BUILD_DIR
 
 before_script:
   - export PATH=$HOME/.local/bin:$PATH
 
 script:
-  - stack --verbosity warn build
-  - stack --verbosity warn test --coverage
+  - stack build
+  - stack test --coverage
 
 after_script:
-  # - export MIX_DIR=$(stack path --dist-dir)/hpc/
-  # - export TIX_DIR=$(stack path --local-hpc-root)/hakocalc/
-  # - codecov-haskell hakocalc-test --exclude-dir test --mix-dir $MIX_DIR --tix-dir $TIX_DIR
+  - export MIX_DIR=$(stack path --dist-dir)/hpc/
+  - export TIX_DIR=$(stack path --local-hpc-root)/hakocalc/
+  - codecov-haskell hakocalc-test --exclude-dir test --mix-dir $MIX_DIR --tix-dir $TIX_DIR
