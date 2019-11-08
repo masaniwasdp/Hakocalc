@@ -5,8 +5,8 @@ module Hakocalc.Command.Function
 
 
 import Control.Lens ((^.))
-import Hakocalc.Entity.Defeat (HP, Probability, Quantity, missiles, probability)
 import Hakocalc.Entity.Probability (fromProbability)
+import Hakocalc.Service.Defeat (HP, Probability, Quantity, missiles, probability)
 import Text.Printf (printf)
 
 import qualified Hakocalc.Command.Config as C

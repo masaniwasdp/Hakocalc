@@ -3,7 +3,7 @@
 -- Copyright   : 2019 masaniwa
 -- License     : MIT
 --
-module Hakocalc.Entity.Common
+module Hakocalc.Service.Common
   ( combination
   , repeated
   ) where

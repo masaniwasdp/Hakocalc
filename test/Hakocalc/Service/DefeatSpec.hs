@@ -1,10 +1,10 @@
 {-# OPTIONS_GHC -fno-warn-missing-signatures #-}
 
-module Hakocalc.Entity.DefeatSpec where
+module Hakocalc.Service.DefeatSpec where
 
 
-import Hakocalc.Entity.Defeat
 import Hakocalc.Entity.Probability (toProbability)
+import Hakocalc.Service.Defeat
 import Test.Hspec
 
 

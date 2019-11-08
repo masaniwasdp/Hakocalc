@@ -3,7 +3,7 @@
 -- Copyright   : 2019 masaniwa
 -- License     : MIT
 --
-module Hakocalc.Entity.Defeat
+module Hakocalc.Service.Defeat
   ( HP
   , Probability
   , Quantity
@@ -13,8 +13,8 @@ module Hakocalc.Entity.Defeat
 
 
 import Data.List (find)
-import Hakocalc.Entity.Common (repeated)
 import Hakocalc.Entity.Probability (fromProbability, toProbability)
+import Hakocalc.Service.Common (repeated)
 import Numeric.Natural (Natural)
 
 import qualified Hakocalc.Entity.Probability as P
