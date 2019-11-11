@@ -1,0 +1,3 @@
+rslt-p: "%.3f%%\n"
+rslt-q: "%d\n"
+fail-q: "Could not calculate.\n"

@@ -5,33 +5,34 @@ module Hakocalc.Command.Commands
 
 import Control.Lens ((^.))
 import Data.Semigroup ((<>))
-import Hakocalc.Command.Function (functionP, functionQ)
 import Hakocalc.Command.Helper (defineArg, defineCmd)
+import Hakocalc.Model.Calculator (calcProbability, calcQuantity)
 import Options.Applicative (CommandFields, Mod, ParserInfo, info, progDesc, subparser)
 
 import qualified Hakocalc.Command.Config as C
+import qualified Hakocalc.Model.Config as M
 
 
-commands :: C.Config -> ParserInfo (IO ())
+commands :: C.Config -> M.Config -> ParserInfo (IO ())
 
-commands cfg = info (subparser xs) $ progDesc (cfg ^. C.descA)
+commands cc mc = info (subparser xs) $ progDesc (cc ^. C.descA)
   where
-    xs = commandP cfg <> commandQ cfg
+    xs = commandP cc mc <> commandQ cc mc
 
 
-commandP :: C.Config -> Mod CommandFields (IO ())
+commandP :: C.Config -> M.Config -> Mod CommandFields (IO ())
 
-commandP cfg = defineCmd p (cfg ^. C.nameP) (cfg ^. C.descP)
+commandP cc mc = defineCmd (putStrLn <$> p) (cc ^. C.nameP) (cc ^. C.descP)
   where
-    p = functionP cfg
-      <$> defineArg (cfg ^. C.helpH) (cfg ^. C.metaH)
-      <*> defineArg (cfg ^. C.helpQ) (cfg ^. C.metaQ)
+    p = calcProbability mc
+      <$> defineArg (cc ^. C.helpH) (cc ^. C.metaH)
+      <*> defineArg (cc ^. C.helpQ) (cc ^. C.metaQ)
 
 
-commandQ :: C.Config -> Mod CommandFields (IO ())
+commandQ :: C.Config -> M.Config -> Mod CommandFields (IO ())
 
-commandQ cfg = defineCmd p (cfg ^. C.nameQ) (cfg ^. C.descQ)
+commandQ cc mc = defineCmd (putStrLn <$> q) (cc ^. C.nameQ) (cc ^. C.descQ)
   where
-    p = functionQ cfg
-      <$> defineArg (cfg ^. C.helpH) (cfg ^. C.metaH)
-      <*> defineArg (cfg ^. C.helpP) (cfg ^. C.metaP)
+    q = calcQuantity mc
+      <$> defineArg (cc ^. C.helpH) (cc ^. C.metaH)
+      <*> defineArg (cc ^. C.helpP) (cc ^. C.metaP)

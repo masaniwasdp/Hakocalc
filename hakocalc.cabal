@@ -8,15 +8,17 @@ author:             masaniwa
 copyright:          2019 masaniwa
 build-type:         Simple
 data-files:         assets/command/config.yaml
+                  , assets/model/config.yaml
 cabal-version:      >=1.10
 
 library
   hs-source-dirs:   src
   exposed-modules:  Hakocalc.Command.Commands
                   , Hakocalc.Command.Config
-                  , Hakocalc.Command.Function
                   , Hakocalc.Command.Helper
                   , Hakocalc.Entity.Probability
+                  , Hakocalc.Model.Calculator
+                  , Hakocalc.Model.Config
                   , Hakocalc.Service.Common
                   , Hakocalc.Service.Defeat
   ghc-options:      -Wall -O2
