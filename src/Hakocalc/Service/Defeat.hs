@@ -13,11 +13,11 @@ module Hakocalc.Service.Defeat
 
 
 import Data.List (find)
-import Hakocalc.Entity.Probability (fromProbability, toProbability)
-import Hakocalc.Service.Common (repeated)
+import Hakocalc.Math.Calc (repeated)
+import Hakocalc.Math.Probability (fromProbability, toProbability)
 import Numeric.Natural (Natural)
 
-import qualified Hakocalc.Entity.Probability as P
+import qualified Hakocalc.Math.Probability as P
 
 
 -- | Reprezentanta HP.

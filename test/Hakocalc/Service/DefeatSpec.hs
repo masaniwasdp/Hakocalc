@@ -3,7 +3,7 @@
 module Hakocalc.Service.DefeatSpec where
 
 
-import Hakocalc.Entity.Probability (toProbability)
+import Hakocalc.Math.Probability (toProbability)
 import Hakocalc.Service.Defeat
 import Test.Hspec
 

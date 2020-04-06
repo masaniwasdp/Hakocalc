@@ -16,10 +16,10 @@ library
   exposed-modules:  Hakocalc.Command.Commands
                   , Hakocalc.Command.Config
                   , Hakocalc.Command.Helper
-                  , Hakocalc.Entity.Probability
+                  , Hakocalc.Math.Calc
+                  , Hakocalc.Math.Probability
                   , Hakocalc.Model.Calculator
                   , Hakocalc.Model.Config
-                  , Hakocalc.Service.Common
                   , Hakocalc.Service.Defeat
   ghc-options:      -Wall -O2
   build-depends:    aeson
@@ -45,8 +45,8 @@ test-suite hakocalc-test
   type:             exitcode-stdio-1.0
   hs-source-dirs:   test
   main-is:          Spec.hs
-  other-modules:    Hakocalc.Entity.ProbabilitySpec
-                  , Hakocalc.Service.CommonSpec
+  other-modules:    Hakocalc.Math.CalcSpec
+                  , Hakocalc.Math.ProbabilitySpec
                   , Hakocalc.Service.DefeatSpec
   ghc-options:      -Wall
   build-depends:    base

@@ -5,7 +5,7 @@ module Hakocalc.Model.Calculator
 
 
 import Control.Lens ((^.))
-import Hakocalc.Entity.Probability (fromProbability)
+import Hakocalc.Math.Probability (fromProbability)
 import Hakocalc.Model.Config (Config, failQ, rsltP, rsltQ)
 import Hakocalc.Service.Defeat (HP, Probability, Quantity, missiles, probability)
 import Text.Printf (printf)

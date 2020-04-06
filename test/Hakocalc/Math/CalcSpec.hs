@@ -1,10 +1,10 @@
 {-# OPTIONS_GHC -fno-warn-missing-signatures #-}
 
-module Hakocalc.Service.CommonSpec where
+module Hakocalc.Math.CalcSpec where
 
 
-import Hakocalc.Entity.Probability (toProbability)
-import Hakocalc.Service.Common
+import Hakocalc.Math.Calc
+import Hakocalc.Math.Probability (toProbability)
 import Test.Hspec
 
 
