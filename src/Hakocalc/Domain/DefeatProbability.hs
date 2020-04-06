@@ -3,7 +3,7 @@
 -- Copyright   : 2019 masaniwa
 -- License     : MIT
 --
-module Hakocalc.Service.Defeat
+module Hakocalc.Domain.DefeatProbability
   ( HP
   , Probability
   , Quantity

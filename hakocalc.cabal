@@ -8,7 +8,7 @@ author:             masaniwa
 copyright:          2019 masaniwa
 build-type:         Simple
 data-files:         assets/command/config.yaml
-                  , assets/model/config.yaml
+                  , assets/domain/config.yaml
 cabal-version:      >=1.10
 
 library
@@ -16,11 +16,11 @@ library
   exposed-modules:  Hakocalc.Command.Commands
                   , Hakocalc.Command.Config
                   , Hakocalc.Command.Helper
+                  , Hakocalc.Domain.Config
+                  , Hakocalc.Domain.DefeatProbability
+                  , Hakocalc.Domain.Model
                   , Hakocalc.Math.Calc
                   , Hakocalc.Math.Probability
-                  , Hakocalc.Model.Calculator
-                  , Hakocalc.Model.Config
-                  , Hakocalc.Service.Defeat
   ghc-options:      -Wall -O2
   build-depends:    aeson
                   , base
@@ -45,9 +45,9 @@ test-suite hakocalc-test
   type:             exitcode-stdio-1.0
   hs-source-dirs:   test
   main-is:          Spec.hs
-  other-modules:    Hakocalc.Math.CalcSpec
+  other-modules:    Hakocalc.Domain.DefeatProbabilitySpec
+                  , Hakocalc.Math.CalcSpec
                   , Hakocalc.Math.ProbabilitySpec
-                  , Hakocalc.Service.DefeatSpec
   ghc-options:      -Wall
   build-depends:    base
                   , hakocalc

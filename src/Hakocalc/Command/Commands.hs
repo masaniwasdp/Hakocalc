@@ -6,33 +6,33 @@ module Hakocalc.Command.Commands
 import Control.Lens ((^.))
 import Data.Semigroup ((<>))
 import Hakocalc.Command.Helper (defineArg, defineCmd)
-import Hakocalc.Model.Calculator (calcProbability, calcQuantity)
+import Hakocalc.Domain.Model (calcProbability, calcQuantity)
 import Options.Applicative (CommandFields, Mod, ParserInfo, info, progDesc, subparser)
 
-import qualified Hakocalc.Command.Config as C
-import qualified Hakocalc.Model.Config as M
+import qualified Hakocalc.Command.Config as CC
+import qualified Hakocalc.Domain.Config as DC
 
 
-commands :: C.Config -> M.Config -> ParserInfo (IO ())
+commands :: CC.Config -> DC.Config -> ParserInfo (IO ())
 
-commands cc mc = info (subparser xs) $ progDesc (cc ^. C.descA)
+commands cc dc = info (subparser xs) $ progDesc (cc ^. CC.descA)
   where
-    xs = commandP cc mc <> commandQ cc mc
+    xs = commandP cc dc <> commandQ cc dc
 
 
-commandP :: C.Config -> M.Config -> Mod CommandFields (IO ())
+commandP :: CC.Config -> DC.Config -> Mod CommandFields (IO ())
 
-commandP cc mc = defineCmd (putStrLn <$> p) (cc ^. C.nameP) (cc ^. C.descP)
+commandP cc dc = defineCmd (putStrLn <$> p) (cc ^. CC.nameP) (cc ^. CC.descP)
   where
-    p = calcProbability mc
-      <$> defineArg (cc ^. C.helpH) (cc ^. C.metaH)
-      <*> defineArg (cc ^. C.helpQ) (cc ^. C.metaQ)
+    p = calcProbability dc
+      <$> defineArg (cc ^. CC.helpH) (cc ^. CC.metaH)
+      <*> defineArg (cc ^. CC.helpQ) (cc ^. CC.metaQ)
 
 
-commandQ :: C.Config -> M.Config -> Mod CommandFields (IO ())
+commandQ :: CC.Config -> DC.Config -> Mod CommandFields (IO ())
 
-commandQ cc mc = defineCmd (putStrLn <$> q) (cc ^. C.nameQ) (cc ^. C.descQ)
+commandQ cc dc = defineCmd (putStrLn <$> q) (cc ^. CC.nameQ) (cc ^. CC.descQ)
   where
-    q = calcQuantity mc
-      <$> defineArg (cc ^. C.helpH) (cc ^. C.metaH)
-      <*> defineArg (cc ^. C.helpP) (cc ^. C.metaP)
+    q = calcQuantity dc
+      <$> defineArg (cc ^. CC.helpH) (cc ^. CC.metaH)
+      <*> defineArg (cc ^. CC.helpP) (cc ^. CC.metaP)
