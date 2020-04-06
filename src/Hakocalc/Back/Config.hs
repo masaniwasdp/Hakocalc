@@ -4,7 +4,7 @@
 {-# LANGUAGE TemplateHaskell #-}
 {-# LANGUAGE TypeSynonymInstances #-}
 
-module Hakocalc.Domain.Config where
+module Hakocalc.Back.Config where
 
 
 import Control.Lens (makeFields)
