@@ -7,22 +7,25 @@ license-file:       LICENSE
 author:             masaniwa
 copyright:          2019 masaniwa
 build-type:         Simple
-data-files:         assets/controller/config.yaml
-                  , assets/presenter/config.yaml
+data-files:         assets/controller/cli-config.yaml
+                  , assets/presenter/cli-config.yaml
 cabal-version:      >=1.10
 
 library
   hs-source-dirs:   src
-  exposed-modules:  Hakocalc.Calculator.DefeatProbability
+  exposed-modules:  Hakocalc.Calculator
+                  , Hakocalc.Calculator.DefeatProbability
                   , Hakocalc.Calculator.IPresenter
                   , Hakocalc.Calculator.Model
-                  , Hakocalc.Controller.Config
+                  , Hakocalc.Controller
+                  , Hakocalc.Controller.CLI
+                  , Hakocalc.Controller.CLIConfig
                   , Hakocalc.Controller.Helper
-                  , Hakocalc.Controller.Request
                   , Hakocalc.Math.Calc
                   , Hakocalc.Math.Probability
-                  , Hakocalc.Presenter.Config
-                  , Hakocalc.Presenter.Response
+                  , Hakocalc.Presenter
+                  , Hakocalc.Presenter.CLI
+                  , Hakocalc.Presenter.CLIConfig
   ghc-options:      -Wall -O2
   build-depends:    aeson
                   , base
