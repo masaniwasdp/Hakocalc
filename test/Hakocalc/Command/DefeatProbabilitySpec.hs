@@ -1,9 +1,9 @@
 {-# OPTIONS_GHC -fno-warn-missing-signatures #-}
 
-module Hakocalc.Calculator.DefeatProbabilitySpec where
+module Hakocalc.Command.DefeatProbabilitySpec where
 
 
-import Hakocalc.Calculator.DefeatProbability
+import Hakocalc.Command.DefeatProbability
 import Hakocalc.Math.Probability (toProbability)
 import Test.Hspec
 

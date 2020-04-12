@@ -11,37 +11,37 @@ import Hakocalc.Controller.CLIConfig
 import Hakocalc.Controller.Helper (defineArg, defineCmd)
 import Options.Applicative (CommandFields, Mod, ParserInfo, info, progDesc, subparser)
 
-import qualified Hakocalc.Calculator as Calculator
+import qualified Hakocalc.Command as Command
 
 
-data CLI a = CLI CLIConfig (Calculator.Model a)
+data CLI a = CLI CLIConfig (Command.Model a)
 
 
-cli :: Calculator.IPresenter a => CLIConfig -> Calculator.Model a -> CLI a
+cli :: Command.IPresenter a => CLIConfig -> Command.Model a -> CLI a
 
 cli = CLI
 
 
-execute :: Calculator.IPresenter a => CLI a -> ParserInfo (IO ())
+execute :: Command.IPresenter a => CLI a -> ParserInfo (IO ())
 
 execute c@(CLI cfg _) = info (subparser xs) $ progDesc (cfg ^. descA)
   where
     xs = requestP c <> requestQ c
 
 
-requestP :: Calculator.IPresenter a => CLI a -> Mod CommandFields (IO ())
+requestP :: Command.IPresenter a => CLI a -> Mod CommandFields (IO ())
 
-requestP (CLI cfg calculator) = defineCmd action (cfg ^. nameP) (cfg ^. descP)
+requestP (CLI cfg cmd) = defineCmd action (cfg ^. nameP) (cfg ^. descP)
   where
-    action = Calculator.calculateP calculator
+    action = Command.calculateP cmd
       <$> defineArg (cfg ^. helpH) (cfg ^. metaH)
       <*> defineArg (cfg ^. helpQ) (cfg ^. metaQ)
 
 
-requestQ :: Calculator.IPresenter a => CLI a -> Mod CommandFields (IO ())
+requestQ :: Command.IPresenter a => CLI a -> Mod CommandFields (IO ())
 
-requestQ (CLI cfg calculator) = defineCmd action (cfg ^. nameQ) (cfg ^. descQ)
+requestQ (CLI cfg cmd) = defineCmd action (cfg ^. nameQ) (cfg ^. descQ)
   where
-    action = Calculator.calculateQ calculator
+    action = Command.calculateQ cmd
       <$> defineArg (cfg ^. helpH) (cfg ^. metaH)
       <*> defineArg (cfg ^. helpP) (cfg ^. metaP)

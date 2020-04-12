@@ -3,7 +3,7 @@ import Data.Yaml (FromJSON, decodeFileThrow)
 import Options.Applicative (customExecParser, prefs, showHelpOnEmpty)
 import Paths_hakocalc (getDataFileName)
 
-import qualified Hakocalc.Calculator as Calculator
+import qualified Hakocalc.Command as Command
 import qualified Hakocalc.Controller as Controller
 import qualified Hakocalc.Presenter as Presenter
 
@@ -11,18 +11,18 @@ import qualified Hakocalc.Presenter as Presenter
 main :: IO ()
 
 main = do
-  cli <- controller =<< calculator =<< presenter
+  cli <- controller =<< command =<< presenter
 
   join $ customExecParser (prefs showHelpOnEmpty) (Controller.execute cli)
 
 
-calculator :: Calculator.IPresenter a => a -> IO (Calculator.Model a)
+command :: Command.IPresenter a => a -> IO (Command.Model a)
 
-calculator p = do
-  return $ Calculator.model p
+command p = do
+  return $ Command.model p
 
 
-controller :: Calculator.IPresenter a => Calculator.Model a -> IO (Controller.CLI a)
+controller :: Command.IPresenter a => Command.Model a -> IO (Controller.CLI a)
 
 controller c = do
   cfg <- getConfig "assets/controller/cli-config.yaml"

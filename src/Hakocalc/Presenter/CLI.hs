@@ -9,13 +9,13 @@ import Hakocalc.Math.Probability (fromProbability)
 import Hakocalc.Presenter.CLIConfig
 import Text.Printf (printf)
 
-import qualified Hakocalc.Calculator as Calculator
+import qualified Hakocalc.Command as Command
 
 
 data CLI = CLI CLIConfig
 
 
-instance Calculator.IPresenter CLI where
+instance Command.IPresenter CLI where
   resultP (CLI cfg) rslt = printf (cfg ^. rsltP) $ val * 100
     where
       val = (fromRational :: Rational -> Double) $ fromProbability rslt

@@ -1,11 +1,11 @@
-module Hakocalc.Calculator.IPresenter
+module Hakocalc.Command.IPresenter
   ( IPresenter
   , resultP
   , resultQ
   ) where
 
 
-import Hakocalc.Calculator.DefeatProbability (Probability, Quantity)
+import Hakocalc.Command.DefeatProbability (Probability, Quantity)
 
 
 class IPresenter a where

@@ -1,4 +1,4 @@
-module Hakocalc.Calculator.Model
+module Hakocalc.Command.Model
   ( Model
   , calculateP
   , calculateQ
@@ -6,8 +6,8 @@ module Hakocalc.Calculator.Model
   ) where
 
 
-import Hakocalc.Calculator.DefeatProbability (HP, Probability, Quantity, missiles, probability)
-import Hakocalc.Calculator.IPresenter (IPresenter, resultP, resultQ)
+import Hakocalc.Command.DefeatProbability (HP, Probability, Quantity, missiles, probability)
+import Hakocalc.Command.IPresenter (IPresenter, resultP, resultQ)
 
 
 data Model a = Model a

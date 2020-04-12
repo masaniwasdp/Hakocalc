@@ -13,10 +13,10 @@ cabal-version:      >=1.10
 
 library
   hs-source-dirs:   src
-  exposed-modules:  Hakocalc.Calculator
-                  , Hakocalc.Calculator.DefeatProbability
-                  , Hakocalc.Calculator.IPresenter
-                  , Hakocalc.Calculator.Model
+  exposed-modules:  Hakocalc.Command
+                  , Hakocalc.Command.DefeatProbability
+                  , Hakocalc.Command.IPresenter
+                  , Hakocalc.Command.Model
                   , Hakocalc.Controller
                   , Hakocalc.Controller.CLI
                   , Hakocalc.Controller.CLIConfig
@@ -50,7 +50,7 @@ test-suite hakocalc-test
   type:             exitcode-stdio-1.0
   hs-source-dirs:   test
   main-is:          Spec.hs
-  other-modules:    Hakocalc.Calculator.DefeatProbabilitySpec
+  other-modules:    Hakocalc.Command.DefeatProbabilitySpec
                   , Hakocalc.Math.CalcSpec
                   , Hakocalc.Math.ProbabilitySpec
   ghc-options:      -Wall
