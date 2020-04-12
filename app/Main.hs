@@ -1,16 +1,21 @@
 import Control.Monad (join)
 import Data.Yaml (FromJSON, decodeFileThrow)
-import Hakocalc.Controller.Command (command)
 import Options.Applicative (customExecParser, prefs, showHelpOnEmpty)
 import Paths_hakocalc (getDataFileName)
+
+import qualified Hakocalc.Calculator.Model as Calculator
+import qualified Hakocalc.Controller.Request as Request
+import qualified Hakocalc.Presenter.Response as Response
 
 main :: IO ()
 
 main = do
-  controllerConfig <- getConfig "assets/controller/config.yaml"
-  calculatorConfig <- getConfig "assets/calculator/config.yaml"
+  ccfg <- getConfig "assets/controller/config.yaml"
+  pcfg <- getConfig "assets/presenter/config.yaml"
 
-  join $ customExecParser (prefs showHelpOnEmpty) (command controllerConfig calculatorConfig)
+  let env = Request.environment ccfg . Calculator.model $ Response.environment pcfg
+
+  join $ customExecParser (prefs showHelpOnEmpty) (Request.execute env)
 
 
 getConfig :: FromJSON a => String -> IO a

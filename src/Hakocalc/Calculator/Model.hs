@@ -1,29 +1,28 @@
 module Hakocalc.Calculator.Model
-  ( calculateP
+  ( Model
+  , calculateP
   , calculateQ
+  , model
   ) where
 
 
-import Control.Lens ((^.))
-import Hakocalc.Calculator.Config
 import Hakocalc.Calculator.DefeatProbability (HP, Probability, Quantity, missiles, probability)
-import Hakocalc.Math.Probability (fromProbability)
-import Text.Printf (printf)
+import Hakocalc.Calculator.IPresenter (IPresenter, resultP, resultQ)
 
 
-calculateP :: Config -> HP -> Quantity -> String
-
-calculateP cfg h q = output . double $ probability h q
-  where
-    output = printf (cfg ^. rsltP)
-
-    double = (fromRational :: Rational -> Double) . fromProbability
+data Model a = Model a
 
 
-calculateQ :: Config -> HP -> Probability -> String
+model :: IPresenter a => a -> Model a
 
-calculateQ cfg h p = maybe output notify $ missiles h p
-  where
-    output = printf (cfg ^. rsltQ)
+model = Model
 
-    notify = printf (cfg ^. failQ)
+
+calculateP :: IPresenter a => Model a -> HP -> Quantity -> IO ()
+
+calculateP (Model presenter) h q = resultP presenter $ probability h q
+
+
+calculateQ :: IPresenter a => Model a -> HP -> Probability -> IO ()
+
+calculateQ (Model presenter) h p = resultQ presenter $ missiles h p
