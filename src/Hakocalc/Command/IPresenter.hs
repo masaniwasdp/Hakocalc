@@ -1,7 +1,7 @@
 module Hakocalc.Command.IPresenter
   ( IPresenter
-  , resultP
-  , resultQ
+  , printP
+  , printQ
   ) where
 
 
@@ -9,6 +9,6 @@ import Hakocalc.Command.DefeatProbability (Probability, Quantity)
 
 
 class IPresenter a where
-  resultP :: a -> Probability -> IO ()
+  printP :: a -> Probability -> IO ()
 
-  resultQ :: a -> Maybe Quantity -> IO ()
+  printQ :: a -> Maybe Quantity -> IO ()

@@ -16,11 +16,11 @@ data CLI = CLI CLIConfig
 
 
 instance Command.IPresenter CLI where
-  resultP (CLI cfg) rslt = printf (cfg ^. rsltP) $ val * 100
+  printP (CLI cfg) rslt = printf (cfg ^. rsltP) $ val * 100
     where
       val = (fromRational :: Rational -> Double) $ fromProbability rslt
 
-  resultQ (CLI cfg) rslt = case rslt of
+  printQ (CLI cfg) rslt = case rslt of
     Just x -> printf (cfg ^. rsltQ) x
 
     _ -> printf (cfg ^. failQ)

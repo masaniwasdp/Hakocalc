@@ -7,7 +7,7 @@ module Hakocalc.Command.Model
 
 
 import Hakocalc.Command.DefeatProbability (HP, Probability, Quantity, missiles, probability)
-import Hakocalc.Command.IPresenter (IPresenter, resultP, resultQ)
+import Hakocalc.Command.IPresenter (IPresenter, printP, printQ)
 
 
 data Model a = Model a
@@ -20,9 +20,9 @@ model = Model
 
 calculateP :: IPresenter a => Model a -> HP -> Quantity -> IO ()
 
-calculateP (Model presenter) h q = resultP presenter $ probability h q
+calculateP (Model presenter) h q = printP presenter $ probability h q
 
 
 calculateQ :: IPresenter a => Model a -> HP -> Probability -> IO ()
 
-calculateQ (Model presenter) h p = resultQ presenter $ missiles h p
+calculateQ (Model presenter) h p = printQ presenter $ missiles h p
