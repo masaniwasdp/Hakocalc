@@ -1,4 +1,4 @@
-module Hakocalc.Front.Helper
+module Hakocalc.Controller.Helper
   ( defineArg
   , defineCmd
   ) where

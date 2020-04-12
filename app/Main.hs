@@ -1,20 +1,18 @@
 import Control.Monad (join)
-import Data.Yaml (decodeFileThrow)
-import Hakocalc.Front.Command (parser)
+import Data.Yaml (FromJSON, decodeFileThrow)
+import Hakocalc.Controller.Command (command)
 import Options.Applicative (customExecParser, prefs, showHelpOnEmpty)
 import Paths_hakocalc (getDataFileName)
-
-import qualified Hakocalc.Back.Config as BCfg
-import qualified Hakocalc.Front.Config as FCfg
-
 
 main :: IO ()
 
 main = do
-  fname <- getDataFileName "assets/front/config.yaml"
-  bname <- getDataFileName "assets/back/config.yaml"
+  controllerConfig <- getConfig "assets/controller/config.yaml"
+  calculatorConfig <- getConfig "assets/calculator/config.yaml"
 
-  fcfg <- decodeFileThrow fname :: IO FCfg.Config
-  bcfg <- decodeFileThrow bname :: IO BCfg.Config
+  join $ customExecParser (prefs showHelpOnEmpty) (command controllerConfig calculatorConfig)
 
-  join $ customExecParser (prefs showHelpOnEmpty) (parser fcfg bcfg)
+
+getConfig :: FromJSON a => String -> IO a
+
+getConfig file = decodeFileThrow =<< getDataFileName file

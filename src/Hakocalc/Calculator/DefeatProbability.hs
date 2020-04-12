@@ -3,7 +3,7 @@
 -- Copyright   : 2019 masaniwa
 -- License     : MIT
 --
-module Hakocalc.Back.DefeatProbability
+module Hakocalc.Calculator.DefeatProbability
   ( HP
   , Probability
   , Quantity

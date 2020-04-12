@@ -7,18 +7,18 @@ license-file:       LICENSE
 author:             masaniwa
 copyright:          2019 masaniwa
 build-type:         Simple
-data-files:         assets/back/config.yaml
-                  , assets/front/config.yaml
+data-files:         assets/calculator/config.yaml
+                  , assets/controller/config.yaml
 cabal-version:      >=1.10
 
 library
   hs-source-dirs:   src
-  exposed-modules:  Hakocalc.Back.Command
-                  , Hakocalc.Back.Config
-                  , Hakocalc.Back.DefeatProbability
-                  , Hakocalc.Front.Command
-                  , Hakocalc.Front.Config
-                  , Hakocalc.Front.Helper
+  exposed-modules:  Hakocalc.Calculator.Config
+                  , Hakocalc.Calculator.DefeatProbability
+                  , Hakocalc.Calculator.Model
+                  , Hakocalc.Controller.Command
+                  , Hakocalc.Controller.Config
+                  , Hakocalc.Controller.Helper
                   , Hakocalc.Math.Calc
                   , Hakocalc.Math.Probability
   ghc-options:      -Wall -O2
@@ -45,7 +45,7 @@ test-suite hakocalc-test
   type:             exitcode-stdio-1.0
   hs-source-dirs:   test
   main-is:          Spec.hs
-  other-modules:    Hakocalc.Back.DefeatProbabilitySpec
+  other-modules:    Hakocalc.Calculator.DefeatProbabilitySpec
                   , Hakocalc.Math.CalcSpec
                   , Hakocalc.Math.ProbabilitySpec
   ghc-options:      -Wall
