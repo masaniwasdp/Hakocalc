@@ -5,7 +5,6 @@ module Hakocalc.Presenter.CLI
 
 
 import Control.Lens ((^.))
-import Hakocalc.Math.Probability (fromProbability)
 import Hakocalc.Presenter.CLIConfig
 import Text.Printf (printf)
 
@@ -16,9 +15,9 @@ data CLI = CLI CLIConfig
 
 
 instance Command.IPresenter CLI where
-  printP (CLI cfg) rslt = printf (cfg ^. rsltP) $ val * 100
+  printP (CLI cfg) rslt = printf (cfg ^. rsltP) fval
     where
-      val = (fromRational :: Rational -> Double) $ fromProbability rslt
+      fval = (read $ show rslt) :: Double
 
   printQ (CLI cfg) rslt = case rslt of
     Just x -> printf (cfg ^. rsltQ) x
