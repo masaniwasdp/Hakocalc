@@ -6,6 +6,9 @@ cache:
 
   timeout: 600
 
+before_cache:
+  - tree $HOME/.stack
+
 install:
   - curl -sSL https://get.haskellstack.org | sh
   - cd $HOME
@@ -22,6 +25,6 @@ script:
   - stack test --coverage
 
 after_script:
-  - export TIX=$(stack path --local-hpc-root)/hakocalc/hakocalc-test.tix
+  - export TIX=$(stack path --local-hpc-root)/hakocalc/hakocalc-test/hakocalc-test.tix
   - export MIX_DIR=$(stack path --dist-dir)/hpc/
   - codecov-haskell hakocalc-test --exclude-dir test --tix $TIX --mix-dir $MIX_DIR
