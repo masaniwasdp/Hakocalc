@@ -11,15 +11,11 @@ import qualified Hakocalc.Presenter as Presenter
 main :: IO ()
 
 main = do
-  presenterConfig <- getConfig "assets/presenter/cli-config.yaml"
+  presenter <- Presenter.cli <$> getConfig "assets/presenter/cli-config.yaml"
 
-  controllerConfig <- getConfig "assets/controller/cli-config.yaml"
+  command <- return $ Command.model presenter
 
-  let presenter = Presenter.cli presenterConfig
-
-  let command = Command.model presenter
-
-  let controller = Controller.cli controllerConfig command
+  controller <- (flip Controller.cli) command <$> getConfig "assets/controller/cli-config.yaml"
 
   join $ customExecParser (prefs showHelpOnEmpty) (Controller.execute controller)
 
