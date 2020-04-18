@@ -6,10 +6,6 @@ cache:
 
   timeout: 600
 
-before_cache:
-  - sudo apt-get -y install tree
-  - tree $HOME/.stack
-
 install:
   - curl -sSL https://get.haskellstack.org | sh
   - cd $HOME
