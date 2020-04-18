@@ -22,6 +22,6 @@ script:
   - stack test --coverage
 
 after_script:
+  - export TIX=$(stack path --local-hpc-root)/hakocalc/hakocalc-test.tix
   - export MIX_DIR=$(stack path --dist-dir)/hpc/
-  - export TIX_DIR=$(stack path --local-hpc-root)/hakocalc/
-  - codecov-haskell hakocalc-test --exclude-dir test --mix-dir $MIX_DIR --tix-dir $TIX_DIR
+  - codecov-haskell hakocalc-test --exclude-dir test --tix $TIX --mix-dir $MIX_DIR
