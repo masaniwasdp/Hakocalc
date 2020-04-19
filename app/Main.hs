@@ -1,9 +1,7 @@
-import Control.Monad (join)
 import Data.Yaml (FromJSON, decodeFileThrow)
 import Options.Applicative (customExecParser, prefs, showHelpOnEmpty)
 import Paths_hakocalc (getDataFileName)
 
-import qualified Hakocalc.Command as Command
 import qualified Hakocalc.Controller as Controller
 import qualified Hakocalc.Presenter as Presenter
 
@@ -11,13 +9,10 @@ import qualified Hakocalc.Presenter as Presenter
 main :: IO ()
 
 main = do
-  presenter <- Presenter.cli <$> getConfig "assets/presenter/cli-config.yaml"
+  pCfg <- getConfig "assets/presenter/cli-config.yaml"
+  cCfg <- getConfig "assets/controller/cli-config.yaml"
 
-  command <- return $ Command.model presenter
-
-  controller <- (flip Controller.cli) command <$> getConfig "assets/controller/cli-config.yaml"
-
-  join $ customExecParser (prefs showHelpOnEmpty) (Controller.execute controller)
+  Presenter.runCLI pCfg =<< customExecParser (prefs showHelpOnEmpty) (Controller.runCLI cCfg)
 
 
 getConfig :: FromJSON a => String -> IO a

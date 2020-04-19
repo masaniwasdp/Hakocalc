@@ -1,30 +1,42 @@
+{-# OPTIONS_GHC -fno-warn-orphans #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE TypeSynonymInstances #-}
+
 module Hakocalc.Presenter.CLI
   ( CLI
-  , cli
+  , runCLI
   ) where
 
 
 import Control.Lens ((^.))
+import Control.Monad.State (liftIO)
+import Control.Monad.Trans.Reader (ReaderT, ask, runReaderT)
 import Hakocalc.Presenter.CLIConfig
 import Text.Printf (printf)
 
 import qualified Hakocalc.Command as Command
 
 
-data CLI = CLI CLIConfig
+type CLI = ReaderT CLIConfig IO
 
 
-instance Command.IPresenter CLI where
-  printP (CLI cfg) rslt = printf (cfg ^. rsltP) fval
-    where
-      fval = (read $ show rslt) :: Double
+instance Command.Presenter CLI where
+  printP rslt = do
+    cfg <- ask
 
-  printQ (CLI cfg) rslt = case rslt of
-    Just x -> printf (cfg ^. rsltQ) x
+    let fval = (read $ show rslt) :: Double
 
-    _ -> printf (cfg ^. failQ)
+    liftIO $ printf (cfg ^. rsltP) fval
+
+  printQ rslt = do
+    cfg <- ask
+
+    case rslt of
+      Just x -> liftIO $ printf (cfg ^. rsltQ) x
+
+      _ -> liftIO $ printf (cfg ^. failQ)
 
 
-cli :: CLIConfig -> CLI
+runCLI :: CLIConfig -> CLI a -> IO a
 
-cli = CLI
+runCLI = flip runReaderT

@@ -1,97 +1,57 @@
 {-# OPTIONS_GHC -fno-warn-missing-signatures #-}
+{-# OPTIONS_GHC -fno-warn-orphans #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE TypeSynonymInstances #-}
 
 module Hakocalc.Command.ModelSpec where
 
 
-import Data.IORef (IORef, newIORef, readIORef, writeIORef)
+import Control.Monad.State (State, execState, modify)
 import Hakocalc.Command.DefeatProbability (Probability, Quantity)
-import Hakocalc.Command.IPresenter (IPresenter (..))
 import Hakocalc.Command.Model
+import Hakocalc.Command.Presenter (Presenter, printP, printQ)
 import Hakocalc.Math.Probability (toProbability)
 import Test.Hspec
 
 
-data Presenter = Presenter (IORef [Probability]) (IORef [Maybe Quantity])
+type PresenterMock = State ([Probability], [Maybe Quantity])
 
 
-instance IPresenter Presenter where
-  printP (Presenter refp _) rslt = writeIORef refp =<< (rslt :) <$> readIORef refp
+instance Presenter PresenterMock where
+  printP rslt = modify $ \ (p, q) -> (rslt : p, q)
 
-  printQ (Presenter _ refq) rslt = writeIORef refq =<< (rslt :) <$> readIORef refq
+  printQ rslt = modify $ \ (p, q) -> (p, rslt : q)
+
+
+runPresenterMock = (flip execState) s
+  where
+    s = ([], []) :: ([Probability], [Maybe Quantity])
 
 
 spec = do
   describe "calculateP" $ do
-    it "Inora Ghost" $ do
-      p <- newIORef []
-      q <- newIORef []
+    it "Inora Ghost" $
+      runPresenterMock (calculateP 1 1) `shouldBe` ([toProbability $ recip 7], [])
 
-      calculateP (model $ Presenter p q) 1 1
+    it "King Inora" $
+      runPresenterMock (calculateP 5 5) `shouldBe` ([toProbability $ recip 16807], [])
 
-      readIORef p `shouldReturn` [toProbability $ recip 7]
-      readIORef q `shouldReturn` []
+    it "Pseudo 01" $
+      runPresenterMock (calculateP 3 0) `shouldBe` ([toProbability 0], [])
 
-    it "King Inora" $ do
-      p <- newIORef []
-      q <- newIORef []
-
-      calculateP (model $ Presenter p q) 5 5
-
-      readIORef p `shouldReturn` [toProbability $ recip 16807]
-      readIORef q `shouldReturn` []
-
-    it "Pseudo 01" $ do
-      p <- newIORef []
-      q <- newIORef []
-
-      calculateP (model $ Presenter p q) 3 0
-
-      readIORef p `shouldReturn` [toProbability 0]
-      readIORef q `shouldReturn` []
-
-    it "Pseudo 02" $ do
-      p <- newIORef []
-      q <- newIORef []
-
-      calculateP (model $ Presenter p q) 0 3
-
-      readIORef p `shouldReturn` [toProbability 1]
-      readIORef q `shouldReturn` []
+    it "Pseudo 02" $
+      runPresenterMock (calculateP 0 3) `shouldBe` ([toProbability 1], [])
 
 
   describe "calculateQ" $ do
-    it "Inora Ghost" $ do
-      p <- newIORef []
-      q <- newIORef []
+    it "Inora Ghost" $
+      runPresenterMock (calculateQ 1 (toProbability $ recip 7)) `shouldBe` ([], [Just 1])
 
-      calculateQ (model $ Presenter p q) 1 (toProbability $ recip 7)
+    it "King Inora" $
+      runPresenterMock (calculateQ 5 (toProbability $ recip 16807)) `shouldBe` ([], [Just 5])
 
-      readIORef p `shouldReturn` []
-      readIORef q `shouldReturn` [Just 1]
+    it "Pseudo 01" $
+      runPresenterMock (calculateQ 1 (toProbability 0)) `shouldBe` ([], [Nothing])
 
-    it "King Inora" $ do
-      p <- newIORef []
-      q <- newIORef []
-
-      calculateQ (model $ Presenter p q) 5 (toProbability $ recip 16807)
-
-      readIORef p `shouldReturn` []
-      readIORef q `shouldReturn` [Just 5]
-
-    it "Pseudo 01" $ do
-      p <- newIORef []
-      q <- newIORef []
-
-      calculateQ (model $ Presenter p q) 1 (toProbability 0)
-
-      readIORef p `shouldReturn` []
-      readIORef q `shouldReturn` [Nothing]
-
-    it "Pseudo 02" $ do
-      p <- newIORef []
-      q <- newIORef []
-
-      calculateQ (model $ Presenter p q) 0 (toProbability 1)
-
-      readIORef p `shouldReturn` []
-      readIORef q `shouldReturn` [Nothing]
+    it "Pseudo 02" $
+      runPresenterMock (calculateQ 0 (toProbability 1)) `shouldBe` ([], [Nothing])

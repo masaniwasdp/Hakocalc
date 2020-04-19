@@ -15,8 +15,8 @@ library
   hs-source-dirs:   src
   exposed-modules:  Hakocalc.Command
                   , Hakocalc.Command.DefeatProbability
-                  , Hakocalc.Command.IPresenter
                   , Hakocalc.Command.Model
+                  , Hakocalc.Command.Presenter
                   , Hakocalc.Controller
                   , Hakocalc.Controller.CLI
                   , Hakocalc.Controller.CLIConfig
@@ -31,7 +31,9 @@ library
                   , base
                   , casing
                   , lens
+                  , mtl
                   , optparse-applicative
+                  , transformers
                   , yaml
   default-language: Haskell2010
 
@@ -58,4 +60,5 @@ test-suite hakocalc-test
   build-depends:    base
                   , hakocalc
                   , hspec
+                  , mtl
   default-language: Haskell2010
