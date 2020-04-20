@@ -31,27 +31,27 @@ runPresenterMock = (flip execState) s
 spec = do
   describe "calculateP" $ do
     it "Inora Ghost" $
-      runPresenterMock (calculateP 1 1) `shouldBe` ([toProbability $ recip 7], [])
+      runPresenterMock (calculateP modelImpl 1 1) `shouldBe` ([toProbability $ recip 7], [])
 
     it "King Inora" $
-      runPresenterMock (calculateP 5 5) `shouldBe` ([toProbability $ recip 16807], [])
+      runPresenterMock (calculateP modelImpl 5 5) `shouldBe` ([toProbability $ recip 16807], [])
 
     it "Pseudo 01" $
-      runPresenterMock (calculateP 3 0) `shouldBe` ([toProbability 0], [])
+      runPresenterMock (calculateP modelImpl 3 0) `shouldBe` ([toProbability 0], [])
 
     it "Pseudo 02" $
-      runPresenterMock (calculateP 0 3) `shouldBe` ([toProbability 1], [])
+      runPresenterMock (calculateP modelImpl 0 3) `shouldBe` ([toProbability 1], [])
 
 
   describe "calculateQ" $ do
     it "Inora Ghost" $
-      runPresenterMock (calculateQ 1 (toProbability $ recip 7)) `shouldBe` ([], [Just 1])
+      runPresenterMock (calculateQ modelImpl 1 (toProbability $ recip 7)) `shouldBe` ([], [Just 1])
 
     it "King Inora" $
-      runPresenterMock (calculateQ 5 (toProbability $ recip 16807)) `shouldBe` ([], [Just 5])
+      runPresenterMock (calculateQ modelImpl 5 (toProbability $ recip 16807)) `shouldBe` ([], [Just 5])
 
     it "Pseudo 01" $
-      runPresenterMock (calculateQ 1 (toProbability 0)) `shouldBe` ([], [Nothing])
+      runPresenterMock (calculateQ modelImpl 1 (toProbability 0)) `shouldBe` ([], [Nothing])
 
     it "Pseudo 02" $
-      runPresenterMock (calculateQ 0 (toProbability 1)) `shouldBe` ([], [Nothing])
+      runPresenterMock (calculateQ modelImpl 0 (toProbability 1)) `shouldBe` ([], [Nothing])

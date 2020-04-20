@@ -1,6 +1,9 @@
 module Hakocalc.Command.Model
-  ( calculateP
+  ( Model
+  , ModelImpl
+  , calculateP
   , calculateQ
+  , modelImpl
   ) where
 
 
@@ -8,11 +11,21 @@ import Hakocalc.Command.DefeatProbability (HP, Probability, Quantity, missiles, 
 import Hakocalc.Command.Presenter (Presenter, printP, printQ)
 
 
-calculateP :: Presenter m => HP -> Quantity -> m ()
+class Model a where
+  calculateP :: Presenter m => a -> HP -> Quantity -> m ()
 
-calculateP h q = printP $ probability h q
+  calculateQ :: Presenter m => a -> HP -> Probability -> m ()
 
 
-calculateQ :: Presenter m => HP -> Probability -> m ()
+data ModelImpl = ModelImpl
 
-calculateQ h p = printQ $ missiles h p
+
+instance Model ModelImpl where
+  calculateP _ h q = printP $ probability h q
+
+  calculateQ _ h p = printQ $ missiles h p
+
+
+modelImpl :: ModelImpl
+
+modelImpl = ModelImpl
