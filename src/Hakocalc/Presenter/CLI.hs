@@ -9,34 +9,35 @@ module Hakocalc.Presenter.CLI
 
 
 import Control.Lens ((^.))
-import Control.Monad.State (liftIO)
+import Control.Monad.State (lift)
 import Control.Monad.Trans.Reader (ReaderT, ask, runReaderT)
+import Hakocalc.Interface (Stdio (putStrLn'))
 import Hakocalc.Presenter.CLIConfig
 import Text.Printf (printf)
 
 import qualified Hakocalc.Command as Command
 
 
-type CLI = ReaderT CLIConfig IO
+type CLI m = ReaderT CLIConfig m
 
 
-instance Command.Presenter CLI where
+instance Stdio m => Command.Presenter (CLI m) where
   printP rslt = do
     cfg <- ask
 
     let fval = (read $ show rslt) :: Double
 
-    liftIO $ printf (cfg ^. rsltP) fval
+    lift . putStrLn' $ printf (cfg ^. rsltP) fval
 
   printQ rslt = do
     cfg <- ask
 
     case rslt of
-      Just x -> liftIO $ printf (cfg ^. rsltQ) x
+      Just x -> lift . putStrLn' $ printf (cfg ^. rsltQ) x
 
-      _ -> liftIO $ printf (cfg ^. failQ)
+      _ -> lift . putStrLn' $ printf (cfg ^. failQ)
 
 
-runCLI :: CLIConfig -> CLI a -> IO a
+runCLI :: Stdio m => CLIConfig -> (CLI m) a -> m a
 
 runCLI = flip runReaderT
