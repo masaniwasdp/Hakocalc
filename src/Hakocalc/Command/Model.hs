@@ -21,9 +21,9 @@ data ModelImpl = ModelImpl
 
 
 instance Model ModelImpl where
-  calculateP _ h q = printP $ probability h q
+  calculateP ModelImpl h q = printP $ probability h q
 
-  calculateQ _ h p = printQ $ missiles h p
+  calculateQ ModelImpl h p = printQ $ missiles h p
 
 
 modelImpl :: ModelImpl
