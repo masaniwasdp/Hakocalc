@@ -21,9 +21,7 @@ library
                   , Hakocalc.Controller.CLI
                   , Hakocalc.Controller.CLIConfig
                   , Hakocalc.Controller.Helper
-                  , Hakocalc.Interface
                   , Hakocalc.Interface.Stdio
-                  , Hakocalc.Interface.StdioImpl
                   , Hakocalc.Math.Calc
                   , Hakocalc.Math.Probability
                   , Hakocalc.Presenter

@@ -11,7 +11,7 @@ module Hakocalc.Presenter.CLI
 import Control.Lens ((^.))
 import Control.Monad.State (lift)
 import Control.Monad.Trans.Reader (ReaderT, ask, runReaderT)
-import Hakocalc.Interface (Stdio (putStrLn'))
+import Hakocalc.Interface.Stdio (Stdio (putStrLn'))
 import Hakocalc.Presenter.CLIConfig
 import Text.Printf (printf)
 
